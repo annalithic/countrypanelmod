@@ -52,6 +52,7 @@ types countrypanelmod_types {
 		}	
 
 		flowcontainer = {
+			spacing = 8
 			countrypanelmod_culture_piechart = {}
 			countrypanelmod_religion_piechart = {}
 		}
@@ -287,10 +288,11 @@ types countrypanelmod_types {
 							}
 
 							textbox = {
+								parentanchor = left|vcenter
+								align = center|nobaseline
 								position = { 6 0 }
-								text = "[PopType.GetName]"
+								text = "[PopType.GetNameNoFormatting]"
 								autoresize = yes
-								parentanchor = left
 							}
 	
 						}
@@ -302,10 +304,10 @@ types countrypanelmod_types {
 							}
 
 							textbox = {
+								parentanchor = center
 								align = center|nobaseline
 								text = "[PopType.GetPopulation(Country.Self)|d]"
 								autoresize = yes
-								parentanchor = center
 							}
 						}
 
@@ -316,10 +318,10 @@ types countrypanelmod_types {
 							}
 
 							textbox = {
+								parentanchor = center
 								align = center|nobaseline
 								text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
 								autoresize = yes
-								parentanchor = center
 							}
 						}
 
@@ -340,12 +342,12 @@ types countrypanelmod_types {
 								blockoverride "value_left" {
 									min = 0
 									max = 100
-									value = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(Country.Self), PopType.GetPopulation(Country.Self))]"
+									value = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(CountryPanel.AccessCountry.Self), PopType.GetPopulation(CountryPanel.AccessCountry.Self))]"
 								}
 								blockoverride "value_right" {
 									min = 0
 									max = 100
-									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(Country.Self), PopType.GetPopulation(Country.Self)))]"
+									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(CountryPanel.AccessCountry.Self), PopType.GetPopulation(CountryPanel.AccessCountry.Self)))]"
 								}
 
 
@@ -773,7 +775,7 @@ types countrypanelmod_types {
 			size = { 30 30 }
 
 			block "chart_button_position" {
-				position = { -5 5 }
+				position = { 15 20 }
 			}
 
 			state = {
