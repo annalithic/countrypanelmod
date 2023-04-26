@@ -1,0 +1,933 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+@pop_type_table_row_height = 27
+
+types countrypanelmod_types {
+
+	type countrypanelmod_panel_population_content = flowcontainer {
+		datacontext = "[CountryPanel.AccessCountry]"
+		using = default_list_position
+		direction = vertical
+		minimumsize = { @panel_width -1 }
+		maximumsize = { @panel_width -1 }
+		margin_top = 10	
+		spacing = 10
+		
+		countrypanelmod_pop_strata_section = {}
+
+		default_header = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = "POP_TYPE_HEADER"
+			}
+		}	
+
+		flowcontainer = {
+			spacing = 10
+			flowcontainer = {
+				margin = {10 0 10 10}
+				spacing = 15
+				direction = vertical
+				countrypanelmod_pop_type_pol_str_piechart = {}
+				countrypanelmod_pop_type_piechart = {}
+			}
+
+			countrypanelmod_pop_type_table = {}
+		}
+
+		default_header = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = "POP_CULTURE_HEADER"
+			}
+		}	
+
+		flowcontainer = {
+			countrypanelmod_culture_piechart = {}
+			countrypanelmod_religion_piechart = {}
+		}
+
+
+
+
+		
+	} 
+
+
+	type holding = flowcontainer {
+
+		
+
+		flowcontainer = {
+			minimumsize = { @panel_width -1 }
+			countrypanelmod_loyalistsgraph = {}
+			countrypanelmod_radicalsgraph = {}
+		}
+
+		widget = {
+			size = { 60 30 }
+			background = {
+				using = entry_bg_simple
+			}
+
+			textbox = {
+				align = center|nobaseline
+				text = "[PopType.GetPopulationAsPercentage(Country.Self)|v/%d]"
+				autoresize = yes
+				parentanchor = center
+			}
+		}
+
+		widget = {
+			size = { 60 30 }
+			background = {
+				using = entry_bg_simple
+			}
+
+
+			widget = {
+				size = { 60 30 }
+				background = {
+					using = entry_bg_simple
+				}
+
+				textbox = {
+					align = center|nobaseline
+					text = "[PopType.GetRadicals(Country.Self)|d]"
+					autoresize = yes
+					parentanchor = center
+				}
+			}
+
+			widget = {
+				size = { 60 30 }
+				background = {
+					using = entry_bg_simple
+				}
+
+				textbox = {
+					align = center|nobaseline
+					text = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(Country.Self), PopType.GetPopulation(Country.Self))|f]"
+					autoresize = yes
+					parentanchor = center
+				}
+			}
+
+			widget = {
+				size = { 60 30 }
+				background = {
+					using = entry_bg_simple
+				}
+
+				textbox = {
+					align = center|nobaseline
+					text = "[PopType.GetLoyalists(Country.Self)|d]"
+					autoresize = yes
+					parentanchor = center
+				}
+			}
+
+			widget = {
+				size = { 60 30 }
+				background = {
+					using = entry_bg_simple
+				}
+
+				textbox = {
+					align = center|nobaseline
+					text = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(Country.Self), PopType.GetPopulation(Country.Self))|f]"
+					autoresize = yes
+					parentanchor = center
+				}
+			}
+
+		}
+
+	}
+
+	type countrypanelmod_pop_strata_section = flowcontainer {
+		parentanchor = hcenter
+		background = {
+			texture = "gfx/interface/illustrations/top_illus/top_illu_population.dds"
+			using = top_illu_properties
+			margin = { -2 0 }
+			alpha = 0.6
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_lower_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleLowerStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_poor_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "LOWER_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_LOW_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetLowerStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_POOR"
+				tooltip = "POPS_OVERVIEW_REMAINDER_POOR_TOOLTIP"
+			}
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_middle_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleMiddleStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_middle_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "MIDDLE_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_MIDDLE_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetMiddleStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_MIDDLE"
+				tooltip = "POPS_OVERVIEW_REMAINDER_MIDDLE_TOOLTIP"
+			}
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_upper_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleUpperStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_upper_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "UPPER_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_UPPER_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetUpperStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_RICH"
+				tooltip = "POPS_OVERVIEW_REMAINDER_RICH_TOOLTIP"
+			}
+		}
+	}
+
+
+	type countrypanelmod_pop_type_table = flowcontainer {
+		dynamicgridbox = {
+			parentanchor = left
+			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+			
+
+			item = {
+				widget = {
+
+
+					size = { @panel_width_half @pop_type_table_row_height }
+					
+					flowcontainer = {
+						parentanchor = top
+
+						widget = {
+							size = { @pop_type_table_row_height @pop_type_table_row_height }
+
+							background = {
+								using = simple_frame
+							}
+
+							icon = {
+								parentanchor = center
+								texture = "/gfx/interface/piechart/piechart_legend.dds"
+								position = { -0.5 -0.5 }
+								size = { 24 24 }
+								color = "[PopType.GetColor]"
+							}
+						}
+
+						
+
+
+						widget = {
+							size = { 120 @pop_type_table_row_height }
+							background = {
+								using = entry_bg_simple
+							}
+
+							textbox = {
+								position = { 6 0 }
+								text = "[PopType.GetName]"
+								autoresize = yes
+								parentanchor = left
+							}
+	
+						}
+
+						widget = {
+							size = { 60 @pop_type_table_row_height }
+							background = {
+								using = entry_bg_simple
+							}
+
+							textbox = {
+								align = center|nobaseline
+								text = "[PopType.GetPopulation(Country.Self)|d]"
+								autoresize = yes
+								parentanchor = center
+							}
+						}
+
+						widget = {
+							size = { 60 @pop_type_table_row_height }
+							background = {
+								using = entry_bg_simple
+							}
+
+							textbox = {
+								align = center|nobaseline
+								text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+								autoresize = yes
+								parentanchor = center
+							}
+						}
+
+
+			
+						
+						widget = {
+							size = { 88 @pop_type_table_row_height }
+							
+							background = {
+								using = entry_bg_simple
+							}
+
+							countrypanelmod_radicalism_progressbar = {
+								size = { 80 19 }
+								position = { 4 4 }
+
+								blockoverride "value_left" {
+									min = 0
+									max = 100
+									value = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(Country.Self), PopType.GetPopulation(Country.Self))]"
+								}
+								blockoverride "value_right" {
+									min = 0
+									max = 100
+									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(Country.Self), PopType.GetPopulation(Country.Self)))]"
+								}
+
+
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+	type countrypanelmod_pop_strata_summary = flowcontainer {
+		minimumsize = { 180 -1 }
+		maximumsize = { 180 -1 }
+		direction = vertical
+		using = entry_bg_fancy
+
+		# portrait and summary
+		widget = {
+			parentanchor = hcenter
+			size = { 180 380 }
+
+			widget = {
+				size = { 170 380 }
+				scissor = yes
+				parentanchor = hcenter
+				position = { 0 25 }
+
+				culture_info_pop_portrait = {
+					parentanchor = center
+					
+					block "strata_portrait_properties" {}
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = hcenter
+				margin_top = 15
+
+				flowcontainer = {
+					parentanchor = hcenter
+					icon = {
+						block "strata_icon" {}
+						size = { 28 28 }
+						parentanchor = vcenter
+					}
+					textbox = {
+						parentanchor = vcenter
+						block "strata_label" {}
+						align = nobaseline
+						autoresize = yes
+						margin_left = 5
+					}
+				}
+
+				textbox = {
+					block "population_summary" {}
+					autoresize = yes
+					parentanchor = hcenter
+					using = fontsize_large
+					default_format = "#variable"
+					align = nobaseline
+				}
+			}
+
+
+			flowcontainer = {
+				parentanchor = bottom|hcenter
+				direction = vertical
+
+				textbox = {
+					block "sol_summary" {}
+					autoresize = yes
+				}
+				margin_bottom = 15
+			}
+		}
+	}
+
+
+	type countrypanelmod_culture_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopCulturesSortedByPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "STATE_CULTURES"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_CULTURE_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[Culture.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[Culture.GetColor]"
+		}
+		
+		blockoverride "pie_item_goto_button" {
+			button = {
+				using = clean_button
+				size = { 100% 100% }
+				onclick = "[InformationPanelBar.OpenCultureInfoPanel(Culture.AccessSelf)]"
+			}
+		}
+
+		blockoverride "leftside_info" {
+			text = "[Culture.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[Culture.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([Culture.GetPopulation(Country.Self)|D])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 3
+		}
+	}
+
+	type countrypanelmod_religion_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopReligionsSortedByPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopReligionsSortedByPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopCulturesSortedByPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "STATE_RELIGIONS"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_RELIGION_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[Religion.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[Religion.GetColor]"
+		}
+		
+		blockoverride "pie_item_goto_button" {
+			button = {
+				using = clean_button
+				size = { 100% 100% }
+				onclick = "[InformationPanelBar.OpenReligionInfoPanel(Religion.AccessSelf)]"
+			}
+		}
+
+		blockoverride "leftside_info" {
+			text = "[Religion.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[Religion.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([Religion.GetPopulation(Country.Self)|D])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 3
+		}
+	}
+
+	type countrypanelmod_pop_type_piechart = countrypanelmod_smallchart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_POP_TYPES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "POPULATION_PIECHART_HEADER"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[PopType.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+
+		blockoverride "leftside_info" {
+			text = "[PopType.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[PopType.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([PopType.GetPopulation(Country.Self)|K])"
+		}
+	}
+
+	type countrypanelmod_pop_type_pol_str_piechart = countrypanelmod_smallchart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPolStr), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_POP_TYPES_POL_STR"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "POLITICAL_STRENGTH_PIECHART_HEADER"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
+		}
+
+		blockoverride "pieslice" {
+			value = "[PopType.GetPolStrAsFloat(Country.Self)]"
+		}
+
+		
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+
+		blockoverride "leftside_info" {
+			text = "[PopType.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([PopType.GetPolStr(Country.Self)|K])"
+		}
+	}
+
+	type countrypanelmod_loyalistsgraph = v3_plotline {
+		using = default_list_position
+
+		blockoverride "header" {
+			text = "LOYALISTS"
+		}
+
+		blockoverride "size" {
+			size = { 180 100 }
+		}
+		blockoverride "line_color" {
+			color = { .9 .9 .9 1.0 }
+		}
+		blockoverride "line_plotpoints" {
+			visible = "[Not(IsEmpty(Country.GetLoyalistsTrend))]"
+			plotpoints = "[GetTrendPlotPointsNormalized(Country.GetLoyalistsTrend, '(CFixedPoint)0', GetMax(Country.GetPopulationTrend) )]"
+		}
+		blockoverride "maxvalue" {
+			text = "[GetMax(Country.GetLoyalistsTrend)|K]"
+		}
+		blockoverride "minvalue" {
+			raw_text = "0"
+		}
+		blockoverride "startdate" {
+			text = "[GetOldestDate(Country.GetLoyalistsTrend)]"
+		}
+		blockoverride "enddate" {
+			text = "[GetLatestDate(Country.GetLoyalistsTrend)]"
+		}
+		blockoverride "multiitem" {}
+
+		blockoverride "empty_state_visibility" {
+			visible = "[And(EqualTo_CFixedPoint(GetMin(Country.GetLoyalistsTrend), '(CFixedPoint)0'), EqualTo_CFixedPoint(GetMax(Country.GetLoyalistsTrend), '(CFixedPoint)0'))]"
+		}
+		blockoverride "empty_state_text" {
+			text = "NO_LOYALISTS"
+		}
+	}
+
+
+	type countrypanelmod_radicalsgraph = v3_plotline {
+		using = default_list_position
+
+		blockoverride "header" {
+			text = "RADICALS"
+		}
+
+		blockoverride "size" {
+			size = { 180 100 }
+		}
+		blockoverride "line_color" {
+			color = { .9 .9 .9 1.0 }
+		}
+		blockoverride "line_plotpoints" {
+			visible = "[Not(IsEmpty(Country.GetRadicalsTrend))]"
+			plotpoints = "[GetTrendPlotPointsNormalized(Country.GetRadicalsTrend, '(CFixedPoint)0', GetMax(Country.GetPopulationTrend) )]"
+		}
+		blockoverride "maxvalue" {
+			text = "[GetMax(Country.GetRadicalsTrend)|K]"
+		}
+		blockoverride "minvalue" {
+			raw_text = "0"
+		}
+		blockoverride "startdate" {
+			text = "[GetOldestDate(Country.GetRadicalsTrend)]"
+		}
+		blockoverride "enddate" {
+			text = "[GetLatestDate(Country.GetRadicalsTrend)]"
+		}
+		blockoverride "multiitem" {}
+
+		blockoverride "empty_state_visibility" {
+			visible = "[And(EqualTo_CFixedPoint(GetMin(Country.GetRadicalsTrend), '(CFixedPoint)0'), EqualTo_CFixedPoint(GetMax(Country.GetRadicalsTrend), '(CFixedPoint)0'))]"
+		}
+		blockoverride "empty_state_text" {
+			text = "NO_RADICALS"
+		}
+	}
+
+	type countrypanelmod_smallchart = container {
+		onmousehierarchyenter = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('hide_chart_button','show_chart_button')]"
+		onmousehierarchyleave = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('show_chart_button','hide_chart_button')]"
+		alwaystransparent = no
+
+		flowcontainer = {
+			block = "chart_visible" {}
+			direction = vertical
+			spacing = 5
+			margin = { 8 5 }
+
+			block "minimumsize" {
+
+			}
+
+			block "background" {
+				background = {
+				}
+			}
+
+			block "title" {
+				textbox = {
+					using = default_list_position
+					size = { 120 20 }
+					align = hcenter|nobaseline
+					default_format = "#title"
+
+					block "heading" {
+						raw_text = "#todo heading#!"
+					}
+				}
+			}
+			v3_piechart = {
+				visible = "[GetVariableSystem.Exists('piecharts')]"
+
+				block "tree_chart_size" {}
+			}
+			v3_treemapchart  = {
+				visible = "[Not(GetVariableSystem.Exists('piecharts'))]"
+
+				block "tree_chart_size" {}
+			}
+
+		}
+
+		widget = {
+			name = "chart_button"
+			block = "chart_visible" {}
+			parentanchor = right|top
+			size = { 30 30 }
+
+			block "chart_button_position" {
+				position = { -5 5 }
+			}
+
+			state = {
+				name = hide_chart_button
+				trigger_on_create = yes
+				alpha = 0
+				duration = 0.2
+			}
+
+			state = {
+				name = show_chart_button
+				alpha = 1
+				duration = 0.15
+			}
+
+			# grid/list toggle
+			button_icon_round_toggle = {
+				size = { 29 29 }
+				parentanchor = right|vcenter
+				block "chart_button_button_position" {
+					position = { -10 0 }
+				}	
+
+				blockoverride "on_click" {
+					onclick = "[GetVariableSystem.Toggle('piecharts')]"
+				}
+				blockoverride "view_1" {
+					visible = "[Not(GetVariableSystem.Exists('piecharts'))]"
+				}
+				blockoverride "view_2" {
+					visible = "[GetVariableSystem.Exists('piecharts')]"
+				}
+				blockoverride "icon_1" {
+					texture = "gfx/interface/buttons/button_icons/piecharts.dds"
+				}
+				blockoverride "icon_2" {
+					texture = "gfx/interface/buttons/button_icons/areacharts.dds"
+				}
+				blockoverride "tooltip_1" {
+					tooltip = "TOOLTIP_VIEW_LIST"
+				}
+				blockoverride "tooltip_2" {
+					tooltip = "TOOLTIP_VIEW_GRID"
+				}
+			}
+		}
+	}
+
+	type countrypanelmod_radicalism_progressbar = widget {
+		size = { 300 40 }
+		
+		background = {
+			texture = "gfx/interface/progressbar/progressbar_empty.dds"
+			spriteType = Corneredtiled
+			spriteborder = { 4 4 }
+			texture_density = 2
+			
+			using = progressbar_texture_properties
+		}
+		
+		### progressbar left
+		widget = {
+			size = { 100% 100% }
+			scissor = yes
+			
+			progressbar = {
+				### REVERSE HACK
+
+				block "negative_textures" {
+					progresstexture = "gfx/interface/progressbar/progressbar_bad.dds" 
+					noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+				}
+				
+				size = { 100% 100% }
+				spriteType = Corneredtiled
+				spriteborder = { 4 4 }
+				texture_density = 2
+				skip_initial_animation = yes
+				
+				block "negative_min_max_values" {
+					min = -1
+					max = 0
+				}
+
+				block "value_left" {}
+				
+				blockoverride "glow" {
+					texture = "gfx/interface/icons/generic_icons/transparent.dds"
+				}
+				blockoverride "glow_line" {
+					texture = "gfx/interface/icons/generic_icons/transparent.dds"
+				}
+
+
+				direction = horizontal
+				using = progressbar_texture_properties
+			}
+		}
+		
+		### progressbar right
+		widget = {
+			size = { 100% 100% }
+			parentanchor = right
+			scissor = yes
+			
+			progressbar = {
+
+				block "positive_textures" {
+					progresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+					noprogresstexture = "gfx/interface/progressbar/progressbar_green.dds"
+				}
+				
+				size = { 100% 100% }
+				spriteType = Corneredtiled
+				spriteborder = { 4 4 }
+				texture_density = 2
+				skip_initial_animation = yes
+				
+				block "positive_min_max_values" {
+					min = 0
+					max = 1
+				}
+
+				block "value_right" {}
+				
+				direction = horizontal
+				
+				using = progressbar_marker_indicator
+
+				blockoverride "glow" {
+					texture = "gfx/interface/icons/generic_icons/transparent.dds"
+				}
+				blockoverride "glow_line" {
+					texture = "gfx/interface/icons/generic_icons/transparent.dds"
+				}
+				
+				using = progressbar_texture_properties
+			}
+		}	
+		
+		### frame
+		widget = {
+			size = { 100% 100% }
+			
+			background = {
+				name = "frame"
+				texture = "gfx/interface/progressbar/progressbar_frame.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 6 6 }
+				texture_density = 2
+				margin = { 3 3 }
+			}
+		}
+	}
+
+
+}
