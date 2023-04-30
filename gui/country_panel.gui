@@ -189,8 +189,9 @@ types country_panel_types
 					visible = "[InformationPanel.IsTabSelected('diplomacy')]"
 					using = default_content_fade
 				}
-				
-				countrypanelmod_panel_politics_content = {
+
+				country_panel_politics_content = {
+				#countrypanelmod_panel_politics_content = {
 					visible = "[And(Country.IsAIOrOtherPlayer,InformationPanel.IsTabSelected('politics'))]"
 					using = default_content_fade
 				}	

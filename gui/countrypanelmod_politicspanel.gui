@@ -246,39 +246,6 @@ types countrypanelmod_politicspanel_types {
 		
 		widget = { size = { 10 10 } }
 
-		### INSTITUTIONS
-		default_header = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = INSTITUTIONS
-			}
-		}	
-
-		widget = { size = { 10 10 } }
-
-		flowcontainer = {
-			direction = vertical
-			visible = "[Not(IsDataModelEmpty(Country.AccessInstitutions))]"
-			datamodel = "[Country.AccessInstitutions]"
-			parentanchor = hcenter
-			spacing = 8		
-
-			item = {
-				country_panel_institution_item = {}
-			}
-		}
-
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessInstitutions)]"
-			}
-			blockoverride "text" {
-				text = "NO_INSTITUTIONS"
-			}
-		}		
-		
-		widget = { size = { 10 10 } }
-
 		### LAWS
 		default_header = {
 			parentanchor = hcenter
@@ -338,7 +305,7 @@ types countrypanelmod_politicspanel_types {
 				spacing = 5		
 
 				item = {
-					countrypanelmod_law_item = {
+					countrypanelmod_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 					}
 				}
@@ -354,7 +321,7 @@ types countrypanelmod_politicspanel_types {
 				spacing = 5		
 
 				item = {
-					countrypanelmod_law_item = {
+					countrypanelmod_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 					}
 				}
@@ -382,7 +349,7 @@ types countrypanelmod_politicspanel_types {
 				spacing = 5		
 
 				item = {
-					countrypanelmod_law_item = {
+					countrypanelmod_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 					}
 				}
@@ -390,14 +357,49 @@ types countrypanelmod_politicspanel_types {
 		}			
 	}
 
-	type countrypanelmod_law_item = widget {
+	type countrypanelmod_law_item_container = widget {
 		size = { 170 65 }
 
-		country_panel_law_item = {
+		countrypanelmod_law_item = {
 			visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName)))]"
 		}
 		countrypanelmod_enacting_law_item = {
 			visible = "[And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName))]"
+		}
+	}
+
+	type countrypanelmod_law_item = widget {
+		size = { 170 65 }
+		
+		background = {
+			using = entry_bg_simple
+		}		
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin = { 8 0 }
+		
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				icon = {
+					size = { 40 40 }
+					texture = "[Law.GetTexture]"			
+				}
+				countrypanelmod_institution_level_dots = {
+					visible = "[Law.HasInstitution]"
+				}
+			}
+			
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				align = center|nobaseline
+				fontsize_min = 10
+				multiline = yes
+				
+				text = "[Law.GetName]"
+			}
 		}
 	}
 
@@ -413,9 +415,14 @@ types countrypanelmod_politicspanel_types {
 			spacing = 5
 			margin = { 8 0 }
 		
-			countrypanelmod_law_change_icon = {
-				size = { 40 40 }
-			}		
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				countrypanelmod_law_change_icon = {}
+				countrypanelmod_institution_level_dots = {
+					visible = "[Law.HasInstitution]"
+				}
+			}
 			
 			textbox = {
 				layoutpolicy_horizontal = expanding
@@ -437,88 +444,9 @@ types countrypanelmod_politicspanel_types {
 		}
 	}
 	
-	type countrypanelmod_enactment_widget = flowcontainer {
-		
-		widget = {
-			datacontext = "[CountryPanel.AccessCountry.AccessLawBeingEnacted]"
-			size = { 170 65 }
-			
-			background = {
-				using = entry_bg_simple_colored
-			}		
-	
-			hbox = {
-				layoutpolicy_horizontal = expanding
-				spacing = 5
-				margin = { 8 0 }
-			
-				countrypanelmod_law_change_icon = {
-					size = { 40 40 }
-				}		
-				
-				textbox = {
-					layoutpolicy_horizontal = expanding
-					align = center|nobaseline
-					fontsize_min = 10
-					multiline = yes
-					
-					text = "COUNTRYPANELMOD_LAW_CHANGE"
-				}
-
-			}
-	
-			widget = {
-				size = { 100% 100% }
-				
-				tooltipwidget = {
-					FancyTooltip_Law = {}
-				}
-			}
-		}
-
-		widget = {
-			datacontext = "[CountryPanel.AccessCountry.AccessActiveLawFromGroup(CountryPanel.AccessCountry.AccessLawBeingEnacted.GetGroup.GetKey)]"
-			size = { 170 65 }
-			
-			background = {
-				using = entry_bg_simple
-			}		
-	
-			hbox = {
-				layoutpolicy_horizontal = expanding
-				spacing = 5
-				margin = { 8 0 }
-			
-				law_icon = {
-					size = { 40 40 }
-				}		
-				
-				textbox = {
-					layoutpolicy_horizontal = expanding
-					align = center|nobaseline
-					fontsize_min = 10
-					multiline = yes
-					
-					text = "[Law.GetName]"
-				}
-			}
-	
-			widget = {
-				size = { 100% 100% }
-				
-				tooltipwidget = {
-					FancyTooltip_Law = {}
-				}
-			}
-		}	
-
-	}
-
 	type countrypanelmod_law_change_icon = widget {
-		size = { 40 40 }
-		
+		size = {40 40}
 		widget = {
-
 			size = {20 40}
 			scissor = yes
 
@@ -552,21 +480,50 @@ types countrypanelmod_politicspanel_types {
 			texture = "gfx/interface/dividers/divider_clean_vertical.dds"
 		}
 
-		#icon = {
-		#	size = { 90% 90% }
-		#	parentanchor = center
-		#	texture = "[Law.GetTexture]"
-		#	spriteborder_bottom = 50
-		#}
-
-		#icon = {
-		#	visible = "[Law.HasInstitution]"
-		#	parentanchor = bottom
-		#	size = { 45% 45% }
-		#	texture = "[Law.GetInstitutionType.GetIcon]"
-		#	tooltip = "[Law.GetInstitutionTooltip]"
-		#}
 	}
+
+	type countrypanelmod_institution_level_dots = widget {
+		size = { 40 10 }
+		datamodel = "[CountryPanel.AccessCountry.AccessInstitutions]"
+		item = {
+			flowcontainer = {
+				parentanchor = center
+				visible = "[EqualTo_string(Law.GetInstitutionType.GetNameNoFormatting,Institution.GetNameNoFormatting)]"
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)1')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)2')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)3')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)4')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)5')]"
+				}	
+			}	
+		}
+	}
+
+
+	type countrypanelmod_institution_level_dot = widget {
+		size = { 8 8 }
+		background = {
+			using = simple_frame
+		}
+		
+		icon = {
+			parentanchor = center
+			size = { 5 5 }
+			texture = "gfx/interface/piechart/piechart.dds"
+			color = { 1.0 0.8 0.64 1.0}	
+		}
+		#texture = "gfx/interface/icons/institution_icons/institution_icon_bg.dds"
+	}
+
 
 
 }

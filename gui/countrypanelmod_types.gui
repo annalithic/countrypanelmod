@@ -34,7 +34,7 @@ types countrypanelmod_types {
 		flowcontainer = {
 			spacing = 10
 			flowcontainer = {
-				margin = {10 0 10 10}
+				margin = {10 0 }
 				spacing = 15
 				direction = vertical
 				countrypanelmod_pop_type_pol_str_piechart = {}
