@@ -20,41 +20,9 @@ types countrypanelmod_politicspanel_types {
 		maximumsize = { @panel_width -1 }
 		margin_top = 5	
 
-		textbox = {
-			autoresize = yes
-			#size = { 250 30 }
-			text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
-			align = left
-			elide = right
-			#using = fontsize_small
-		}
 
-		widget = {
-			size = {5 5}
-		}
+		countrypanelmod_ig_header = {}
 
-		flowcontainer = {
-			spacing = 10
-			margin_left = 0
-			#flowcontainer = {
-			#	direction = vertical
-			#	spacing = 10
-				#countrypanelmod_ig_clout_chart = {}
-				#countrypanelmod_ig_population_chart = {}
-			#}
-			countrypanelmod_ig_table = {}
-			flowcontainer = {
-				margin_top = 8
-				direction = vertical
-				#visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
-				datamodel = "[Country.AccessPoliticalMovements]"
-				spacing = 5		
-	
-				item = {
-					countrypanelmod_political_movement_item = {}
-				}
-			}
-		}
 
 		#flowcontainer = {
 		#	visible = "[Country.IsEnactingLaw]"
@@ -62,8 +30,9 @@ types countrypanelmod_politicspanel_types {
 		#}
 
 		widget = {
-			size = {10 10}
+			size = {5 5}
 		}
+
 
 		### LAWS
 		default_header = {
@@ -83,7 +52,6 @@ types countrypanelmod_politicspanel_types {
 				align = center|nobaseline
 				using = fontsize_large
 				fontsize_min = 14
-				elide = right
 				
 				text = "POWER_STRUCTURE"
 			}		
@@ -93,7 +61,6 @@ types countrypanelmod_politicspanel_types {
 				align = center|nobaseline
 				using = fontsize_large
 				fontsize_min = 14
-				elide = right
 				
 				text = "ECONOMY"
 			}
@@ -103,7 +70,6 @@ types countrypanelmod_politicspanel_types {
 				align = center|nobaseline
 				using = fontsize_large
 				fontsize_min = 14
-				elide = right
 				
 				text = "HUMAN_RIGHTS"
 			}			
@@ -112,7 +78,6 @@ types countrypanelmod_politicspanel_types {
 		widget = { size = { 5 3 } }
 		
 		flowcontainer = {
-
 			parentanchor = hcenter
 			direction = horizontal
 			spacing = 5
@@ -176,7 +141,79 @@ types countrypanelmod_politicspanel_types {
 			}			
 		}			
 		
-		widget = { size = { 40 40 } }
+		widget = { size = { 10 10 } }
+
+		### MOVEMENTS
+		default_header = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = POLITICAL_MOVEMENTS
+			}
+		}	
+
+		widget = { size = { 10 10 } }
+		
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPoliticalMovements)]"
+			}
+			blockoverride "text" {
+				text = "NO_POLITICAL_MOVEMENTS"
+			}
+		}	
+
+		flowcontainer = {
+			direction = vertical
+			visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
+			datamodel = "[Country.AccessPoliticalMovements]"
+			parentanchor = hcenter
+			spacing = 5		
+
+			item = {
+				country_panel_political_movement_item = {}
+			}
+		}
+
+
+		widget = { size = { 40 400 } }
+
+
+		textbox = {
+			autoresize = yes
+			#size = { 250 30 }
+			text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
+			align = left
+			elide = right
+			#using = fontsize_small
+		}
+
+		widget = {
+			size = {5 5}
+		}
+
+
+		flowcontainer = {
+			spacing = 10
+			margin_left = 0
+			#flowcontainer = {
+			#	direction = vertical
+			#	spacing = 10
+				#countrypanelmod_ig_clout_chart = {}
+				#countrypanelmod_ig_population_chart = {}
+			#}
+			countrypanelmod_ig_table = {}
+			flowcontainer = {
+				margin_top = 8
+				direction = vertical
+				#visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
+				datamodel = "[Country.AccessPoliticalMovements]"
+				spacing = 5		
+	
+				item = {
+					countrypanelmod_political_movement_item = {}
+				}
+			}
+		}
 
 
 		### TOP INFO
@@ -365,41 +402,310 @@ types countrypanelmod_politicspanel_types {
 			}			
 		}
 
-		widget = { size = { 10 10 } }
-
-		### MOVEMENTS
-		default_header = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = POLITICAL_MOVEMENTS
-			}
-		}	
-
-		widget = { size = { 10 10 } }
 		
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessPoliticalMovements)]"
-			}
-			blockoverride "text" {
-				text = "NO_POLITICAL_MOVEMENTS"
-			}
-		}	
+		widget = { size = { 10 10 } }
 
 		flowcontainer = {
-			direction = vertical
-			visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
-			datamodel = "[Country.AccessPoliticalMovements]"
-			parentanchor = hcenter
-			spacing = 5		
+			countrypanelmod_ig_table2 = {}
+			flowcontainer = {
+				direction = vertical
+				textbox = {
+					parentanchor = left
+					margin_left = 5
+					autoresize = yes
+					size = { @panel_width 30 }
+					text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
+					align = nobaseline
+					elide = right
+					using = fontsize_xl
+				}
+				widget = {
+					size = { 250 30 }
+					countrypanelmod_legitimacy_item = {}
+	
+				}
+	
+		
+			}
+		}
 
-			item = {
-				country_panel_political_movement_item = {}
+		widget = {
+			size = {5 5}
+		}
+
+
+	}
+
+	type countrypanelmod_ig_header = flowcontainer {
+		margin_top = 5
+		margin_bottom = 10
+		parentanchor = hcenter
+		direction = vertical
+		minimumsize = { 535 -1 }
+		#spacing = 10
+		
+		background = {
+			using = entry_bg_simple
+		}
+
+		background = {
+			texture = "gfx/interface/illustrations/government/government_illustration.dds"
+			alpha = 0.2
+			fittype = centercrop
+			using = frame_small_mask
+			
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_center.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
 			}
 		}
 		
-		widget = { size = { 10 10 } }
+		textbox = {
+			parentanchor = hcenter
+			margin_left = 20
+			autoresize = yes
+			text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
+			align = nobaseline
+			elide = right
+			using = fontsize_xl
+		}
+		widget = {
+			size = { 5 5 }
+		}
 
+
+		flowcontainer = {
+			parentanchor = hcenter
+		
+			dynamicgridbox = {
+				#background = {
+				#	using = light_bg
+				#}
+					
+				parentanchor = left
+				datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInGovernment]"
+				flipdirection = yes
+				
+				item = {
+					countrypanelmod_ig_header_widget = {}
+				}
+			}
+		
+	
+		
+			dynamicgridbox = {
+				parentanchor = left
+				datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInOpposition]"
+				flipdirection = yes
+				item = {
+					countrypanelmod_ig_header_widget = {}
+				}
+			}
+
+			#dynamicgridbox = {
+			#	parentanchor = left
+			#	datamodel = "[CountryPanel.AccessCountry.AccessMarginalInterestGroups]"
+			#	flipdirection = yes
+			#	item = {
+			#		countrypanelmod_ig_header_widget = {}
+			#	}
+			#}
+
+		}			
+	}
+
+	type TODO_remove_holding_zone = widget {
+		
+		#DIVIDER
+		widget = {
+			size = { 0 100% }
+			icon = {
+				parentanchor = center
+				size = { 2 100% }
+				texture = "gfx/interface/dividers/divider_clean_vertical.dds"
+				texture_density = 2
+				alpha = 0.6
+				
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_vertical_center.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = alphamultiply
+					alpha = 0.6
+				}
+			}		
+		}
+
+
+		widget = {
+			size = { 30 30 }
+			parentanchor = hcenter
+			
+			background = {
+				using = dark_area
+				alpha = 0.35
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				spacing = 5
+				margin = { 10 0 }
+			
+				icon = {
+					texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
+					size = { 25 25 }
+					tooltip = "[concept_in_government]"
+				}	
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					text = "GOVERNMENT"
+					align = left|nobaseline
+					elide = right
+					default_format = "#title"
+				}
+			}
+		}
+
+
+		widget = {
+			size = { 30 30 }
+			parentanchor = hcenter
+			
+			background = {
+				using = dark_area
+				alpha = 0.35
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				spacing = 5
+				margin = { 10 0 }
+			
+				icon = {
+					texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
+					size = { 25 25 }
+					tooltip = "[concept_in_opposition]"
+				}	
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					text = "OPPOSITION"
+					align = left|nobaseline
+					elide = right
+					default_format = "#title"
+				}
+			}
+		}
+
+	}
+
+	type countrypanelmod_ig_header_widget = widget {
+		size = { 65 105 }
+		background = {
+			visible = "[InterestGroup.IsInGovernment]"
+			texture = "gfx/interface/backgrounds/entry_bg_top_mask.dds"  
+			spriteType = Corneredtiled
+			spriteborder = { 12 12 }
+			texture_density = 2
+			color = "[InterestGroup.GetColor]"
+
+
+			#texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			#alpha = "[Min_float(Multiply_float(FixedPointToFloat(InterestGroup.GetClout),'(float)2'),'(float)0.4')]"
+			alpha = 0.45
+			modify_texture = {
+				texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				alpha = 0.8
+				blend_mode = multiply
+			}
+
+			modify_texture = {
+				
+				texture = "gfx/interface/textures/velvet_texture.dds"
+				spriteType = Corneredtiled
+				texture_density = 1
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+					
+			}
+
+	
+			#modify_texture = {
+			#	texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+			#	spriteType = Corneredstretched
+			#	spriteborder = { 0 0 }
+			#	blend_mode = alphamultiply
+			#	alpha = 0.5
+			#}
+	
+		}
+
+		background = {
+			visible = "[InterestGroup.IsInGovernment]"
+			using = simple_frame
+		}
+
+
+		flowcontainer = {
+			parentanchor = center
+			direction = vertical
+			tooltip = "CLOUT_PIECHART"
+			
+			widget = {
+				size = { 36 36 }
+				parentanchor = hcenter
+				
+				ig_button = {
+					size = { 100% 100% }
+					blockoverride "in_government_icon"{}
+				}
+			}
+			textbox = {
+				margin_left = 5
+				visible = "[InterestGroup.IsPowerful]"
+				text = "[InterestGroup.GetClout|%1v]"
+				autoresize = yes
+				parentanchor = hcenter
+			}
+			textbox = {
+				margin_left = 5
+				visible = "[Not(InterestGroup.IsPowerful)]"
+				text = "[InterestGroup.GetClout|%1]"
+				autoresize = yes
+				parentanchor = hcenter
+			}
+			textbox = {
+				margin_right = 5
+				visible = "[And(LessThan_int32(InterestGroup.GetApprovalValue,'(int32)5'),GreaterThan_int32(InterestGroup.GetApprovalValue,'(int32)-5'))]"
+				text = "[InterestGroup.GetApprovalValue|=1]"
+				autoresize = yes
+				parentanchor = hcenter
+			}
+			textbox = {
+				margin_right = 5
+				visible = "[GreaterThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)5')]"
+				text = "[InterestGroup.GetApprovalValue|=p]"
+				autoresize = yes
+				parentanchor = hcenter
+			}
+			textbox = {
+				margin_right = 5
+				visible = "[LessThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)-5')]"
+				text = "[InterestGroup.GetApprovalValue|n]"
+				autoresize = yes
+				parentanchor = hcenter
+			}
+		}
 	}
 
 	type countrypanelmod_ig_clout_chart = countrypanelmod_smallchart {
@@ -617,6 +923,47 @@ types countrypanelmod_politicspanel_types {
 	}
 
 
+	type countrypanelmod_ig_table2 = flowcontainer {
+		
+		direction = vertical
+
+		#widget = { size = {5 5} }
+
+		dynamicgridbox = {
+			datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInGovernment]"
+			item = {
+				countrypanelmod_ig_row2 = {}
+			}
+		}
+
+		widget = {
+			size = { 5 5 }
+		}
+
+		divider_clean = {
+			parentanchor = hcenter
+			size = { 140 3 }
+		}
+
+		widget = {
+			size = { 5 5 }
+		}
+
+		dynamicgridbox = {
+			datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInOpposition]"
+			item = {
+				countrypanelmod_ig_row2 = {}
+			}
+		}
+		dynamicgridbox = {
+			datamodel = "[CountryPanel.AccessCountry.AccessMarginalInterestGroups]"
+			item = {
+				countrypanelmod_ig_row2 = {}
+			}
+		}
+	}
+
+
 	type countrypanelmod_ig_table = flowcontainer {
 		
 		direction = vertical
@@ -656,6 +1003,90 @@ types countrypanelmod_politicspanel_types {
 			}
 		}
 	}
+
+	type countrypanelmod_ig_row2 = flowcontainer {
+		margin_bottom = 2
+		tooltip = "CLOUT_PIECHART"
+		widget = {
+			size = { 5 5 }
+		}
+
+		widget = {
+			size = { 38 36 }
+			
+			ig_button = {
+				position = { 0 1 }
+				size = { 36 36 }
+				blockoverride "in_government_icon"{}
+			}
+		}
+
+
+
+		flowcontainer = {
+			parentanchor = vcenter
+
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = "[InterestGroup.GetColor]"
+				alpha = "[Min_float(Multiply_float(FixedPointToFloat(InterestGroup.GetClout),'(float)2'),'(float)0.4')]"
+				#alpha = 0.5
+			}
+
+			widget = {
+				size = { 55 36 }
+				background = {
+					using = entry_bg_simple
+				}
+				textbox = {
+					visible = "[InterestGroup.IsPowerful]"
+					parentanchor = center
+					align = center|nobaseline
+					text = "[InterestGroup.GetClout|%1v]"
+					autoresize = yes
+				}
+				textbox = {
+					visible = "[Not(InterestGroup.IsPowerful)]"
+					parentanchor = center
+					align = center|nobaseline
+					text = "[InterestGroup.GetClout|%1]"
+					autoresize = yes
+				}
+
+			}
+
+			#widget = {
+			#	size = { 55 @ig_table_row_height }
+			#	background = {
+			#		using = entry_bg_simple
+			#	}
+			#	textbox = {
+			#		parentanchor = center
+			#		align = center|nobaseline
+			#		text = "[InterestGroup.GetPopulation|d]"
+			#		autoresize = yes
+			#	}
+			#}
+
+			widget = {
+				size = { 40 36 }
+				background = {
+					using = entry_bg_simple
+				}
+
+				textbox = {
+					parentanchor = center
+					align = center|nobaseline
+					text = "[InterestGroup.GetApprovalValue|=+]"
+					autoresize = yes
+				}
+			}
+
+		}
+
+	
+}
+
 
 	type countrypanelmod_ig_row = flowcontainer {
 			tooltip = "CLOUT_PIECHART"
@@ -926,6 +1357,52 @@ types countrypanelmod_politicspanel_types {
 		#texture = "gfx/interface/icons/institution_icons/institution_icon_bg.dds"
 	}
 
+
+	type countrypanelmod_legitimacy_item = vbox {
+		margin = { 5 0 }
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = preferred
+		spacing = 5
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			spacing = 10
+			datacontext = "[Country]"
+			tooltip = "COUNTRYPANELMOD_LEGITIMACY_LEVEL_ACTIVE_TOOLTIP"
+			
+			textbox = {
+				autoresize = yes
+				text = "[Country.GetGovernmentLegitimacyLevel.GetNameNoFormatting|v]"
+				align = left|nobaseline
+				elide = right
+			}
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				size = { 0 20 }
+				raw_text = "#variable [Country.GetGovernmentLegitimacy]#!"
+				align = left|nobaseline
+				elide = right
+			}
+		}
+		
+		levels_progressbar = {
+			datamodel = "[GetLegitimacyLevels]"
+			
+			blockoverride "item_properties" {
+				layoutstretchfactor_horizontal = "[LegitimacyLevel.GetWidth]"
+				tooltip = "[SelectLocalization( LegitimacyLevel.IsActive( Country.GetGovernmentLegitimacy ), 'LEGITIMACY_LEVEL_ACTIVE_TOOLTIP', 'LEGITIMACY_LEVEL_INACTIVE_TOOLTIP' )]"
+			}
+			blockoverride "level_active" {
+				visible = "[LegitimacyLevel.IsActive( Country.GetGovernmentLegitimacy )]"
+			}
+			blockoverride "last_level" {
+				visible = "[Not(EqualTo_int32( LegitimacyLevel.GetUpperBound, '(int32)100' ))]"
+			}
+			blockoverride "default_progressbar_value" {
+				value = "[LegitimacyLevel.GetProgress( Country.GetGovernmentLegitimacy )]"
+			}
+		}
+	}
 
 
 }

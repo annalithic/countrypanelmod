@@ -369,13 +369,13 @@ types countrypanelmod_types {
 		# portrait and summary
 		widget = {
 			parentanchor = hcenter
-			size = { 180 380 }
+			size = { 180 330 }
 
 			widget = {
-				size = { 170 380 }
+				size = { 170 330 }
 				scissor = yes
 				parentanchor = hcenter
-				position = { 0 25 }
+				position = { 0 18 }
 
 				culture_info_pop_portrait = {
 					parentanchor = center
@@ -485,7 +485,7 @@ types countrypanelmod_types {
 		}
 
 		blockoverride "maxverticalslots" {
-			maxverticalslots = 3
+			maxverticalslots = 6
 		}
 	}
 
@@ -544,7 +544,7 @@ types countrypanelmod_types {
 		}
 
 		blockoverride "maxverticalslots" {
-			maxverticalslots = 3
+			maxverticalslots = 6
 		}
 	}
 
