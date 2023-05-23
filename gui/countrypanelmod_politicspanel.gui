@@ -21,11 +21,6 @@ types countrypanelmod_politicspanel_types {
 		margin_top = 5
 
 
-		button = {
-			using = default_button
-			texture = "gfx/interface/buttons/red_button_bg.dds"
-			size = {65 120}
-		}
 
 		countrypanelmod_ig_header = {}
 
@@ -35,23 +30,6 @@ types countrypanelmod_politicspanel_types {
 		#	countrypanelmod_enactment_widget = {}
 		#}
 
-		widget = {
-			size = {5 5}
-		}
-
-
-		### LAWS
-		default_header = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = LAWS
-			}
-		}
-
-		widget = { size = { 5 1 } }
-		
-		countrypanelmod_laws_block = {}
-		
 		widget = { size = { 5 5 } }
 
 		### MOVEMENTS
@@ -86,7 +64,27 @@ types countrypanelmod_politicspanel_types {
 		}
 
 
-		widget = { size = { 5 5 } }
+
+		widget = {
+			size = {5 5}
+		}
+
+
+		### LAWS
+		default_header = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = LAWS
+			}
+		}
+
+		widget = { size = { 5 1 } }
+		
+		countrypanelmod_laws_block = {}
+		
+
+
+		widget = { size = { 5 500 } }
 
 
 		flowcontainer = {
@@ -493,6 +491,7 @@ types countrypanelmod_politicspanel_types {
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
 				blend_mode = alphamultiply
+				alpha = 0.8
 			}
 
 			modify_texture = {
@@ -500,6 +499,7 @@ types countrypanelmod_politicspanel_types {
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
 				blend_mode = alphamultiply
+				alpha = 0.8
 			}
 		}
 		
@@ -535,7 +535,8 @@ types countrypanelmod_politicspanel_types {
 			}
 		
 			widget = {
-				size = { 10 10 }
+				visible = no
+				size = { 30 10 }
 			}
 		
 			dynamicgridbox = {
@@ -559,89 +560,6 @@ types countrypanelmod_politicspanel_types {
 		}			
 	}
 
-	type TODO_remove_holding_zone = widget {
-		
-		#DIVIDER
-		widget = {
-			size = { 0 100% }
-			icon = {
-				parentanchor = center
-				size = { 2 100% }
-				texture = "gfx/interface/dividers/divider_clean_vertical.dds"
-				texture_density = 2
-				alpha = 0.6
-				
-				modify_texture = {
-					texture = "gfx/interface/masks/fade_vertical_center.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = alphamultiply
-					alpha = 0.6
-				}
-			}		
-		}
-
-
-		widget = {
-			size = { 30 30 }
-			parentanchor = hcenter
-			
-			background = {
-				using = dark_area
-				alpha = 0.35
-			}
-			
-			hbox = {
-				layoutpolicy_horizontal = expanding
-				spacing = 5
-				margin = { 10 0 }
-			
-				icon = {
-					texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
-					size = { 25 25 }
-					tooltip = "[concept_in_government]"
-				}	
-				textbox = {
-					layoutpolicy_horizontal = expanding
-					text = "GOVERNMENT"
-					align = left|nobaseline
-					elide = right
-					default_format = "#title"
-				}
-			}
-		}
-
-
-		widget = {
-			size = { 30 30 }
-			parentanchor = hcenter
-			
-			background = {
-				using = dark_area
-				alpha = 0.35
-			}
-			
-			hbox = {
-				layoutpolicy_horizontal = expanding
-				spacing = 5
-				margin = { 10 0 }
-			
-				icon = {
-					texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
-					size = { 25 25 }
-					tooltip = "[concept_in_opposition]"
-				}	
-				textbox = {
-					layoutpolicy_horizontal = expanding
-					text = "OPPOSITION"
-					align = left|nobaseline
-					elide = right
-					default_format = "#title"
-				}
-			}
-		}
-
-	}
 
 	type countrypanelmod_ig_header_widget = widget {
 		size = { 65 105 }
@@ -667,13 +585,12 @@ types countrypanelmod_politicspanel_types {
 			}
 
 			modify_texture = {
-				
 				texture = "gfx/interface/textures/velvet_texture.dds"
 				spriteType = Corneredtiled
 				texture_density = 1
 				spriteborder = { 0 0 }
 				blend_mode = overlay
-					
+				
 			}
 
 	
@@ -747,104 +664,164 @@ types countrypanelmod_politicspanel_types {
 
 	type countrypanelmod_ig_header_widget2 = widget {
 		size = { 65 125 }
+
 		background = {
-			#visible = "[InterestGroup.IsInGovernment]"
-			texture = "gfx/interface/backgrounds/entry_bg_top_mask.dds"  
-			spriteType = Corneredtiled
-			spriteborder = { 12 12 }
-			texture_density = 2
-			color = "[InterestGroup.GetColor]"
+			texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			alpha = 0
 
-			alpha = 0.7
-
-
-
-			#texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-			#alpha = "[Min_float(Multiply_float(FixedPointToFloat(InterestGroup.GetClout),'(float)2'),'(float)0.4')]"
 			modify_texture = {
-				texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+				texture = "gfx/interface/backgrounds/simple_frame_mask.dds"  
 				spriteType = Corneredstretched
-				spriteborder = { 0 0 }
-				alpha = 0.6
-				blend_mode = multiply
+				spriteborder = { 20 20 }
+				texture_density = 2
+				blend_mode = alphamultiply
 			}
 
+		}
+
+		button = {
+			size = { 100% 100% }
+
+			block "onclick" {
+				onclick = "[InformationPanelBar.OpenInterestGroupPanel(InterestGroup.AccessSelf)]"
+			}
+
+
+			using = countrypanelmod_ig_widget_button
+			texture = "gfx/interface/buttons/white_button_bg.dds"
+			
+			blockoverride "bevel_texture" {
+				texture = "gfx/interface/buttons/red_button_bevel.dds"
+			}
+		
+			block "frame_visible" {}
+	
+
+			alpha = 1
+
+			color = "[InterestGroup.GetColor]"
+
 			modify_texture = {
-				texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+				texture = "gfx/interface/textures/velvet_texture.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				alpha = 0.1
+				alpha = 0.8
 				blend_mode = add
 			}
 
 			modify_texture = {
-				
-				texture = "gfx/interface/textures/velvet_texture.dds"
-				spriteType = Corneredtiled
-				texture_density = 1
+				texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
-				blend_mode = overlay
-				alpha = 1
-					
+				alpha = 0.7
+				blend_mode = multiply
 			}
 
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = alphamultiply
+				alpha = 0.5
+			}		
+
+
 	
-			#modify_texture = {
-			#	texture = "gfx/interface/masks/fade_vertical_bottom.dds"
-			#	spriteType = Corneredstretched
-			#	spriteborder = { 0 0 }
-			#	blend_mode = alphamultiply
-			#	alpha = 0.5
+			#background = {
+				#visible = "[InterestGroup.IsInGovernment]"
+				#texture = "gfx/interface/backgrounds/entry_bg_top_mask.dds"  
+				#spriteType = Corneredtiled
+				#spriteborder = { 12 12 }
+				#texture_density = 2
+				#alpha = 0.7
+	
+	
+	
+				#texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				#alpha = "[Min_float(Multiply_float(FixedPointToFloat(InterestGroup.GetClout),'(float)2'),'(float)0.4')]"
+				#modify_texture = {
+				#	texture = "gfx/interface/backgrounds/gradient_overlay.dds"
+				#	spriteType = Corneredstretched
+				#	spriteborder = { 0 0 }
+				#	alpha = 0
+				#	blend_mode = multiply
+				#}
+	
+				
+	
+				#modify_texture = {
+				#	texture = "gfx/interface/textures/velvet_texture.dds"
+				#	spriteType = Corneredtiled
+				#	texture_density = 1
+				#	spriteborder = { 0 0 }
+				#	blend_mode = overlay
+				#	alpha = 1		
+				#}
+	
+		
+				#modify_texture = {
+				#	texture = "gfx/interface/masks/fade_vertical_bottom.dds"
+				#	spriteType = Corneredstretched
+				#	spriteborder = { 0 0 }
+				#	blend_mode = alphamultiply
+				#	alpha = 0.5
+				#}
 			#}
 	
-		}
-
-		background = {
-			#visible = "[InterestGroup.IsInGovernment]"
-			using = simple_frame
-		}
-
-		
-
-
-		icon = {
-			size = { 65 65 }
-			texture = "[InterestGroup.GetTexture]"
-			parentanchor = bottom
-			alpha = 0.25
+	
+	
+			
+	
+	
+			icon = {
+				size = { 65 65 }
+				texture = "[InterestGroup.GetTexture]"
+				parentanchor = bottom
+				alpha = 0.25
+			}
+	
+			widget = {
+				size = { 65 32 }
+				scissor = yes
+				visible = "[InterestGroup.IsPowerful]"
+	
+				parentanchor = bottom
+				icon = {
+					parentanchor = hcenter|bottom
+					position = { 0 -2 }
+					size = { 61 61 }
+					texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
+					alwaystransparent = yes
+				}	
+			}
+	
+			widget = {
+				size = { 65 32 }
+				scissor = yes
+				visible = "[InterestGroup.IsPowerful]"
+	
+				icon = {
+					parentanchor = hcenter|top
+					position = { 0 2 }
+					size = { 61 61 }
+					texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
+					alwaystransparent = yes
+				}	
+			}
+	
+	
+	
+	
 		}
 
 		widget = {
-			size = { 65 32 }
-			scissor = yes
-			visible = "[InterestGroup.IsPowerful]"
-
-			parentanchor = bottom
-			icon = {
-				parentanchor = hcenter|bottom
-				position = { 0 -2 }
-				size = { 61 61 }
-				alpha = 0.9
-				texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
-				alwaystransparent = yes
-			}	
+			size = { 100% 100% }
+			background = {
+				using = simple_frame
+			}
 		}
-
-		widget = {
-			size = { 65 32 }
-			scissor = yes
-			visible = "[InterestGroup.IsPowerful]"
-
-			icon = {
-				parentanchor = hcenter|top
-				position = { 0 2 }
-				size = { 61 61 }
-				alpha = 0.9
-				texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
-				alwaystransparent = yes
-			}	
-		}
-
 
 
 		flowcontainer = {
@@ -997,7 +974,7 @@ types countrypanelmod_politicspanel_types {
 
 				margin_right = 5
 				visible = "[And(LessThan_int32(InterestGroup.GetApprovalValue,'(int32)5'),GreaterThan_int32(InterestGroup.GetApprovalValue,'(int32)-5'))]"
-				text = "[InterestGroup.GetApprovalValue|=1v]"
+				text = "[InterestGroup.GetApprovalValue|=v]"
 				autoresize = yes
 				parentanchor = hcenter
 			}
@@ -1034,6 +1011,8 @@ types countrypanelmod_politicspanel_types {
 				parentanchor = hcenter
 			}
 		}
+
+
 	}
 	
 
@@ -1916,6 +1895,465 @@ types countrypanelmod_politicspanel_types {
 
 		}
 	}
+}
 
+template countrypanelmod_ig_widget_button {
+	block "sound" {
+		using = select_button_sound
+	}
+	using = countrypanelmod_ig_button_properties
+	texture = "gfx/interface/buttons/default_button_bg.dds"
 
+	gfxtype = togglepushbuttongfx
+	upframe = 1
+	uphoverframe = 1
+	uppressedframe = 1
+	downframe = 2
+	downhoverframe = 2
+	downpressedframe = 2
+	disableframe = 3
+	
+	spriteborder = { 7 7 }
+	framesize = { 19 19 }
+	
+	### show
+	state = {
+		name = _show
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		
+		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('show')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('show')]"
+	}
+	
+	### mouse enter
+	state = {
+		name = _mouse_enter
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0.5
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		
+		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_enter')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_enter')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_enter')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('enter')]"
+	}
+	
+	### mouse leave
+	state = {
+		name = _mouse_leave
+		using = Animation_Curve_Default
+		using = button_animation_duration_slow
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		
+		on_start = "[PdxGuiWidget.AccessChild('frame').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').InterruptThenTriggerAnimation('enter','leave')]"
+	}
+	
+	### mouse press
+	state = {
+		name = _mouse_press
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 1
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { -0.005 -0.02 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { -0.005 -0.02 }
+			using = default_button_texture_alpha
+		}
+		
+		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_press')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_press')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_press')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('press')]"
+	}
+	
+	### mouse release
+	state = {
+		name = _mouse_release
+		using = Animation_Curve_Default
+		using = button_animation_duration
+		modify_texture = {
+			name = mouse_press
+			alpha = 0
+		}
+		modify_texture = {
+			name = mouse_enter
+			alpha = 0.3
+		}
+		modify_texture = {
+			name = "texture"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		modify_texture = {
+			name = "wood_border"
+			translate_uv = { 0 0 }
+			using = default_button_texture_alpha
+		}
+		
+		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_release')]"
+		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_release')]"
+		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_release')]"
+		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('release')]"
+	}
+	
+	### bevel
+	margin_widget = {
+		name = "bevel"
+		size = { 100% 100% }
+		alpha = 0.7
+		position = { 0 0 }
+		
+		block "bevel_margin" {
+			margin = { 2 2 }
+		}
+		
+		state = {
+			name = show
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_enter
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 1
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_leave
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+		state = {
+			name = mouse_press
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.2
+			position = { 1 1 }
+		}
+		state = {
+			name = mouse_release
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			alpha = 0.7
+			position = { 0 0 }
+		}
+		
+		icon = {
+			size = { 100% 100% }
+			block "bevel_texture" {
+				texture = "gfx/interface/buttons/default_button_bevel.dds"
+			}
+			spriteType = Corneredtiled
+			texture_density = 2
+			spriteborder = { 75 35 }
+		}
+	}
+	
+	### primary decoration
+	icon = {
+		name = "primary_dec"
+		block "primary_visible" {
+			visible = no #only visible for primary buttons
+		}
+		block "primary_texture" {
+			texture = "gfx/interface/buttons/default_button_frame_fancy_small.dds"
+		}
+		spriteborder = { 50 20 }
+		spriteType = Corneredstretched
+		size = { 100% 100% }
+		texture_density = 2
+		alwaystransparent = yes
+		
+		modify_texture = {
+			name = "mouse_enter"
+			texture = "gfx/interface/buttons/default_button_frame_mouse_enter.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			blend_mode = overlay
+			alpha = 0
+			translate_uv = { 0 1 }
+		}
+		
+		state = {
+			name = show
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_enter
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 1
+				translate_uv = { 0 0 }
+			}
+		}
+		state = {
+			name = mouse_leave
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_press
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_release
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+	}
+	
+	### frame
+	icon = {
+		block "frame_visible" {
+			visible = no #only used for action buttons
+		}
+		block "frame_texture" {
+			texture = "gfx/interface/buttons/default_button_frame.dds"
+		}
+		spriteborder = { 12 12 }
+		name = "frame"
+		spriteType = Corneredstretched
+		size = { 100% 100% }
+		texture_density = 2
+		alwaystransparent = yes
+		
+		modify_texture = {
+			name = "mouse_enter"
+			texture = "gfx/interface/buttons/default_button_frame_mouse_enter.dds"
+			spriteType = Corneredstretched
+			spriteborder = { 0 0 }
+			blend_mode = overlay
+			alpha = 0
+			translate_uv = { 0 1 }
+		}
+		
+		state = {
+			name = show
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_enter
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 1
+				translate_uv = { 0 0 }
+			}
+		}
+		state = {
+			name = mouse_leave
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_press
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			blockoverride "sound" {
+				clicksound = "event:/SFX/DLC/1.3_ip1/UI/character_invite"
+			}
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+		state = {
+			name = mouse_release
+			using = Animation_Curve_Default
+			using = button_animation_duration
+			
+			modify_texture = {
+				name = "mouse_enter"
+				alpha = 0
+				translate_uv = { 0 1 }
+			}
+		}
+	}
+	
+	#Hack for the type "button_icon_square" which needs the animation triggers above
+	block "hack_icon" {
+		icon = {
+			name = icon
+			size = { 1 1 }
+			texture = "gfx/interface/icons/generic_icons/transparent.dds"
+			alwaystransparent = yes
+		}
+	}
+}
+
+template countrypanelmod_ig_button_properties
+{
+	effectname = "NoHighlight"
+	spriteType = Corneredtiled
+	texture_density = 2
+
+	modify_texture = {
+		name = "bg_gradient"
+		texture = "gfx/interface/buttons/default_button_bg_gradient.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		alpha = 0.5
+	}
+	modify_texture = {
+		name = "texture"
+		texture = "gfx/interface/buttons/default_button_texture.dds"
+		spriteType = Corneredtiled
+		texture_density = 2
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		translate_uv = { 0 0 }
+		using = default_button_texture_alpha
+	}
+	modify_texture = {
+		name = "wood_border"
+		texture = "gfx/interface/buttons/default_button_wood_border.dds"
+		spriteType = Corneredtiled
+		texture_density = 2
+		spriteborder = { 250 0 }
+		blend_mode = overlay
+		translate_uv = { 0 0 }
+		using = default_button_texture_alpha
+	}
+	
+	### animation textures
+	modify_texture = {
+		name = "mouse_enter"
+		texture = "gfx/interface/buttons/white_button_mouseover.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = add
+		alpha = 0
+	}
+	modify_texture = {
+		name = "mouse_press"
+		texture = "gfx/interface/buttons/default_button_mousepress.dds"
+		spriteType = Corneredstretched
+		spriteborder = { 0 0 }
+		blend_mode = overlay
+		alpha = 0
+	}
+	
+	### disabled stripes
+	using = disabled_stripes
 }
