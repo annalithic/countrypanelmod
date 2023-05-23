@@ -9,9 +9,11 @@
 @panel_width_plus_70 = 610			# used to be 530
 
 template information_tab_visibility {
-	visible = "[Or(And(Country.IsLocalPlayer,Not(Or(InformationPanel.IsTabSelected('diplomacy'),InformationPanel.IsTabSelected('modifiers')))),And(Country.IsAIOrOtherPlayer,Not(Or(Or(Or(InformationPanel.IsTabSelected('politics'),InformationPanel.IsTabSelected('modifiers')),InformationPanel.IsTabSelected('diplomacy')),InformationPanel.IsTabSelected('interactions')))))]"}
+	visible = "[Or(And(Country.IsLocalPlayer,Not(Or(InformationPanel.IsTabSelected('diplomacy'),InformationPanel.IsTabSelected('modifiers')))),And(Country.IsAIOrOtherPlayer,Not(Or(Or(Or(InformationPanel.IsTabSelected('politics'),InformationPanel.IsTabSelected('modifiers')),InformationPanel.IsTabSelected('diplomacy')),InformationPanel.IsTabSelected('interactions')))))]"
+}
 template information_tab_visibility_not {
-	visible = "[Not(Or(And(Country.IsLocalPlayer,Not(Or(InformationPanel.IsTabSelected('diplomacy'),InformationPanel.IsTabSelected('modifiers')))),And(Country.IsAIOrOtherPlayer,Not(Or(Or(Or(InformationPanel.IsTabSelected('politics'),InformationPanel.IsTabSelected('modifiers')),InformationPanel.IsTabSelected('diplomacy')),InformationPanel.IsTabSelected('interactions'))))))]"}
+	visible = "[Not(Or(And(Country.IsLocalPlayer,Not(Or(InformationPanel.IsTabSelected('diplomacy'),InformationPanel.IsTabSelected('modifiers')))),And(Country.IsAIOrOtherPlayer,Not(Or(Or(Or(InformationPanel.IsTabSelected('politics'),InformationPanel.IsTabSelected('modifiers')),InformationPanel.IsTabSelected('diplomacy')),InformationPanel.IsTabSelected('interactions'))))))]"
+}
 
 types country_panel_types
 {
@@ -82,13 +84,13 @@ types country_panel_types
 				blockoverride "second_button_name" {
 					name = "tutorial_highlight_country_politics_tab"
 				}								
-				
+
 				#Population
 				blockoverride "third_button" {
-					text = "COUNTRY_PANEL_POPULATION_TAB"
+					text = "COUNTRYPANELMOD_POPULATION_TAB"
 				}
 				blockoverride "third_button_tooltip" {
-					tooltip = "COUNTRY_PANEL_POPULATION_TAB"
+					tooltip = "COUNTRYPANELMOD_POPULATION_TAB"
 				}
 				blockoverride "third_button_click" {
 					onclick = "[InformationPanel.SelectTab('modifiers')]"
@@ -100,9 +102,9 @@ types country_panel_types
 					visible = "[Not(InformationPanel.IsTabSelected('modifiers'))]"
 				}
 				blockoverride "third_button_selected" {
-					text = "COUNTRY_PANEL_POPULATION_TAB_SELECTED"
+					text = "COUNTRYPANELMOD_POPULATION_TAB_SELECTED"
 				}
-
+			
 
 				# Diplomacy
 				blockoverride "fourth_button" {
@@ -126,26 +128,6 @@ types country_panel_types
 				blockoverride "fourth_button_name" {
 					name = "tutorial_highlight_country_diplomacy_tab"
 				}
-
-				# Modifiers
-				#blockoverride "fourth_button" {
-				#	text = "COUNTRY_PANEL_MODIFIERS_TAB"
-				#}
-				#blockoverride "fourth_button_tooltip" {
-				#	tooltip = "COUNTRY_PANEL_MODIFIERS_TAB"
-				#}
-				#blockoverride "fourth_button_click" {
-				#	onclick = "[InformationPanel.SelectTab('modifiers')]"
-				#}
-				#blockoverride "fourth_button_visibility" {
-				#	visible = "[And(Country.IsLocalPlayer,InformationPanel.IsTabSelected('modifiers'))]"
-				#}
-				#blockoverride "fourth_button_visibility_checked" {
-				#	visible = "[And(Country.IsLocalPlayer,Not( InformationPanel.IsTabSelected('modifiers') ))]"
-				#}
-				#blockoverride "fourth_button_selected" {
-				#	text = "COUNTRY_PANEL_MODIFIERS_TAB_SELECTED"
-				#}
 
 				# Interactions
 				blockoverride "fifth_button" {
@@ -189,8 +171,7 @@ types country_panel_types
 					visible = "[InformationPanel.IsTabSelected('diplomacy')]"
 					using = default_content_fade
 				}
-
-				#country_panel_politics_content = {
+				
 				countrypanelmod_panel_politics_content = {
 					visible = "[And(Country.IsAIOrOtherPlayer,InformationPanel.IsTabSelected('politics'))]"
 					using = default_content_fade
@@ -273,7 +254,7 @@ types country_panel_types
 
 			#RULER PORTRAIT
 			character_portrait_large_torso = {
-				datacontext = "[Country.GetRuler]"
+				datacontext = "[Country.AccessRuler]"
 				position = { 25 125 }
 				blockoverride "show_hat" {}
 				blockoverride "highlight" {}
@@ -1224,7 +1205,7 @@ types war_panel
 							using = tooltip_above	
 							datacontext = "[Truce.GetFirstCountry]"
 							blockoverride "flag_tooltip" {
-								tooltip = "[Truce.GetTruceDate]"
+								tooltip = "[Truce.GetTruceExpirationDesc]"
 							}
 						}			
 					}
@@ -1234,14 +1215,29 @@ types war_panel
 	}
 
 	### FAVOUR ITEM
-	type diplomatic_obligation_item = widget {
+	type diplomatic_obligation_item_from = widget { 
 		size = { 60 42 }
 		
 		small_flag = {
 			parentanchor = vcenter
-			using = tooltip_above						
+			using = tooltip_above	
+			#Here we want to show the country which owes us an obligation
+			datacontext = "[DiplomaticRelations.GetCountryWhichOwesObligation]"
 			blockoverride "flag_tooltip" {
-				tooltip = "[Country.GetName]"
+				tooltip = "[Country.GetObligationFromExpirationDesc(DiplomaticRelations.GetCountryWhichNotOwesObligation)]"
+			}
+		}		
+	}
+	type diplomatic_obligation_item_to = widget {
+		size = { 60 42 }
+		
+		small_flag = {
+			parentanchor = vcenter
+			using = tooltip_above
+			#Here we want to show the country which we owe an obligation to	
+			datacontext = "[DiplomaticRelations.GetCountryWhichNotOwesObligation]"
+			blockoverride "flag_tooltip" {
+				tooltip = "[Country.GetObligationToExpirationDesc(DiplomaticRelations.GetCountryWhichOwesObligation)]"
 			}
 		}		
 	}
@@ -1288,7 +1284,7 @@ types war_panel
 				datamodel = "[Country.GetObligationsOwedFrom]"
 
 				item = {
-					diplomatic_obligation_item = {}
+					diplomatic_obligation_item_from = {}
 				}
 			}			
 		}
@@ -1336,7 +1332,7 @@ types war_panel
 				datamodel = "[Country.GetObligationsOwedTo]"
 
 				item = {
-					diplomatic_obligation_item = {}
+					diplomatic_obligation_item_to = {}
 				}
 			}			
 		}
@@ -1685,6 +1681,7 @@ types country_info
 		multiline = yes
 		maximumsize = { 420 -1 }
 		text = "COUNTRY_ARABLE_LAND"
+		block "tooltip" {}
 	}
 
 	type country_government_info = textbox {

@@ -64,96 +64,6 @@ types countrypanelmod_types {
 	} 
 
 
-	type holding = flowcontainer {
-
-		
-
-		flowcontainer = {
-			minimumsize = { @panel_width -1 }
-			countrypanelmod_loyalistsgraph = {}
-			countrypanelmod_radicalsgraph = {}
-		}
-
-		widget = {
-			size = { 60 30 }
-			background = {
-				using = entry_bg_simple
-			}
-
-			textbox = {
-				align = center|nobaseline
-				text = "[PopType.GetPopulationAsPercentage(Country.Self)|v/%d]"
-				autoresize = yes
-				parentanchor = center
-			}
-		}
-
-		widget = {
-			size = { 60 30 }
-			background = {
-				using = entry_bg_simple
-			}
-
-
-			widget = {
-				size = { 60 30 }
-				background = {
-					using = entry_bg_simple
-				}
-
-				textbox = {
-					align = center|nobaseline
-					text = "[PopType.GetRadicals(Country.Self)|d]"
-					autoresize = yes
-					parentanchor = center
-				}
-			}
-
-			widget = {
-				size = { 60 30 }
-				background = {
-					using = entry_bg_simple
-				}
-
-				textbox = {
-					align = center|nobaseline
-					text = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(Country.Self), PopType.GetPopulation(Country.Self))|f]"
-					autoresize = yes
-					parentanchor = center
-				}
-			}
-
-			widget = {
-				size = { 60 30 }
-				background = {
-					using = entry_bg_simple
-				}
-
-				textbox = {
-					align = center|nobaseline
-					text = "[PopType.GetLoyalists(Country.Self)|d]"
-					autoresize = yes
-					parentanchor = center
-				}
-			}
-
-			widget = {
-				size = { 60 30 }
-				background = {
-					using = entry_bg_simple
-				}
-
-				textbox = {
-					align = center|nobaseline
-					text = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(Country.Self), PopType.GetPopulation(Country.Self))|f]"
-					autoresize = yes
-					parentanchor = center
-				}
-			}
-
-		}
-
-	}
 
 	type countrypanelmod_pop_strata_section = flowcontainer {
 		parentanchor = hcenter
@@ -324,9 +234,6 @@ types countrypanelmod_types {
 								autoresize = yes
 							}
 						}
-
-
-			
 						
 						widget = {
 							size = { 88 @pop_type_table_row_height }
@@ -342,12 +249,12 @@ types countrypanelmod_types {
 								blockoverride "value_left" {
 									min = 0
 									max = 100
-									value = "[CurrentAndMaxToProgressbarValueInt32(PopType.GetRadicals(CountryPanel.AccessCountry.Self), PopType.GetPopulation(CountryPanel.AccessCountry.Self))]"
+									value = "[CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self))))]"
 								}
 								blockoverride "value_right" {
 									min = 0
 									max = 100
-									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(PopType.GetLoyalists(CountryPanel.AccessCountry.Self), PopType.GetPopulation(CountryPanel.AccessCountry.Self)))]"
+									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
 								}
 
 
