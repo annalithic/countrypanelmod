@@ -87,10 +87,10 @@ types country_panel_types
 
 				#Population
 				blockoverride "third_button" {
-					text = "COUNTRYPANELMOD_POPULATION_TAB"
+					text = "concept_population"
 				}
 				blockoverride "third_button_tooltip" {
-					tooltip = "COUNTRYPANELMOD_POPULATION_TAB"
+					tooltip = "concept_population"
 				}
 				blockoverride "third_button_click" {
 					onclick = "[InformationPanel.SelectTab('modifiers')]"

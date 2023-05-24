@@ -20,8 +20,6 @@ types countrypanelmod_politicspanel_types {
 		maximumsize = { @panel_width -1 }
 		margin_top = 5
 
-
-
 		countrypanelmod_ig_header = {}
 
 
@@ -40,9 +38,14 @@ types countrypanelmod_politicspanel_types {
 			}
 		}	
 
-		widget = { size = { 5 5 } }
+		widget = { size = { 3 3 } }
 		
 		empty_state = {
+			minimumsize = {-1 68}
+			blockoverride "margin" {
+				margin_top = 15
+			}				
+	
 			blockoverride "visible" {
 				visible = "[IsDataModelEmpty(Country.AccessPoliticalMovements)]"
 			}
@@ -83,280 +86,6 @@ types countrypanelmod_politicspanel_types {
 		countrypanelmod_laws_block = {}
 		
 
-
-		widget = { size = { 5 500 } }
-
-
-		flowcontainer = {
-			direction = vertical
-			visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
-			datamodel = "[Country.AccessPoliticalMovements]"
-			parentanchor = hcenter
-			spacing = 5		
-
-			item = {
-				country_panel_political_movement_item = {}
-			}
-		}
-
-
-		widget = { size = { 40 400 } }
-
-
-		textbox = {
-			autoresize = yes
-			#size = { 250 30 }
-			text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
-			align = left
-			elide = right
-			#using = fontsize_small
-		}
-
-		widget = {
-			size = {5 5}
-		}
-
-
-		#flowcontainer = {
-		#	spacing = 10
-		#	margin_left = 0
-			#flowcontainer = {
-			#	direction = vertical
-			#	spacing = 10
-				#countrypanelmod_ig_clout_chart = {}
-				#countrypanelmod_ig_population_chart = {}
-			#}
-		#	countrypanelmod_ig_table = {}
-		#	flowcontainer = {
-		#		margin_top = 8
-		#		direction = vertical
-		#		#visible = "[Not(IsDataModelEmpty(Country.AccessPoliticalMovements))]"
-		#		datamodel = "[Country.AccessPoliticalMovements]"
-		#		spacing = 5		
-		#
-		#		item = {
-		#			countrypanelmod_political_movement_item = {}
-		#		}
-		#	}
-		#}
-
-
-		### TOP INFO
-		flowcontainer = {
-			parentanchor = hcenter
-			direction = vertical
-			minimumsize = { @panel_width -1 }
-			margin = { 0 10 }
-			spacing = 10
-			
-			using = main_bg
-
-			background = {
-				texture = "gfx/interface/illustrations/government/government_illustration.dds"
-				alpha = 0.2
-				fittype = center
-				using = frame_small_mask
-				
-				modify_texture = {
-					texture = "gfx/interface/masks/fade_horizontal_center.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = alphamultiply
-				}
-			}
-			
-			textbox = {
-				parentanchor = hcenter
-				autoresize = yes
-				size = { @panel_width 30 }
-				text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
-				align = nobaseline
-				elide = right
-				using = fontsize_xl
-			}
-
-			flowcontainer = {
-				spacing = 5
-				parentanchor = hcenter
-			
-				### government					
-				flowcontainer = {
-					direction = vertical
-					spacing = 5
-					
-					widget = {
-						size = { 250 30 }
-						parentanchor = hcenter
-						
-						background = {
-							using = dark_area
-							alpha = 0.35
-						}
-						
-						hbox = {
-							layoutpolicy_horizontal = expanding
-							spacing = 5
-							margin = { 10 0 }
-						
-							icon = {
-								texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
-								size = { 25 25 }
-								tooltip = "[concept_in_government]"
-							}	
-							textbox = {
-								layoutpolicy_horizontal = expanding
-								text = "GOVERNMENT"
-								align = left|nobaseline
-								elide = right
-								default_format = "#title"
-							}
-						}
-					}
-				
-					fixedgridbox = {
-						parentanchor = left
-						datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInGovernment]"
-						datamodel_wrap = 4
-						addcolumn = 65
-						addrow = 65
-						flipdirection = yes
-						
-						item = {
-							widget = {
-								size = { 65 65 }
-								
-								flowcontainer = {
-									parentanchor = bottom
-									margin_left = 25
-									direction = vertical
-									tooltip = "CLOUT_PIECHART"
-									
-									widget = {
-										size = { 36 36 }
-										parentanchor = hcenter
-										
-										ig_button = {
-											size = { 100% 100% }
-											blockoverride "in_government_icon"{}
-										}
-									}
-									textbox = {
-										text = "[InterestGroup.GetClout|%1]"
-										autoresize = yes
-										parentanchor = hcenter
-									}
-								}
-							}
-						}
-					}
-				}
-			
-				vertical_divider_full = {}
-			
-				### opposition
-				flowcontainer = {
-					direction = vertical
-					spacing = 5
-					
-					widget = {
-						size = { 250 30 }
-						parentanchor = hcenter
-						
-						background = {
-							using = dark_area
-							alpha = 0.35
-						}
-						
-						hbox = {
-							layoutpolicy_horizontal = expanding
-							spacing = 5
-							margin = { 10 0 }
-						
-							icon = {
-								texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
-								size = { 25 25 }
-								tooltip = "[concept_in_opposition]"
-							}	
-							textbox = {
-								layoutpolicy_horizontal = expanding
-								text = "OPPOSITION"
-								align = left|nobaseline
-								elide = right
-								default_format = "#title"
-							}
-						}
-					}
-					
-					fixedgridbox = {
-						parentanchor = left
-						datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInOpposition]"
-						datamodel_wrap = 4
-						addcolumn = 65
-						addrow = 65
-						flipdirection = yes
-						
-						item = {
-							widget = {
-								size = { 65 65 }
-								
-								flowcontainer = {
-									parentanchor = bottom
-									margin_left = 25
-									direction = vertical
-									tooltip = "CLOUT_PIECHART"
-									
-									widget = {
-										size = { 36 36 }
-										parentanchor = hcenter
-										
-										ig_button = {
-											size = { 100% 100% }
-											blockoverride "in_government_icon"{}
-										}
-									}
-									textbox = {
-										text = "[InterestGroup.GetClout|%1]"
-										autoresize = yes
-										parentanchor = hcenter
-									}
-								}
-							}
-						}
-					}
-				}
-			}			
-		}
-
-		
-		widget = { size = { 10 10 } }
-
-		flowcontainer = {
-			countrypanelmod_ig_table2 = {}
-			flowcontainer = {
-				direction = vertical
-				textbox = {
-					parentanchor = left
-					margin_left = 5
-					autoresize = yes
-					size = { @panel_width 30 }
-					text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
-					align = nobaseline
-					elide = right
-					using = fontsize_xl
-				}
-				widget = {
-					size = { 250 30 }
-					countrypanelmod_legitimacy_item = {}
-	
-				}
-	
-		
-			}
-		}
-
-		widget = {
-			size = {5 5}
-		}
 
 
 	}
@@ -468,22 +197,23 @@ types countrypanelmod_politicspanel_types {
 
 	}
 
+
+
 	type countrypanelmod_ig_header = flowcontainer {
+		direction = vertical
+
 		margin_top = 5
 		margin_bottom = 10
-		parentanchor = hcenter
-		direction = vertical
-		minimumsize = { 535 -1 }
+		#parentanchor = hcenter
+		#direction = vertical
+		minimumsize = { 540 -1 }
 		#spacing = 10
-		
-		background = {
-			using = entry_bg_simple
-		}
+		using = main_bg
 
 		background = {
 			texture = "gfx/interface/illustrations/government/government_illustration.dds"
 			alpha = 0.2
-			fittype = centercrop
+			fittype = center
 			using = frame_small_mask
 			
 			modify_texture = {
@@ -491,75 +221,372 @@ types countrypanelmod_politicspanel_types {
 				spriteType = Corneredstretched
 				spriteborder = { 0 0 }
 				blend_mode = alphamultiply
-				alpha = 0.8
 			}
+		}
 
-			modify_texture = {
-				texture = "gfx/interface/masks/fade_vertical_center.dds"
-				spriteType = Corneredstretched
-				spriteborder = { 0 0 }
-				blend_mode = alphamultiply
-				alpha = 0.8
-			}
-		}
-		
-		textbox = {
-			parentanchor = hcenter
-			margin_left = 20
-			autoresize = yes
-			text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
-			align = nobaseline
-			elide = right
-			using = fontsize_xl
-		}
 		widget = {
-			size = { 5 5 }
-		}
+			size = { 100% 215 }
 
+			vbox = {
+				margin_top = 3
+				margin_left = 10
+				margin_right = 10
+	
+				layoutpolicy_horizontal = fixed
+				layoutpolicy_vertical = fixed
 
-		flowcontainer = {
-			parentanchor = hcenter
-		
-			dynamicgridbox = {
-				#background = {
-				#	using = light_bg
-				#}
-					
-				parentanchor = left
-				datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInGovernment]"
-				flipdirection = yes
+				spacing = 5
+
+				textbox = {
+					#visible = no
+					parentanchor = left
+					autoresize = yes
+					text = "COUNTRY_GOVERNMENT_NO_LINE_BREAK"
+					align = nobaseline
+					elide = right
+					using = fontsize_xl
+				}
 				
-				item = {
-					countrypanelmod_ig_header_widget2 = {}
-				}
-			}
+				hbox = {
+					spacing = 5
+					visible = yes
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = fixed
+					parentanchor = left
+
+					vbox = {
+						name = "opposition"
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+						spacing = 2
+
+						widget = {
+							layoutpolicy_horizontal = expanding
+							size = { 30 26 }
+							background = {
+								using = dark_area
+								alpha = 0.35
+
+							}
+
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								spacing = 5
+								margin = { 5 0 }
+							
+								icon = {
+									texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
+									size = { 22 22 }
+									tooltip = "[concept_in_government]"
+								}	
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									text = "GOVERNMENT"
+									align = left|nobaseline
+									elide = right
+									default_format = "#title"
+								}
+							}
+
+						}
+
+						hbox = {
+							name = "government_igs"
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = fixed
+							hbox = {
+								name = "government_parties"
+								#visible = no
+								#visible = "[Not(IsDataModelEmpty(Country.GetPartiesInGovernment))]"
+								parentanchor = left
+								datamodel = "[Country.AccessInterestGroupsInGovernment]"
+								item = {
+									testwidg = {}
+								}
+							}
+							hbox = {
+								name = "government_independents"
+								#visible = no
+								parentanchor = left
+								datamodel = "[Country.GetIndependentInterestGroupsInGovernment]"
+								item = {
+									countrypanelmod_ig_widget_independant = {}
+								}
+							}
+							widget = {
+								layoutpolicy_horizontal = expanding
+								size = {0 0}
+							}
+						}
+					}
+
+					widget = {
+						block "size" {
+							size = { 0 100% }
+						}
+						
+						icon = {
+							parentanchor = center
+							size = { 2 100% }
+							texture = "gfx/interface/dividers/divider_clean_vertical.dds"
+							texture_density = 2
+							alpha = 0.7
+							
+							modify_texture = {
+								texture = "gfx/interface/masks/fade_vertical_center.dds"
+								spriteType = Corneredstretched
+								spriteborder = { 0 0 }
+								blend_mode = alphamultiply
+								alpha = 0.6
+							}
+						}
+					}
+					
+					vbox = {
+						#visible = no
+						layoutpolicy_horizontal = growing
+						layoutpolicy_vertical = expanding
+						spacing = 2
+
+						widget = {
+							layoutpolicy_horizontal = growing
+							size = { 130 26 }
+							background = {
+								using = dark_area
+								alpha = 0.35
+
+							}
+
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								spacing = 5
+								margin = { 5 0 }
+								icon = {
+									texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
+									size = { 22 22 }
+									tooltip = "[concept_in_opposition]"
+								}	
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									text = "OPPOSITION"
+									align = left|nobaseline
+									elide = right
+									default_format = "#title"
+								}
+							}
+
+						}
+
+						hbox = {
+							name = "opposition_igs"
+
+							layoutpolicy_horizontal = fixed
+							hbox = {
+								name = "opposition_parties"
+								#visible = "[Not(IsDataModelEmpty(Country.GetPartiesInOpposition))]"
+								parentanchor = left
+								datamodel = "[Country.AccessInterestGroupsInOpposition]"
+								flipdirection = yes
+							
+								item = {
+									testwidg = {}
+								}
+							}
+
+							hbox = {
+								name = "opposition_independant"
+								#visible = no
+								layoutpolicy_vertical = expanding
+								parentanchor = left
+								datamodel = "[Country.GetIndependentInterestGroupsInOpposition]"
+								flipdirection = yes	
+								item = {
+									countrypanelmod_ig_widget_independant = {}
+								}
+							}
+							widget = {
+								layoutpolicy_horizontal = expanding
+								size = {0 0}
+							}
+						}
+
+					}
+
 		
-			widget = {
-				visible = no
-				size = { 30 10 }
-			}
-		
-			dynamicgridbox = {
-				parentanchor = left
-				datamodel = "[CountryPanel.AccessCountry.AccessInterestGroupsInOpposition]"
-				flipdirection = yes
-				item = {
-					countrypanelmod_ig_header_widget2 = {}
-				}
+				}			
+
+
+				expand = {}
+	
 			}
 
-			#dynamicgridbox = {
-			#	parentanchor = left
-			#	datamodel = "[CountryPanel.AccessCountry.AccessMarginalInterestGroups]"
-			#	flipdirection = yes
-			#	item = {
-			#		countrypanelmod_ig_header_widget = {}
-			#	}
-			#}
-
-		}			
+	
+		}
 	}
 
+	type countrypanelmod_ig_header_party2 = widget {
+		size = { 120 24 }
+		using = entry_bg_simple
+		background = {
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = "[Party.GetColor]"
+			alpha = 0.2
+			
+			modify_texture = {
+				using = texture_velvet
+			}
+		}
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin = { 5 0 }
+			icon = {
+				texture = "[Party.GetIcon]"
+				size = { 22 22 }
+			}	
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				text = "[Party.GetName]"
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 14
+				default_format = "#title"
+			}
+		}
+	}
+
+	type countrypanelmod_ig_header_party = vbox {
+
+		layoutpolicy_horizontal = fixed
+		layoutpolicy_vertical = expanding
+
+		widget = {
+			size = {250 30}
+			layoutpolicy_horizontal = growing
+			layoutpolicy_vertical = fixed
+			using = entry_bg_simple
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = "[Party.GetColor]"
+				alpha = 0.5
+				
+				modify_texture = {
+					using = texture_velvet
+				}
+			}
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				spacing = 5
+				margin = { 5 0 }
+				icon = {
+					texture = "[Party.GetIcon]"
+					size = { 22 22 }
+				}	
+				textbox = {
+					layoutpolicy_horizontal = expanding
+					text = "[Party.GetName]"
+					align = left|nobaseline
+					elide = right
+					fontsize_min = 14
+					default_format = "#title"
+				}
+			}
+		}
+
+		#dynamicgridbox = {
+			#background = {
+			#	using = light_bg
+			#}
+
+		#	parentanchor = left
+		#	datamodel = "[Party.GetMembers]"
+		#    flipdirection = yes
+			
+		#	item = {
+		#		testwidg = {}
+		#	}
+		#}
+	}
+
+	type countrypanelmod_ig_widget_independant = vbox {
+		layoutpolicy_vertical = expanding
+		widget = {
+			size = { 5 5 }
+			layoutpolicy_vertical = expanding
+		}
+		countrypanelmod_ig_header_widget2 = { }
+	}
+
+	type testwidg = vbox {
+
+		visible = "[And(InterestGroup.HasParty, EqualTo_string(InterestGroup.GetParty.GetLeader.GetNameNoFormatting, InterestGroup.GetNameNoFormatting))]"
+
+		layoutpolicy_horizontal = fixed
+		layoutpolicy_vertical = fixed
+		
+
+
+		hbox = {
+			#background = {
+			#	using = dark_area
+			#
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = "[InterestGroup.GetParty.GetColor]"
+				alpha = 0.6
+			}
+			background = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = "[InterestGroup.GetParty.GetColor]"
+				mirror = horizontal
+				alpha = 0.2
+			}
+
+			background = {
+				using = simple_frame
+				margin_bottom = 20
+			}
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin_top = 1
+			margin_left = 5
+			margin_right = 5
+			icon = {
+				datacontext = "[InterestGroup.GetParty]"
+				tooltipwidget = {
+					FancyTooltip_Party = {}
+				}
+				texture = "[Party.GetIcon]"
+				size = { 22 22 }
+			}	
+			textbox = {
+				size = { -1 25 }
+				layoutpolicy_horizontal = expanding
+				text = "[InterestGroup.GetParty.GetName]"
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 14
+				default_format = "#title"
+			}
+		}
+
+
+		fixedgridbox = {
+			layoutpolicy_horizontal = fixed
+			layoutpolicy_vertical = fixed	
+			datamodel = "[InterestGroup.GetParty.GetMembers]"
+			addcolumn = 65
+			addrow = 125
+			flipdirection  = yes
+			item = {
+				countrypanelmod_ig_header_widget2 = {}
+			}
+		}
+
+
+	}
+	
+	
 
 	type countrypanelmod_ig_header_widget = widget {
 		size = { 65 105 }
@@ -891,8 +918,8 @@ types countrypanelmod_politicspanel_types {
 				background = {
 					using = dark_area
 					margin_top = -3
-					margin_bottom = 1
-					alpha = 0.2
+					margin_bottom = 3
+					alpha = 0.4
 
 					modify_texture = {
 						texture = "gfx/interface/masks/fade_horizontal_center.dds"
@@ -910,7 +937,6 @@ types countrypanelmod_politicspanel_types {
 						alpha = 1
 					}
 				}
-
 
 				margin_left = 5
 				#visible = "[InterestGroup.IsPowerful]"
@@ -922,8 +948,8 @@ types countrypanelmod_politicspanel_types {
 				background = {
 					using = dark_area
 					margin_top = -3
-					margin_bottom = 1
-					alpha = 0.3
+					margin_bottom = 3
+					alpha = 0.4
 
 					modify_texture = {
 						texture = "gfx/interface/masks/fade_horizontal_center.dds"
@@ -942,6 +968,7 @@ types countrypanelmod_politicspanel_types {
 					}
 				}
 
+				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
 				visible = "[GreaterThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)5')]"
 				text = "[InterestGroup.GetApprovalValue|=p]"
@@ -954,8 +981,8 @@ types countrypanelmod_politicspanel_types {
 				background = {
 					using = dark_area
 					margin_top = -3
-					margin_bottom = 1
-					alpha = 0.3
+					margin_bottom = 3
+					alpha = 0.4
 					modify_texture = {
 						texture = "gfx/interface/masks/fade_horizontal_center.dds"
 						spriteType = Corneredstretched
@@ -972,6 +999,7 @@ types countrypanelmod_politicspanel_types {
 					}
 				}
 
+				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
 				visible = "[And(LessThan_int32(InterestGroup.GetApprovalValue,'(int32)5'),GreaterThan_int32(InterestGroup.GetApprovalValue,'(int32)-5'))]"
 				text = "[InterestGroup.GetApprovalValue|=v]"
@@ -985,8 +1013,8 @@ types countrypanelmod_politicspanel_types {
 				background = {
 					using = dark_area
 					margin_top = -3
-					margin_bottom = 1
-					alpha = 0.3
+					margin_bottom = 3
+					alpha = 0.4
 					modify_texture = {
 						texture = "gfx/interface/masks/fade_horizontal_center.dds"
 						spriteType = Corneredstretched
@@ -1003,7 +1031,7 @@ types countrypanelmod_politicspanel_types {
 					}
 				}
 
-
+				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
 				visible = "[LessThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)-5')]"
 				text = "[InterestGroup.GetApprovalValue|n]"
@@ -1622,12 +1650,8 @@ types countrypanelmod_politicspanel_types {
 			FancyTooltip_PoliticalMovement = {}
 		}
 
-		###NORMAL NON-REVOLUTIONARY MOVEMENT###
 		widget = {
 			size = { 535 68 }
-			#visible = "[Not(PoliticalMovement.IsRevolutionary)]"
-
-
 			button = {
 				size = { 100% 100% }
 				onclick = "[InformationPanelBar.OpenPoliticalMovementPanel(PoliticalMovement.AccessSelf)]"
@@ -1686,9 +1710,9 @@ types countrypanelmod_politicspanel_types {
 							layoutpolicy_vertical = fixed
 	
 							textbox = {
-								margin_left = 5
-								layoutpolicy_horizontal = expanding
-								size = { 0 20 }
+								margin_left = 2
+								
+								autoresize = true
 								align = left|nobaseline
 								elide = right
 								fontsize_min = 12
@@ -1696,8 +1720,9 @@ types countrypanelmod_politicspanel_types {
 								background = {
 									using = dark_area
 									alpha = 0.3
-									margin_left = 20
-									
+									margin_left = 30
+									margin_right = 70
+
 									#margin_bottom = 6
 									#margin_top = 4
 									
@@ -1725,8 +1750,61 @@ types countrypanelmod_politicspanel_types {
 						hbox = {
 							layoutpolicy_horizontal = expanding
 							layoutpolicy_vertical = expanding
-							#margin = { 10 0 }
-	
+							margin_bottom = 2
+							#margin = { 10 0 }							
+
+							### REVOLUTION PROGRESSBAR ###
+							widget = {
+								visible = "[PoliticalMovement.IsRevolutionary]"
+								size = { 148 20 }
+								
+								bad_progressbar_horizontal = {
+									parentanchor = left
+									datacontext = "[PoliticalMovement.GetRevolution]"
+									size = { 140 20 }
+
+									tooltip = "REVOLUTIONS_PROGRESS_TOOLTIP"
+									using = tooltip_below
+
+									blockoverride "values" {
+										value = "[FixedPointToFloat( PoliticalMovement.GetRevolution.GetProgress )]"
+										min = 0
+										max = 1
+									}
+
+									flowcontainer = {
+										parentanchor = vcenter
+										margin_left = 2
+										spacing = 7
+
+										### revolution header
+										textbox = {
+											text = "revolution"
+											align = nobaseline
+											autoresize = yes
+											fontsize_min = 14
+										}
+									}
+
+									textbox = {
+										text = "[PoliticalMovement.GetRevolution.GetProgress|%0]"
+										autoresize = yes
+										align = nobaseline
+										parentanchor = right|vcenter
+										margin_right = 20
+									}
+									
+									blockoverride "in_government_icon" {}
+
+									icon = {
+										parentanchor = right|vcenter
+										size = { 20 20 }
+										texture = "gfx/interface/icons/politics_icons/radicalized.dds"
+										position = { 0 0 }
+									}
+								}
+							}
+
 							### Characters ###
 							flowcontainer = {
 								layoutpolicy_horizontal = fixed
@@ -1735,7 +1813,7 @@ types countrypanelmod_politicspanel_types {
 
 								visible = "[Not(IsDataModelEmpty(PoliticalMovement.GetSupportingCharacters))]"
 								#margin_left = 5
-								#margin_bottom = 7
+								margin_bottom = 2
 								spacing = 3
 	
 								dynamicgridbox = {
@@ -1747,14 +1825,13 @@ types countrypanelmod_politicspanel_types {
 	
 											blockoverride "portrait_button_onrightclick" {}
 	
-											blockoverride "tooltip" {}
-	
-											character_ig_icon = {
-												parentanchor = bottom|right
-												size = { 12 12 }
-	
-												blockoverride "tooltip" {}
-											}
+											#blockoverride "tooltip" {}
+						
+											#character_ig_icon = {
+											#	parentanchor = bottom|right
+											#	size = { 12 12 }
+											#	blockoverride "tooltip" {}
+											#}
 										}
 									}
 								}
@@ -1771,7 +1848,7 @@ types countrypanelmod_politicspanel_types {
 							}
 
 							widget = {
-								size = { 3 3 }
+								size = { 2 2 }
 							}
 	
 							### Interest Groups
@@ -1795,7 +1872,7 @@ types countrypanelmod_politicspanel_types {
 
 							textbox = {
 								layoutpolicy_horizontal = expanding
-								visible = "[Not(Or(PoliticalMovement.IsPlacated,PoliticalMovement.IsRevolutionary))]"
+								visible = "[Not(PoliticalMovement.IsPlacated)]"
 								size = { 0 20 }
 								align = right|nobaseline
 								elide = right
@@ -1818,57 +1895,7 @@ types countrypanelmod_politicspanel_types {
 								visible = "[PoliticalMovement.IsRevolutionary]"
 							}
 
-							### REVOLUTION PROGRESSBAR ###
-							widget = {
-								visible = "[PoliticalMovement.IsRevolutionary]"
-								size = { 230 25 }
-								
-								bad_progressbar_horizontal = {
-									datacontext = "[PoliticalMovement.GetRevolution]"
-									size = { 230 25 }
-
-									tooltip = "REVOLUTIONS_PROGRESS_TOOLTIP"
-									using = tooltip_below
-
-									blockoverride "values" {
-										value = "[FixedPointToFloat( PoliticalMovement.GetRevolution.GetProgress )]"
-										min = 0
-										max = 1
-									}
-
-									flowcontainer = {
-										parentanchor = vcenter
-										margin_left = 10
-										spacing = 7
-
-										### revolution header
-										textbox = {
-											text = "REVOLUTIONS_HEADER"
-											align = nobaseline
-											autoresize = yes
-										}
-									}
-
-									textbox = {
-										text = "[PoliticalMovement.GetRevolution.GetProgress|%0v]"
-										autoresize = yes
-										align = nobaseline
-										parentanchor = right|vcenter
-										margin_right = 35
-									}
-									
-									blockoverride "in_government_icon" {}
-
-									icon = {
-										parentanchor = right|vcenter
-										size = { 25 25 }
-										texture = "gfx/interface/icons/politics_icons/radicalized.dds"
-										position = { -5 0 }
-									}
-								}
-							}
-							
-		
+					
 
 						}
 

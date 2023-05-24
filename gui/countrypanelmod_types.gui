@@ -19,7 +19,7 @@ types countrypanelmod_types {
 		direction = vertical
 		minimumsize = { @panel_width -1 }
 		maximumsize = { @panel_width -1 }
-		margin_top = 10	
+		margin_top = 5	
 		spacing = 10
 		
 		countrypanelmod_pop_strata_section = {}
@@ -71,7 +71,7 @@ types countrypanelmod_types {
 			texture = "gfx/interface/illustrations/top_illus/top_illu_population.dds"
 			using = top_illu_properties
 			margin = { -2 0 }
-			alpha = 0.6
+			alpha = 0.8
 		}
 		countrypanelmod_pop_strata_summary = {
 			using = average_standard_of_living_lower_tooltip_with_graph
