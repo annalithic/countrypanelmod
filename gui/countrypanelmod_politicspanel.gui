@@ -386,7 +386,7 @@ types countrypanelmod_politicspanel_types {
 								#visible = "[Not(IsDataModelEmpty(Country.GetPartiesInOpposition))]"
 								parentanchor = left
 								datamodel = "[Country.AccessInterestGroupsInOpposition]"
-								flipdirection = yes
+								#flipdirection = yes
 							
 								item = {
 									testwidg = {}
@@ -399,7 +399,7 @@ types countrypanelmod_politicspanel_types {
 								layoutpolicy_vertical = expanding
 								parentanchor = left
 								datamodel = "[Country.GetIndependentInterestGroupsInOpposition]"
-								flipdirection = yes	
+								#flipdirection = yes	
 								item = {
 									countrypanelmod_ig_widget_independant = {}
 								}
@@ -527,17 +527,18 @@ types countrypanelmod_politicspanel_types {
 
 
 		hbox = {
+			datacontext = "[InterestGroup.GetParty]"
 			#background = {
 			#	using = dark_area
 			#
 			background = {
 				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-				color = "[InterestGroup.GetParty.GetColor]"
+				color = "[Party.GetColor]"
 				alpha = 0.6
 			}
 			background = {
 				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-				color = "[InterestGroup.GetParty.GetColor]"
+				color = "[Party.GetColor]"
 				mirror = horizontal
 				alpha = 0.2
 			}
@@ -551,22 +552,31 @@ types countrypanelmod_politicspanel_types {
 			margin_top = 1
 			margin_left = 5
 			margin_right = 5
-			icon = {
-				datacontext = "[InterestGroup.GetParty]"
-				tooltipwidget = {
-					FancyTooltip_Party = {}
+			widget = {
+				size = { 22 25 }
+				icon = {
+					parentanchor = center
+					tooltipwidget = {
+						FancyTooltip_Party = {}
+					}
+					texture = "[Party.GetIcon]"
+					size = { 22 22 }
 				}
-				texture = "[Party.GetIcon]"
-				size = { 22 22 }
-			}	
+			}
+
 			textbox = {
+				visible = "[GreaterThan_int32(GetDataModelSize(Party.GetMembers),'(int32)1')]"
 				size = { -1 25 }
 				layoutpolicy_horizontal = expanding
-				text = "[InterestGroup.GetParty.GetName]"
+				text = "[Party.GetName]"
 				align = left|nobaseline
 				elide = right
 				fontsize_min = 14
-				default_format = "#title"
+				#default_format = "#title"
+			}
+			widget = {
+				layoutpolicy_horizontal = growing
+				size = { -1 25 }
 			}
 		}
 
@@ -1711,8 +1721,7 @@ types countrypanelmod_politicspanel_types {
 	
 							textbox = {
 								margin_left = 2
-								
-								autoresize = true
+								autoresize = yes
 								align = left|nobaseline
 								elide = right
 								fontsize_min = 12
