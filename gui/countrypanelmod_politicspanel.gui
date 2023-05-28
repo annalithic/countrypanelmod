@@ -305,6 +305,7 @@ types countrypanelmod_politicspanel_types {
 								}
 							}
 							hbox = {
+								layoutpolicy_vertical = expanding
 								name = "government_independents"
 								#visible = no
 								parentanchor = left
@@ -321,6 +322,7 @@ types countrypanelmod_politicspanel_types {
 					}
 
 					widget = {
+						visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
 						block "size" {
 							size = { 0 100% }
 						}
@@ -343,14 +345,14 @@ types countrypanelmod_politicspanel_types {
 					}
 					
 					vbox = {
-						#visible = no
+						visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
 						layoutpolicy_horizontal = growing
 						layoutpolicy_vertical = expanding
 						spacing = 2
 
 						widget = {
 							layoutpolicy_horizontal = growing
-							size = { 130 26 }
+							size = { 115 26 }
 							background = {
 								using = dark_area
 								alpha = 0.35
@@ -379,8 +381,7 @@ types countrypanelmod_politicspanel_types {
 
 						hbox = {
 							name = "opposition_igs"
-
-							layoutpolicy_horizontal = fixed
+							layoutpolicy_horizontal = expanding
 							hbox = {
 								name = "opposition_parties"
 								#visible = "[Not(IsDataModelEmpty(Country.GetPartiesInOpposition))]"
