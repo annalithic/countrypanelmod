@@ -20,29 +20,39 @@ types countrypanelmod_types {
 		minimumsize = { @panel_width -1 }
 		maximumsize = { @panel_width -1 }
 		margin_top = 5	
-		spacing = 10
 		
 		countrypanelmod_pop_strata_section = {}
+		widget = { size = { 5 5} }
 
 		default_header = {
 			parentanchor = hcenter
 			blockoverride "text" {
-				text = "POP_TYPE_HEADER"
+				text = "COUNTRYPANELMOD_POP_HEADER"
 			}
 		}	
+		widget = { size = { 5 5} }
 
 		flowcontainer = {
-			spacing = 10
+			spacing = 5
 			flowcontainer = {
+				visible = yes
 				margin = {10 0 }
 				spacing = 15
 				direction = vertical
+				countrypanelmod_pop_type_piechart = {
+					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+				}				
 				countrypanelmod_pop_type_pol_str_piechart = {}
-				countrypanelmod_pop_type_piechart = {}
+				countrypanelmod_pop_type_piechart = {
+					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+				}
 			}
 
 			countrypanelmod_pop_type_table = {}
 		}
+
+		widget = { size = { 5 5} }
+
 
 		default_header = {
 			parentanchor = hcenter
@@ -158,114 +168,512 @@ types countrypanelmod_types {
 
 
 	type countrypanelmod_pop_type_table = flowcontainer {
-		dynamicgridbox = {
-			parentanchor = left
-			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
-			
+		direction = vertical
 
-			item = {
-				widget = {
+		flowcontainer = {
+			widget = {
+				size = { @pop_type_table_row_height @pop_type_table_row_height}
+			}
+			#widget = {
+			#	size = { 120 @pop_type_table_row_height}
+			#}
+			sort_button = {
+				#enabled = no
+				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't'))]"
+				size = { 120 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
+				text = "POP_TYPE_HEADER"
+			}
+			sort_button = {
+				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
+				size = { 120 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't-' )]"
+				text = "POP_TYPE_HEADER"
+			}
+			sort_button = {
+				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p' )]"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
+				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p-' )]"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
+				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'))]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
+				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's')]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's-' )]"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
+				enabled = no
+				size = { 88 @pop_type_table_row_height}
+				text = "COUNTRYPANELMOD_RADICALISM_HEADER"
+			}
 
+		}
 
-					size = { @panel_width_half @pop_type_table_row_height }
-					
-					flowcontainer = {
-						parentanchor = top
-
-						widget = {
-							size = { @pop_type_table_row_height @pop_type_table_row_height }
-
-							background = {
-								using = simple_frame
-							}
-
-							icon = {
-								parentanchor = center
-								texture = "/gfx/interface/piechart/piechart_legend.dds"
-								position = { -0.5 -0.5 }
-								size = { 24 24 }
-								color = "[PopType.GetColor]"
-							}
-						}
-
-						
-
-
-						widget = {
-							size = { 120 @pop_type_table_row_height }
-							background = {
-								using = entry_bg_simple
-							}
-
-							textbox = {
-								parentanchor = left|vcenter
-								align = center|nobaseline
-								position = { 6 0 }
-								text = "[PopType.GetNameNoFormatting]"
-								autoresize = yes
-							}
-	
-						}
-
-						widget = {
-							size = { 60 @pop_type_table_row_height }
-							background = {
-								using = entry_bg_simple
-							}
-
-							textbox = {
-								parentanchor = center
-								align = center|nobaseline
-								text = "[PopType.GetPopulation(Country.Self)|d]"
-								autoresize = yes
-							}
-						}
-
-						widget = {
-							size = { 60 @pop_type_table_row_height }
-							background = {
-								using = entry_bg_simple
-							}
-
-							textbox = {
-								parentanchor = center
-								align = center|nobaseline
-								text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
-								autoresize = yes
-							}
-						}
-						
-						widget = {
-							size = { 88 @pop_type_table_row_height }
-							
-							background = {
-								using = entry_bg_simple
-							}
-
-							countrypanelmod_radicalism_progressbar = {
-								size = { 80 19 }
-								position = { 4 4 }
-
-								blockoverride "value_left" {
-									min = 0
-									max = 100
-									value = "[CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self))))]"
-								}
-								blockoverride "value_right" {
-									min = 0
-									max = 100
-									value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
-								}
-
-
-							}
-						}
-
+		flowcontainer = {
+			direction = vertical
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
 					}
 				}
 			}
 		}
+
+		flowcontainer = {
+			direction = vertical
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't-')]"
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+				item = {
+					countrypanelmod_pop_type_row = {
+						visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
+					}
+				}
+			}
+		}
+
+
+
+		dynamicgridbox = {
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPopulation]"
+			item = {
+				countrypanelmod_pop_type_row = {}
+			}
+		}
+
+		dynamicgridbox = {
+			visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'),Not(GetVariableSystem.Exists('countrypanelmod_pop_type_table_sort')))]"
+			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
+			item = {
+				countrypanelmod_pop_type_row = {}
+			}
+		}
+
+		countrypanelmod_pop_type_table_reverse_pop = {
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-' )]"
+		}
+
+		countrypanelmod_pop_type_table_reverse_str = {
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's-' )]"
+		}
 	}
+
+
+
+	type countrypanelmod_pop_type_table_reverse_pop = flowcontainer {
+		direction = vertical
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)14')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 14
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)13')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 13
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)12')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 12
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)11')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 11
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)10')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 10
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)9')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 9
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)8')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 8
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)7')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 7
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)6')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 6
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)5')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 5
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)4')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 4
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)3')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 3
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)2')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 2
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)1')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 1
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)0')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+				index = 0
+			}
+		}
+	}
+
+
+	type countrypanelmod_pop_type_table_reverse_str = flowcontainer {
+		direction = vertical
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)14')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 14
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)13')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 13
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)12')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 12
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)11')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 11
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)10')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 10
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)9')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 9
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)8')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 8
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)7')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 7
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)6')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 6
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)5')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 5
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)4')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 4
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)3')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 3
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)2')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 2
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)1')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 1
+			}
+		}
+		countrypanelmod_pop_type_row = {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)0')]"
+			datacontext_from_model = {
+				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+				index = 0
+			}
+		}
+	}
+
+	type countrypanelmod_pop_type_row = flowcontainer {
+
+
+		parentanchor = top
+
+		widget = {
+			size = { @pop_type_table_row_height @pop_type_table_row_height }
+
+			background = {
+				using = simple_frame
+			}
+
+			icon = {
+				parentanchor = center
+				texture = "/gfx/interface/piechart/piechart_legend.dds"
+				position = { -0.5 -0.5 }
+				size = { 24 24 }
+				color = "[PopType.GetColor]"
+			}
+		}
+
+		
+
+
+		widget = {
+
+			background = {
+				margin_top = -2
+				margin_bottom = -2
+				visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = { .42 .31 .28 1 }
+				alpha = 0.5
+			}
+			background = {
+				margin_top = -2
+				margin_bottom = -2
+				visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = { .39 .46 .56 1 }
+				alpha = 0.5
+			}
+			background = {
+				margin_top = -2
+				margin_bottom = -2
+				visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				color = { .58 .52 .40 1 }
+				alpha = 0.5
+			}
+
+
+			size = { 120 @pop_type_table_row_height }
+			background = {
+				using = entry_bg_simple
+			}
+
+			textbox = {
+				parentanchor = left|vcenter
+				align = center|nobaseline
+				position = { 6 0 }
+				text = "[PopType.GetNameNoFormatting]"
+				autoresize = yes
+				tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+			}
+
+		}
+
+		widget = {
+			size = { 60 @pop_type_table_row_height }
+			background = {
+				using = entry_bg_simple
+			}
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+
+			textbox = {
+				parentanchor = center
+				align = center|nobaseline
+				text = "[PopType.GetPopulation(Country.Self)|d]"
+				autoresize = yes
+			}
+		}
+
+		widget = {
+			size = { 60 @pop_type_table_row_height }
+			background = {
+				using = entry_bg_simple
+			}
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
+			textbox = {
+				parentanchor = center
+				align = center|nobaseline
+				text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+				autoresize = yes
+			}
+		}
+		
+		widget = {
+			size = { 88 @pop_type_table_row_height }
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM"
+
+			background = {
+				using = entry_bg_simple
+			}
+
+			countrypanelmod_radicalism_progressbar = {
+
+				size = { 80 19 }
+				position = { 4 4 }
+
+				blockoverride "value_left" {
+					min = 0
+					max = 100
+					value = "[CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self))))]"
+				}
+				blockoverride "value_right" {
+					min = 0
+					max = 100
+					value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
+				}
+
+
+			}
+		}
+	}
+
 
 	type countrypanelmod_pop_strata_summary = flowcontainer {
 		minimumsize = { 180 -1 }
@@ -745,6 +1153,7 @@ types countrypanelmod_types {
 		
 		### progressbar left
 		widget = {
+
 			size = { 100% 100% }
 			scissor = yes
 			
@@ -784,6 +1193,7 @@ types countrypanelmod_types {
 		
 		### progressbar right
 		widget = {
+
 			size = { 100% 100% }
 			parentanchor = right
 			scissor = yes
@@ -825,6 +1235,7 @@ types countrypanelmod_types {
 		
 		### frame
 		widget = {
+
 			size = { 100% 100% }
 			
 			background = {
