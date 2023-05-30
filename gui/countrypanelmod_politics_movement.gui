@@ -1,0 +1,296 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types countrypanelmod_politics_movement_types {
+	
+	type countrypanelmod_political_movement_item = flowcontainer {
+		direction = vertical
+
+		onmousehierarchyenter = "[AccessHighlightManager.HighlightPoliticalMovement(PoliticalMovement.Self)]"
+		onmousehierarchyleave = "[AccessHighlightManager.RemoveHighlight]"
+
+		tooltipwidget = {
+			FancyTooltip_PoliticalMovement = {}
+		}
+
+		widget = {
+			size = { 535 68 }
+			button = {
+				size = { 100% 100% }
+				onclick = "[InformationPanelBar.OpenPoliticalMovementPanel(PoliticalMovement.AccessSelf)]"
+				using = default_button
+				parentanchor = center
+
+				#vfx = {
+				#	position = { 200 4 }
+				#	size = { 1000 125 }
+				#	blockoverride "entity_instance" {
+				#		entity_instance = vfx_ui_plane_war_panel_fire_plane_entity
+				#	}	
+				#	alpha = 0.3
+				#}
+	
+
+
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					margin_left = 10
+					margin_right = 10
+					spacing = 5
+
+					widget = {
+						layoutpolicy_horizontal = fixed
+						size = { 50 50 }
+
+						icon = {
+							visible = "[PoliticalMovement.IsRevolutionary]"
+							using = rotate_glow_animation_02
+							blockoverride "rotate_animation_texture" {
+								texture = "gfx/interface/animation/color_bad.dds"
+							}
+							size = { 250% 250% }
+							parentanchor = center
+						}
+
+
+						icon = {
+							size = { 100% 100% }
+							texture = "[PoliticalMovement.GetLaw.GetTexture]"			
+						}
+	
+
+					}
+
+
+					vbox = {
+						margin_top = 7
+
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+
+						hbox = {
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = fixed
+	
+							textbox = {
+								margin_left = 2
+								autoresize = yes
+								align = left|nobaseline
+								elide = right
+								fontsize_min = 12
+	
+								background = {
+									using = dark_area
+									alpha = 0.3
+									margin_left = 30
+									margin_right = 70
+
+									#margin_bottom = 6
+									#margin_top = 4
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										blend_mode = alphamultiply
+									}
+								}
+								
+								text = "[PoliticalMovement.GetName]"	
+							}
+	
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = right|nobaseline
+								elide = right
+								fontsize_min = 12
+								text = "POLITICAL_MOVEMENT_SUPPORT_WITH_LABEL"
+							}
+		
+	
+						}
+	
+						hbox = {
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = expanding
+							margin_bottom = 2
+							#margin = { 10 0 }							
+
+							### REVOLUTION PROGRESSBAR ###
+							widget = {
+								visible = "[PoliticalMovement.IsRevolutionary]"
+								size = { 148 20 }
+								
+								bad_progressbar_horizontal = {
+									parentanchor = left
+									datacontext = "[PoliticalMovement.GetRevolution]"
+									size = { 140 20 }
+
+									tooltip = "REVOLUTIONS_PROGRESS_TOOLTIP"
+									using = tooltip_below
+
+									blockoverride "values" {
+										value = "[FixedPointToFloat( PoliticalMovement.GetRevolution.GetProgress )]"
+										min = 0
+										max = 1
+									}
+
+									flowcontainer = {
+										parentanchor = vcenter
+										margin_left = 2
+										spacing = 7
+
+										### revolution header
+										textbox = {
+											text = "revolution"
+											align = nobaseline
+											autoresize = yes
+											fontsize_min = 14
+										}
+									}
+
+									textbox = {
+										text = "[PoliticalMovement.GetRevolution.GetProgress|%0]"
+										autoresize = yes
+										align = nobaseline
+										parentanchor = right|vcenter
+										margin_right = 20
+									}
+									
+									blockoverride "in_government_icon" {}
+
+									icon = {
+										parentanchor = right|vcenter
+										size = { 20 20 }
+										texture = "gfx/interface/icons/politics_icons/radicalized.dds"
+										position = { 0 0 }
+									}
+								}
+							}
+
+							### Characters ###
+							flowcontainer = {
+								layoutpolicy_horizontal = fixed
+
+
+
+								visible = "[Not(IsDataModelEmpty(PoliticalMovement.GetSupportingCharacters))]"
+								#margin_left = 5
+								margin_bottom = 2
+								spacing = 3
+	
+								dynamicgridbox = {
+									datamodel = "[PoliticalMovement.GetTopSupportingCharacters]"
+									flipdirection = yes
+	
+									item = {
+										character_portrait_mini = {
+	
+											blockoverride "portrait_button_onrightclick" {}
+	
+											#blockoverride "tooltip" {}
+						
+											#character_ig_icon = {
+											#	parentanchor = bottom|right
+											#	size = { 12 12 }
+											#	blockoverride "tooltip" {}
+											#}
+										}
+									}
+								}
+	
+								textbox = {
+									autoresize = yes
+									visible = "[Not(IsDataModelEmpty(PoliticalMovement.GetBottomSupportingCharacters))]"
+									size = { 0 30 }
+									align = right|nobaseline
+									text = "AGITATORS_IN_QUEUE"
+									fontsize_min = 12
+									tooltip = "[PoliticalMovement.GetBottomSupportingCharactersDesc]"
+								}
+							}
+
+							widget = {
+								size = { 2 2 }
+							}
+	
+							### Interest Groups
+							flowcontainer = {
+
+								parentanchor = left
+
+								visible = "[Not(IsDataModelEmpty(PoliticalMovement.GetSupportingInterestGroups))]"
+								datamodel = "[PoliticalMovement.GetSupportingInterestGroups]"
+								#spacing = 3
+								item = {
+									ig_button = {
+										size = { 30 30 }
+										
+										tooltipwidget = {
+											FancyTooltip_IG = {}
+										}
+									}
+								}
+							}
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								visible = "[Not(PoliticalMovement.IsPlacated)]"
+								size = { 0 20 }
+								align = right|nobaseline
+								elide = right
+								fontsize_min = 12
+								text = "POLITICAL_MOVEMENT_RADICALISM_WITH_LABEL"
+							}
+		
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = right|nobaseline
+								elide = right
+								fontsize_min = 12
+								
+								visible = "[And(PoliticalMovement.IsPlacated,Not(PoliticalMovement.IsRevolutionary))]"
+								text = "[concept_political_movement_placated]"
+							}
+
+							expand = {
+								visible = "[PoliticalMovement.IsRevolutionary]"
+							}
+
+					
+
+						}
+
+
+					}
+
+	
+				}
+
+				vbox = {
+					visible = no
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = preferred
+					parentanchor = center
+					margin_right = 10
+
+
+
+				}
+
+
+			}
+			
+
+		}
+	}
+
+}

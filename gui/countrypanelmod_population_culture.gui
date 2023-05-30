@@ -1,0 +1,132 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types countrypanelmod_population_culture_types {
+	
+	type countrypanelmod_culture_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopCulturesSortedByPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "STATE_CULTURES"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_CULTURE_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[Culture.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[Culture.GetColor]"
+		}
+		
+		blockoverride "pie_item_goto_button" {
+			button = {
+				using = clean_button
+				size = { 100% 100% }
+				onclick = "[InformationPanelBar.OpenCultureInfoPanel(Culture.AccessSelf)]"
+			}
+		}
+
+		blockoverride "leftside_info" {
+			text = "[Culture.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[Culture.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([Culture.GetPopulation(Country.Self)|D])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 6
+		}
+	}
+
+	type countrypanelmod_religion_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopReligionsSortedByPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopReligionsSortedByPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopCulturesSortedByPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "STATE_RELIGIONS"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_RELIGION_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[Religion.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[Religion.GetColor]"
+		}
+		
+		blockoverride "pie_item_goto_button" {
+			button = {
+				using = clean_button
+				size = { 100% 100% }
+				onclick = "[InformationPanelBar.OpenReligionInfoPanel(Religion.AccessSelf)]"
+			}
+		}
+
+		blockoverride "leftside_info" {
+			text = "[Religion.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[Religion.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([Religion.GetPopulation(Country.Self)|D])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 6
+		}
+	}
+
+}

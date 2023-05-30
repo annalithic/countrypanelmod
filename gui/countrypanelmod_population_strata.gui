@@ -1,0 +1,174 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types countrypanelmod_population_strata_types {
+
+	type countrypanelmod_pop_strata_section = flowcontainer {
+		parentanchor = hcenter
+		background = {
+			texture = "gfx/interface/illustrations/top_illus/top_illu_population.dds"
+			using = top_illu_properties
+			margin = { -2 0 }
+			alpha = 0.8
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_lower_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleLowerStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_poor_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "LOWER_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_LOW_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetLowerStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_POOR"
+				tooltip = "POPS_OVERVIEW_REMAINDER_POOR_TOOLTIP"
+			}
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_middle_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleMiddleStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_middle_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "MIDDLE_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_MIDDLE_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetMiddleStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_MIDDLE"
+				tooltip = "POPS_OVERVIEW_REMAINDER_MIDDLE_TOOLTIP"
+			}
+		}
+		countrypanelmod_pop_strata_summary = {
+			using = average_standard_of_living_upper_tooltip_with_graph
+			
+			blockoverride "strata_portrait_properties" {
+				datacontext = "[Country.GetSampleUpperStrataPop]"
+			}
+
+			blockoverride "strata_icon" {
+				texture = "gfx/interface/icons/pops_icons/sol_upper_icon.dds"
+			}
+			blockoverride "strata_label" {
+				text = "UPPER_NO_ICON"
+			}
+
+			blockoverride "sol_summary" {
+				text = "COUNTRY_SOL_UPPER_LABEL"
+			}
+
+			blockoverride "population_summary" {
+				text = "[GetTrendValue(Country.GetUpperStrataPopulationTrend)|vD]"
+			}
+
+			blockoverride "remainder" {
+				text = "POPS_OVERVIEW_REMAINDER_RICH"
+				tooltip = "POPS_OVERVIEW_REMAINDER_RICH_TOOLTIP"
+			}
+		}
+	}
+
+	type countrypanelmod_pop_strata_summary = flowcontainer {
+		minimumsize = { 180 -1 }
+		maximumsize = { 180 -1 }
+		direction = vertical
+		using = entry_bg_fancy
+
+		# portrait and summary
+		widget = {
+			parentanchor = hcenter
+			size = { 180 330 }
+
+			widget = {
+				size = { 170 330 }
+				scissor = yes
+				parentanchor = hcenter
+				position = { 0 18 }
+
+				culture_info_pop_portrait = {
+					parentanchor = center
+					
+					block "strata_portrait_properties" {}
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = hcenter
+				margin_top = 15
+
+				flowcontainer = {
+					parentanchor = hcenter
+					icon = {
+						block "strata_icon" {}
+						size = { 28 28 }
+						parentanchor = vcenter
+					}
+					textbox = {
+						parentanchor = vcenter
+						block "strata_label" {}
+						align = nobaseline
+						autoresize = yes
+						margin_left = 5
+					}
+				}
+
+				textbox = {
+					block "population_summary" {}
+					autoresize = yes
+					parentanchor = hcenter
+					using = fontsize_large
+					default_format = "#variable"
+					align = nobaseline
+				}
+			}
+
+
+			flowcontainer = {
+				parentanchor = bottom|hcenter
+				direction = vertical
+
+				textbox = {
+					block "sol_summary" {}
+					autoresize = yes
+				}
+				margin_bottom = 15
+			}
+		}
+	}
+	
+}

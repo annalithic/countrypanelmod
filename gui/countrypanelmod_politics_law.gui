@@ -1,0 +1,289 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types countrypanelmod_politics_law_types {
+
+	type countrypanelmod_laws_block = flowcontainer {
+		minimumsize = { @panel_width -1 }
+		direction = vertical
+
+		flowcontainer = {
+			direction = horizontal
+			
+			textbox = {
+				size = { 180 25 }
+				align = center|nobaseline
+				using = fontsize_large
+				fontsize_min = 14
+				
+				text = "POWER_STRUCTURE"
+			}		
+			
+			textbox = {
+				size = { 180 25 }
+				align = center|nobaseline
+				using = fontsize_large
+				fontsize_min = 14
+				
+				text = "ECONOMY"
+			}
+			
+			textbox = {
+				size = { 180 25 }
+				align = center|nobaseline
+				using = fontsize_large
+				fontsize_min = 14
+				
+				text = "HUMAN_RIGHTS"
+			}			
+		}
+
+		widget = { size = { 5 3 } }
+		
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = horizontal
+			spacing = 5
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActivePowerStructureLaws))]"
+				datamodel = "[Country.AccessActivePowerStructureLaws]"
+				parentanchor = hcenter
+				spacing = 3
+
+				item = {
+					countrypanelmod_law_item_container = {
+						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
+					}
+				}
+			}
+
+			vertical_divider_full = {}
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActiveEconomyLaws))]"
+				datamodel = "[Country.AccessActiveEconomyLaws]"
+				parentanchor = hcenter
+				spacing = 3
+
+				item = {
+					countrypanelmod_law_item_container = {
+						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
+
+						#blockoverride "size" {
+						#	size = { 170 43 }
+						#}
+					}
+				}
+				
+				background = {
+					using = light_bg
+					alpha = 0.5
+					margin = { 5 0 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						blend_mode = alphamultiply
+					}
+				}
+			}
+
+			vertical_divider_full = {}			
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActiveHumanRightsLaws))]"
+				datamodel = "[Country.AccessActiveHumanRightsLaws]"
+				parentanchor = hcenter
+				spacing = 3
+
+				item = {
+					countrypanelmod_law_item_container = {
+						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
+					}
+				}
+			}			
+		}			
+
+	}
+
+	type countrypanelmod_law_item_container = widget {
+		block "size" {
+			size = { 170 55 }
+		}
+
+		countrypanelmod_law_item = {
+			visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName)))]"
+		}
+		countrypanelmod_enacting_law_item = {
+			visible = "[And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName))]"
+		}
+	}
+
+	type countrypanelmod_law_item = widget {
+		size = { 100% 100% }
+		
+		background = {
+			using = entry_bg_simple
+		}		
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin = { 8 0 }
+		
+			flowcontainer = {
+				direction = vertical
+				spacing = 1
+				icon = {
+					size = { 40 40 }
+					texture = "[Law.GetTexture]"			
+				}
+				countrypanelmod_institution_level_dots = {
+					visible = "[Law.HasInstitution]"
+				}
+			}
+			
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				align = center|nobaseline
+				fontsize_min = 10
+				multiline = yes
+				
+				text = "[Law.GetName]"
+			}
+		}
+	}
+
+	type countrypanelmod_enacting_law_item = widget {
+		size = { 100% 100% }
+		
+		background = {
+			using = entry_bg_simple_colored
+		}		
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin = { 8 0 }
+		
+			flowcontainer = {
+				direction = vertical
+				spacing = 2
+				countrypanelmod_law_change_icon = {}
+				countrypanelmod_institution_level_dots = {
+					visible = "[Law.HasInstitution]"
+				}
+			}
+			
+			textbox = {
+				layoutpolicy_horizontal = expanding
+				align = center|nobaseline
+				fontsize_min = 10
+				multiline = yes
+				
+				text = "COUNTRYPANELMOD_LAW_CHANGE"
+			}
+
+		}
+
+		widget = {
+			size = { 100% 100% }
+			
+			tooltipwidget = {
+				FancyTooltip_Law = {}
+			}
+		}
+	}
+	
+	type countrypanelmod_law_change_icon = widget {
+		size = {40 40}
+		widget = {
+			size = {20 40}
+			scissor = yes
+
+			icon = {
+				size = { 40 40 }
+				position = { 10 0 }
+				parentanchor = center
+				texture = "[Law.GetActiveGroupLaw.GetTexture]"
+			}
+		}
+
+		widget = {
+
+			position = { 20 0 }
+
+			size = {20 40}
+			scissor = yes
+
+			icon = {
+				size = { 40 40 }
+				position = { -10 0 }
+				parentanchor = center
+				texture = "[Law.GetTexture]"
+			}
+		}
+
+		icon = {
+			size = { 1 40 }
+			position = { 0 0 }
+			parentanchor = center
+			texture = "gfx/interface/dividers/divider_clean_vertical.dds"
+		}
+
+	}
+
+	type countrypanelmod_institution_level_dots = widget {
+		size = { 40 10 }
+		datamodel = "[CountryPanel.AccessCountry.AccessInstitutions]"
+		item = {
+			flowcontainer = {
+				parentanchor = center
+				visible = "[EqualTo_string(Law.GetInstitutionType.GetNameNoFormatting,Institution.GetNameNoFormatting)]"
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)1')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)2')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)3')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)4')]"
+				}
+				countrypanelmod_institution_level_dot = {
+					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)5')]"
+				}	
+			}	
+		}
+	}
+
+	type countrypanelmod_institution_level_dot = widget {
+		size = { 8 8 }
+		background = {
+			using = simple_frame
+		}
+		
+		icon = {
+			parentanchor = center
+			size = { 5 5 }
+			texture = "gfx/interface/piechart/piechart.dds"
+			color = { 1.0 0.8 0.64 1.0}	
+		}
+		#texture = "gfx/interface/icons/institution_icons/institution_icon_bg.dds"
+	}
+
+}
