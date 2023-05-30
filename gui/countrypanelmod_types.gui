@@ -21,6 +21,8 @@ types countrypanelmod_types {
 		maximumsize = { @panel_width -1 }
 		margin_top = 5	
 		
+		#countrypanelmod_pop_strata_section2 = {}
+
 		countrypanelmod_pop_strata_section = {}
 		widget = { size = { 5 5} }
 
@@ -33,19 +35,43 @@ types countrypanelmod_types {
 		widget = { size = { 5 5} }
 
 		flowcontainer = {
+			#maximumsize = { @panel_width 1000}
+			minimumsize = { -1 360}
+
 			spacing = 5
-			flowcontainer = {
-				visible = yes
-				margin = {10 0 }
-				spacing = 15
-				direction = vertical
-				countrypanelmod_pop_type_piechart = {
-					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
-				}				
-				countrypanelmod_pop_type_pol_str_piechart = {}
-				countrypanelmod_pop_type_piechart = {
-					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+			widget = {
+				size = { 180 100% }
+				background = {
+					using = entry_bg
 				}
+
+				vbox = {
+					margin_top = 2
+					margin_bottom = 5
+
+					parentanchor = hcenter
+					visible = yes
+					#spacing = 15
+					direction = vertical
+					countrypanelmod_pop_type_piechart = {
+						visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+					}
+					widget = {
+						visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+						size = { 15 15}
+						layoutpolicy_vertical = shrinking
+					}
+					countrypanelmod_pop_type_pol_str_piechart = {}
+					widget = {
+						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+						size = { 15 15}
+						layoutpolicy_vertical = shrinking
+					}
+					countrypanelmod_pop_type_piechart = {
+						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+					}
+					expand = {}
+				}	
 			}
 
 			countrypanelmod_pop_type_table = {}
@@ -74,6 +100,144 @@ types countrypanelmod_types {
 	} 
 
 
+	type countrypanelmod_pop_strata_section2 = widget {
+		
+		size = { @panel_width 200 }
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+			#using = entry_bg_fancy
+
+
+			widget = {
+				background = {
+					using = entry_bg_simple
+				}
+				size = { 50 50 }
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				vbox = {
+					margin = { 5 5 }
+
+					widget = {
+						size = {-1 50}
+						layoutpolicy_horizontal = expanding
+						hbox = {
+							spacing = 2
+							widget = {
+								layoutpolicy_vertical = expanding
+								size = { 25 -1 }
+								icon = {
+									parentanchor = top
+									size = { 22 22 }
+									texture = "gfx/interface/icons/pops_icons/sol_poor_icon.dds"
+								}	
+							}
+							vbox = {
+								layoutpolicy_horizontal = expanding
+
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = expanding
+									align = nobaseline
+									text = "COUNTRYPANELMOD_POOR"
+								}
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = expanding
+									align = nobaseline
+									text = "COUNTRYPANELMOD_POOR_SOL"
+								}
+			
+							}
+						}
+					}
+					widget = {
+						layoutpolicy_horizontal = expanding
+						size = { -1 10 }
+						divider_clean = {
+							parentanchor = vcenter
+						}
+					}
+					textbox = {
+						parentanchor = nobaseline
+						align = nobaseline
+						size = {-1 25}
+						layoutpolicy_horizontal = expanding
+						text = "COUNTRYPANELMOD_MIDDLE"
+					}
+					textbox = {
+						size = {-1 25}
+						align = nobaseline
+						layoutpolicy_horizontal = expanding
+						text = "COUNTRYPANELMOD_MIDDLE_SOL"
+					}
+					widget = {
+						layoutpolicy_horizontal = expanding
+						size = { -1 10 }
+						divider_clean = {
+							parentanchor = vcenter
+						}
+					}
+
+					textbox = {
+						size = {-1 25}
+						align = nobaseline
+						layoutpolicy_horizontal = expanding
+						text = "COUNTRYPANELMOD_RICH"
+					}
+					textbox = {
+						size = {-1 25}
+						align = nobaseline
+						layoutpolicy_horizontal = expanding
+						text = "COUNTRYPANELMOD_RICH_SOL"
+					}
+
+
+					expand = {}
+
+				}
+
+			}
+			countrypanelmod_pop_strata_portrait = {
+				datacontext = "[Country.GetSampleLowerStrataPop]"
+			}
+			countrypanelmod_pop_strata_portrait = {
+				datacontext = "[Country.GetSampleMiddleStrataPop]"
+			}
+			countrypanelmod_pop_strata_portrait = {
+				datacontext = "[Country.GetSampleUpperStrataPop]"
+			}
+	
+		}
+
+	}
+
+	type countrypanelmod_pop_strata_portrait = widget {
+		size = { 120 200 }
+		pop_portrait_base = {
+			parentanchor = center
+			#using = entry_bg_fancy
+	
+			background = {
+				using = entry_bg_simple
+			}
+
+			size = { 120 200 }
+			blockoverride "portrait_size" {
+				size = { 120 200 }
+			}
+			blockoverride "pop_portrait_texture" {
+				portrait_texture = "[Pop.GetAnimatedTypedPortrait('environment_standard', 'camera_body', 'idle', PdxGetWidgetScreenSize(PdxGuiWidget.Self), 'random_adult', '(int32)-1')]"
+			}
+	
+			visible = "[Pop.IsValid]"
+			blockoverride "portrait_button" {}
+			
+			block "strata_portrait_properties" {}	
+		}
+
+	}
 
 	type countrypanelmod_pop_strata_section = flowcontainer {
 		parentanchor = hcenter
@@ -171,22 +335,19 @@ types countrypanelmod_types {
 		direction = vertical
 
 		flowcontainer = {
-			widget = {
-				size = { @pop_type_table_row_height @pop_type_table_row_height}
-			}
 			#widget = {
 			#	size = { 120 @pop_type_table_row_height}
 			#}
 			sort_button = {
 				#enabled = no
 				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't'))]"
-				size = { 120 @pop_type_table_row_height}
+				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
 				text = "POP_TYPE_HEADER"
 			}
 			sort_button = {
 				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
-				size = { 120 @pop_type_table_row_height}
+				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't-' )]"
 				text = "POP_TYPE_HEADER"
 			}
@@ -673,6 +834,88 @@ types countrypanelmod_types {
 			}
 		}
 	}
+
+	type countrypanelmod_pop_strata_summary2 = flowcontainer {
+		minimumsize = { 150 -1 }
+		maximumsize = { 100 -1 }
+		direction = vertical
+		using = entry_bg_fancy
+
+		# portrait and summary
+		widget = {
+			parentanchor = hcenter
+			size = { 100 330 }
+
+			widget = {
+				size = { 100 330 }
+				scissor = yes
+				parentanchor = hcenter
+				position = { 0 18 }
+
+
+				pop_portrait_base = {
+					parentanchor = center
+
+					size = { 100 100 }
+					blockoverride "portrait_size" {
+						size = { 100 200 }
+					}
+					blockoverride "pop_portrait_texture" {
+						portrait_texture = "[Pop.GetAnimatedTypedPortrait('environment_standard', 'camera_body', 'idle', PdxGetWidgetScreenSize(PdxGuiWidget.Self), 'random_adult', '(int32)-1')]"
+					}
+			
+					visible = "[Pop.IsValid]"
+					blockoverride "portrait_button" {}
+					
+					block "strata_portrait_properties" {}
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = hcenter
+				margin_top = 15
+
+				flowcontainer = {
+					parentanchor = hcenter
+					icon = {
+						block "strata_icon" {}
+						size = { 28 28 }
+						parentanchor = vcenter
+					}
+					textbox = {
+						parentanchor = vcenter
+						block "strata_label" {}
+						align = nobaseline
+						autoresize = yes
+						margin_left = 5
+					}
+				}
+
+				textbox = {
+					block "population_summary" {}
+					autoresize = yes
+					parentanchor = hcenter
+					using = fontsize_large
+					default_format = "#variable"
+					align = nobaseline
+				}
+			}
+
+
+			flowcontainer = {
+				parentanchor = bottom|hcenter
+				direction = vertical
+
+				textbox = {
+					block "sol_summary" {}
+					autoresize = yes
+				}
+				margin_bottom = 15
+			}
+		}
+	}
+
 
 
 	type countrypanelmod_pop_strata_summary = flowcontainer {

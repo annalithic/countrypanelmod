@@ -14,3 +14,12 @@
  COUNTRYPANELMOD_RADICALISM_HEADER:0 "#header [Concept('concept_radical', '$concept_radicals$')]#!"
  COUNTRYPANELMOD_POP_HEADER:0 "#header [Concept('concept_pop','$concept_population$')]#!"
  COUNTRYPANELMOD_POP_TYPE_RADICALISM:0 "$COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY$\n$TAB$[Concept('concept_loyalist','$concept_loyalists$')]: #variable [PopType.GetLoyalists(Country.Self)|d] ([CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%)#!\n$TAB$[Concept('concept_radical','$concept_radicals$')]: #variable [PopType.GetRadicals(Country.Self)|d] ([CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%)#!"
+
+ COUNTRYPANELMOD_STRATAS_AVG_SOL:1 "$poor$: [Country.GetFormattedStandardOfLivingLabelPoor|v] (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_LOW,CountryStandardOfLivingLower #v [Country.GetFormattedStandardOfLivingPoor]#!#!#!)\n$middle$: #v [Country.GetFormattedStandardOfLivingLabelMiddle]#! (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_MIDDLE,CountryStandardOfLivingMiddle #v [Country.GetFormattedStandardOfLivingMiddle]#!#!#!)\n$rich$: #v [Country.GetFormattedStandardOfLivingLabelRich]#! (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_UPPER,CountryStandardOfLivingUpper [Country.GetFormattedStandardOfLivingRich|v]#!#!)"
+
+ COUNTRYPANELMOD_POOR_SOL:1 "[Country.GetFormattedStandardOfLivingLabelPoor|v] (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_LOW,CountryStandardOfLivingLower #v [Country.GetFormattedStandardOfLivingPoor]#!#!#!)"
+ COUNTRYPANELMOD_MIDDLE_SOL:1 "[Country.GetFormattedStandardOfLivingLabelMiddle|v] (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_LOW,CountryStandardOfLivingMiddle #v [Country.GetFormattedStandardOfLivingMiddle]#!#!#!)"
+ COUNTRYPANELMOD_RICH_SOL:1 "[Country.GetFormattedStandardOfLivingLabelRich|v] (#tooltippable #tooltip:[Country.GetTooltipTag],COUNTRY_SOL_LOW,CountryStandardOfLivingUpper #v [Country.GetFormattedStandardOfLivingRich]#!#!#!)"
+ COUNTRYPANELMOD_POOR:0 "[concept_lower_strata]: [GetTrendValue(Country.GetLowerStrataPopulationTrend)|vD]"
+ COUNTRYPANELMOD_MIDDLE:0 "[concept_middle_strata]: [GetTrendValue(Country.GetMiddleStrataPopulationTrend)|vD]"
+ COUNTRYPANELMOD_RICH:0 "[concept_upper_strata]: [GetTrendValue(Country.GetUpperStrataPopulationTrend)|vD]"
