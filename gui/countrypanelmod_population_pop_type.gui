@@ -13,8 +13,112 @@
 
 types countrypanelmod_population_pop_type_types {
 
+	#MINIMIZED CHART SECTION
+	type countrypanelmod_pop_type_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPopulation), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "[concept_profession]"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[PopType.GetPopulationAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+
+		blockoverride "leftside_info" {
+			text = "[PopType.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[PopType.GetPopulationAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([PopType.GetPopulation(Country.Self)|D])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 3
+		}
+	}
+
+	type countrypanelmod_pop_type_pol_str_piechart = chart {
+		blockoverride "datamodel" {
+			datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
+		}
+
+		blockoverride "show_more_button_visibility" {
+			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPolStr), '(int32)3')]"
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPolStr)]"
+			}
+			blockoverride "text" {
+				text = "NO_CULTURES"
+			}
+		}
+
+		blockoverride "heading" {
+			text = "POLITICAL_STRENGTH_PIECHART_HEADER"
+		}
+
+		blockoverride "tooltip" {
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+		}
+
+		blockoverride "pieslice" {
+			value = "[PopType.GetPolStrAsFloat(Country.Self)]"
+		}
+
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+
+		blockoverride "leftside_info" {
+			text = "[PopType.GetName]"
+		}
+
+		blockoverride "rightside1_info" {
+			text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+		}
+
+		blockoverride "rightside2_info" {
+			raw_text = "([PopType.GetPolStr(Country.Self)|K])"
+		}
+
+		blockoverride "maxverticalslots" {
+			maxverticalslots = 3
+		}
+	}
+
+
 	#POP TYPE CHARTS
-	type countrypanelmod_pop_type_piechart = countrypanelmod_smallchart {
+	type countrypanelmod_pop_type_smallchart = countrypanelmod_smallchart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
 		}
@@ -43,26 +147,13 @@ types countrypanelmod_population_pop_type_types {
 		blockoverride "pieslice" {
 			value = "[PopType.GetPopulationAsFloat(Country.Self)]"
 		}
-
 		
 		blockoverride "color" {
 			color = "[PopType.GetColor]"
 		}
-
-		blockoverride "leftside_info" {
-			text = "[PopType.GetName]"
-		}
-
-		blockoverride "rightside1_info" {
-			text = "[PopType.GetPopulationAsPercentage(Country.Self)|v/%d]"
-		}
-
-		blockoverride "rightside2_info" {
-			raw_text = "([PopType.GetPopulation(Country.Self)|K])"
-		}
 	}
 
-	type countrypanelmod_pop_type_pol_str_piechart = countrypanelmod_smallchart {
+	type countrypanelmod_pop_type_pol_str_smallchart = countrypanelmod_smallchart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
 		}
@@ -92,21 +183,8 @@ types countrypanelmod_population_pop_type_types {
 			value = "[PopType.GetPolStrAsFloat(Country.Self)]"
 		}
 
-		
 		blockoverride "color" {
 			color = "[PopType.GetColor]"
-		}
-
-		blockoverride "leftside_info" {
-			text = "[PopType.GetName]"
-		}
-
-		blockoverride "rightside1_info" {
-			text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
-		}
-
-		blockoverride "rightside2_info" {
-			raw_text = "([PopType.GetPolStr(Country.Self)|K])"
 		}
 	}
 
@@ -224,13 +302,13 @@ types countrypanelmod_population_pop_type_types {
 				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't'))]"
 				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
-				text = "POP_TYPE_HEADER"
+				text = "[concept_profession]"
 			}
 			sort_button = {
 				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
 				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't-' )]"
-				text = "POP_TYPE_HEADER"
+				text = "[concept_profession]"
 			}
 			sort_button = {
 				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
@@ -651,10 +729,11 @@ types countrypanelmod_population_pop_type_types {
 
 			textbox = {
 				parentanchor = left|vcenter
-				align = center|nobaseline
+				align = nobaseline
 				position = { 6 0 }
 				text = "[PopType.GetName]"
-				autoresize = yes
+				size = { 100% 100%}
+				elide = right
 				tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
 			}
 

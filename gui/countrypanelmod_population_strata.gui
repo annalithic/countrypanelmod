@@ -102,7 +102,16 @@ types countrypanelmod_population_strata_types {
 		}
 	}
 
-	type countrypanelmod_pop_strata_summary = flowcontainer {
+	type countrypanelmod_pop_strata_summary = container {
+		countrypanelmod_pop_strata_summary_large = {
+			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+		}
+		countrypanelmod_pop_strata_summary_small = {
+			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+		}
+	}
+
+	type countrypanelmod_pop_strata_summary_large = flowcontainer {
 		minimumsize = { 180 -1 }
 		maximumsize = { 180 -1 }
 		direction = vertical
@@ -170,5 +179,91 @@ types countrypanelmod_population_strata_types {
 			}
 		}
 	}
-	
+
+	type countrypanelmod_pop_strata_summary_small = flowcontainer {
+		minimumsize = { 180 -1 }
+		maximumsize = { 180 -1 }
+		direction = vertical
+		using = entry_bg_fancy
+
+		# portrait and summary
+		widget = {
+			parentanchor = hcenter
+			size = { 180 230 }
+			#scissor = yes
+
+			widget = {
+				size = { 170 230 }
+				scissor = yes
+				parentanchor = bottom|hcenter
+				position = { 0 -10 }
+
+				countrypanelmod_pop_strata_portrait = {
+					parentanchor = hcenter|top
+					
+					block "strata_portrait_properties" {}
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = hcenter
+				margin_top = 10
+
+				flowcontainer = {
+					parentanchor = hcenter
+					icon = {
+						block "strata_icon" {}
+						size = { 24 24 }
+						parentanchor = vcenter
+					}
+					textbox = {
+						parentanchor = vcenter
+						block "strata_label" {}
+						align = nobaseline
+						autoresize = yes
+						margin_left = 5
+					}
+				}
+
+				textbox = {
+					#visible = no
+					block "population_summary" {}
+					autoresize = yes
+					parentanchor = hcenter
+					using = fontsize_large
+					default_format = "#variable"
+					align = nobaseline
+				}
+			}
+
+
+			flowcontainer = {
+				parentanchor = bottom|hcenter
+				direction = vertical
+
+				textbox = {
+					block "sol_summary" {}
+					autoresize = yes
+				}
+				margin_bottom = 15
+			}
+		}
+	}
+
+	type countrypanelmod_pop_strata_portrait = pop_portrait_base {
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = preferred
+		size = { -1 240 }
+		blockoverride "portrait_size" {
+			size = { 190 230 }
+		}
+		blockoverride "pop_portrait_texture" {
+			portrait_texture = "[Pop.GetAnimatedTypedPortrait('environment_standard', 'camera_torso', 'idle', PdxGetWidgetScreenSize(PdxGuiWidget.Self), 'random_adult', '(int32)-1')]"
+		}
+
+		visible = "[Pop.IsValid]"
+		blockoverride "portrait_button" {}
+		tooltipwidget = { FancyTooltip_Pop = {} }
+	}	
 }

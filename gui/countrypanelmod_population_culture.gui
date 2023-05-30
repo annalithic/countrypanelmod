@@ -10,7 +10,7 @@
 @panel_width_plus_70 = 610			# used to be 530
 
 types countrypanelmod_population_culture_types {
-	
+
 	type countrypanelmod_culture_piechart = chart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
@@ -66,7 +66,7 @@ types countrypanelmod_population_culture_types {
 		}
 
 		blockoverride "maxverticalslots" {
-			maxverticalslots = 6
+			maxverticalslots = 3
 		}
 	}
 
@@ -125,7 +125,7 @@ types countrypanelmod_population_culture_types {
 		}
 
 		blockoverride "maxverticalslots" {
-			maxverticalslots = 6
+			maxverticalslots = 3
 		}
 	}
 

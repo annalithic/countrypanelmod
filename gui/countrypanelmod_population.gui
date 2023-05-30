@@ -23,14 +23,77 @@ types countrypanelmod_population_types {
 		widget = { size = { 5 5} }
 
 		default_header = {
+				alwaystransparent = no
+				onmousehierarchyenter = "[PdxGuiWidget.FindChild('minimize_button').InterruptThenTriggerAnimation('hide_minimize_button','show_minimize_button')]"
+				onmousehierarchyleave = "[PdxGuiWidget.FindChild('minimize_button').InterruptThenTriggerAnimation('show_minimize_button','hide_minimize_button')]"	
+				button_icon_round_toggle = {
+					name = "minimize_button"
+	
+					size = { 29 29 }
+					parentanchor = right|vcenter
+					position = { -10 0 }
+					
+					blockoverride "on_click" {
+						onclick = "[GetVariableSystem.Toggle('countrypanelmod_pop_type_minimize')]"
+					}
+					blockoverride "view_1" {
+						visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+					}
+					blockoverride "view_2" {
+						visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+					}
+					blockoverride "icon_1" {
+						texture = "gfx/interface/buttons/button_icons/minus.dds"
+					}
+					blockoverride "icon_2" {
+						texture = "gfx/interface/buttons/button_icons/plus.dds"
+					}
+					blockoverride "tooltip_1" {
+						tooltip = "MINIMIZE_TOOLTIP"
+					}
+					blockoverride "tooltip_2" {
+						tooltip = "EXPAND"
+					}
+	
+					state = {
+						name = hide_minimize_button
+						trigger_on_create = yes
+						alpha = 0
+						duration = 0.2
+					}
+		
+					state = {
+						name = show_minimize_button
+						alpha = 1
+						duration = 0.15
+					}
+				}
+	
+			
+
 			parentanchor = hcenter
 			blockoverride "text" {
 				text = "COUNTRYPANELMOD_POP_HEADER"
 			}
+
 		}	
 		widget = { size = { 5 5} }
 
 		flowcontainer = {
+			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+			spacing = 8
+			countrypanelmod_pop_type_piechart = {
+				visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+			}
+			countrypanelmod_pop_type_pol_str_piechart = {}
+			countrypanelmod_pop_type_piechart = {
+				visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+			}
+
+		}
+
+		flowcontainer = {
+			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
 			#maximumsize = { @panel_width 1000}
 			minimumsize = { -1 360}
 
@@ -46,7 +109,7 @@ types countrypanelmod_population_types {
 					margin_bottom = 5
 					parentanchor = hcenter
 					#spacing = 15
-					countrypanelmod_pop_type_piechart = {
+					countrypanelmod_pop_type_smallchart = {
 						visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
 					}
 					widget = {
@@ -54,13 +117,13 @@ types countrypanelmod_population_types {
 						size = { 15 15}
 						layoutpolicy_vertical = shrinking
 					}
-					countrypanelmod_pop_type_pol_str_piechart = {}
+					countrypanelmod_pop_type_pol_str_smallchart = {}
 					widget = {
 						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 						size = { 15 15}
 						layoutpolicy_vertical = shrinking
 					}
-					countrypanelmod_pop_type_piechart = {
+					countrypanelmod_pop_type_smallchart = {
 						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 					}
 					expand = {}
@@ -79,6 +142,8 @@ types countrypanelmod_population_types {
 				text = "POP_CULTURE_HEADER"
 			}
 		}	
+
+		widget = { size = { 5 5} }
 
 		flowcontainer = {
 			spacing = 8
