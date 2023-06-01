@@ -54,7 +54,11 @@ types countrypanelmod_population_culture_types {
 		}
 
 		blockoverride "leftside_info" {
-			text = "[Culture.GetName]"
+			default_format = "#tooltippable_name"
+			text = "[Culture.GetNameNoFormatting]"
+			tooltipwidget = {
+				countrypanelmod_FancyTooltip_Culture = {}
+			}
 		}
 
 		blockoverride "rightside1_info" {
@@ -113,7 +117,11 @@ types countrypanelmod_population_culture_types {
 		}
 
 		blockoverride "leftside_info" {
-			text = "[Religion.GetName]"
+			default_format = "#tooltippable_name"
+			text = "[Religion.GetNameNoFormatting]"
+			tooltipwidget = {
+				countrypanelmod_FancyTooltip_Religion = {}
+			}
 		}
 
 		blockoverride "rightside1_info" {
@@ -126,6 +134,37 @@ types countrypanelmod_population_culture_types {
 
 		blockoverride "maxverticalslots" {
 			maxverticalslots = 3
+		}
+	}
+
+	type countrypanelmod_FancyTooltip_Culture = FancyTooltipWidgetType {
+		blockoverride "text" {
+			text = "COUNTRYPANELMOD_DATA_CULTURE_NAME_TOOLTIP"
+		}
+
+		blockoverride "name" {
+			text = "[Culture.GetNameNoFormatting]"
+		}
+
+		blockoverride "type" {
+			text = "TOOLTIP_TYPE_CULTURE"
+		}
+	}
+
+	type countrypanelmod_FancyTooltip_Religion = FancyTooltipWidgetType {
+		blockoverride "text" {
+			text = "COUNTRYPANELMOD_DATA_RELIGION_NAME_TOOLTIP"
+		}
+
+		blockoverride "name" {
+			text = "[Religion.GetNameNoFormatting]"
+		}
+
+		blockoverride "type" {
+			text = "TOOLTIP_TYPE_RELIGION"
+		}
+		blockoverride "icon_texture" {
+			texture = "[Religion.GetTexture]"
 		}
 	}
 

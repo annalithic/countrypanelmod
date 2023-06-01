@@ -49,7 +49,12 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "leftside_info" {
-			text = "[PopType.GetName]"
+			default_format = "#tooltippable_name"
+			text = "[PopType.GetNameNoFormatting]"
+			tooltipwidget = {
+				countrypanelmod_FancyTooltip_PopType = {
+				}
+			}
 		}
 
 		blockoverride "rightside1_info" {
@@ -88,7 +93,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
 		}
 
 		blockoverride "pieslice" {
@@ -100,7 +105,12 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "leftside_info" {
-			text = "[PopType.GetName]"
+			default_format = "#tooltippable_name"
+			text = "[PopType.GetNameNoFormatting]"
+			tooltipwidget = {
+				countrypanelmod_FancyTooltip_PopType = {
+				}
+			}
 		}
 
 		blockoverride "rightside1_info" {
@@ -731,10 +741,17 @@ types countrypanelmod_population_pop_type_types {
 				parentanchor = left|vcenter
 				align = nobaseline
 				position = { 6 0 }
-				text = "[PopType.GetName]"
+				default_format = "#tooltippable_name"
+				text = "[PopType.GetNameNoFormatting]"
+				
 				size = { 100% 100%}
 				elide = right
-				tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+				tooltipwidget = {
+					countrypanelmod_FancyTooltip_PopType = {
+					}
+				}
+
+				#tooltip = "COUNTRYPANELMOD_POP_TYPE_NAME_TOOLTIP"
 			}
 
 		}
@@ -906,5 +923,28 @@ types countrypanelmod_population_pop_type_types {
 			}
 		}
 	}
+
+	type countrypanelmod_FancyTooltip_PopType = FancyTooltipWidgetType {
+		blockoverride "text" {
+			text = "COUNTRYPANELMOD_POP_TYPE_NAME_TOOLTIP"
+		}
+
+		blockoverride "icon_texture" {
+			texture = "[PopType.GetTexture]"
+		}
+
+		blockoverride "name" {
+			text = "[PopType.GetNameNoIcon]"
+		}
+
+		blockoverride "type" {
+			text = "TOOLTIP_TYPE_PROFESSION"
+		}
+
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+	}
+
 
 }

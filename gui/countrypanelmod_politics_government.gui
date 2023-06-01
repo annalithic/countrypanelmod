@@ -352,6 +352,10 @@ types countrypanelmod_politics_government_types  {
 				onclick = "[InformationPanelBar.OpenInterestGroupPanel(InterestGroup.AccessSelf)]"
 			}
 
+			tooltipwidget = {
+				FancyTooltip_IG = {}
+			}
+
 
 			using = countrypanelmod_ig_widget_button
 			texture = "gfx/interface/buttons/white_button_bg.dds"
@@ -491,7 +495,7 @@ types countrypanelmod_politics_government_types  {
 		flowcontainer = {
 			parentanchor = center
 			direction = vertical
-			tooltip = "CLOUT_PIECHART"
+			#tooltip = "CLOUT_PIECHART"
 			
 			widget = {
 				size = { 70 50 }

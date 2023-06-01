@@ -18,7 +18,7 @@ types countrypanelmod_population_types {
 		minimumsize = { @panel_width -1 }
 		maximumsize = { @panel_width -1 }
 		margin_top = 5
-		
+
 		countrypanelmod_pop_strata_section = {}
 		widget = { size = { 5 5} }
 
