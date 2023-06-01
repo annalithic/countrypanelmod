@@ -43,10 +43,10 @@ types countrypanelmod_population_types {
 						visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
 					}
 					blockoverride "icon_1" {
-						texture = "gfx/interface/buttons/button_icons/minus.dds"
+						texture = "gfx/interface/buttons/button_icons/reset.dds"
 					}
 					blockoverride "icon_2" {
-						texture = "gfx/interface/buttons/button_icons/plus.dds"
+						texture = "gfx/interface/buttons/button_icons/reset.dds"
 					}
 					blockoverride "tooltip_1" {
 						tooltip = "MINIMIZE_TOOLTIP"
@@ -80,7 +80,7 @@ types countrypanelmod_population_types {
 		widget = { size = { 5 5} }
 
 		flowcontainer = {
-			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+			visible = no
 			spacing = 8
 			countrypanelmod_pop_type_piechart = {
 				visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
@@ -92,64 +92,129 @@ types countrypanelmod_population_types {
 
 		}
 
-		flowcontainer = {
+		countrypanelmod_population_pop_type_section = {
 			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
-			#maximumsize = { @panel_width 1000}
-			minimumsize = { -1 360}
-
-			spacing = 5
-			widget = {
-				size = { 180 100% }
-				background = {
-					using = entry_bg
-				}
-
-				vbox = {
-					margin_top = 2
-					margin_bottom = 5
-					parentanchor = hcenter
-					#spacing = 15
-					countrypanelmod_pop_type_smallchart = {
-						visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
-					}
-					widget = {
-						visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
-						size = { 15 15}
-						layoutpolicy_vertical = shrinking
-					}
-					countrypanelmod_pop_type_pol_str_smallchart = {}
-					widget = {
-						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
-						size = { 15 15}
-						layoutpolicy_vertical = shrinking
-					}
-					countrypanelmod_pop_type_smallchart = {
-						visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
-					}
-					expand = {}
-				}	
-			}
-
-			countrypanelmod_pop_type_table = {}
 		}
 
+		countrypanelmod_population_culture_section = {
+			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+		}
+
+
 		widget = { size = { 5 5} }
 
 
-		default_header = {
-			parentanchor = hcenter
-			blockoverride "text" {
-				text = "POP_CULTURE_HEADER"
-			}
-		}	
+		#default_header = {
+		#	parentanchor = hcenter
+		#	blockoverride "text" {
+		#		text = "POP_CULTURE_HEADER"
+		#	}
+		#}	
 
 		widget = { size = { 5 5} }
+		
+
+		countrypanelmod_population_pop_type_section = {
+			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+
+		}
+
+		countrypanelmod_population_culture_section = {
+			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+		}
+
 
 		flowcontainer = {
+			visible = no
 			spacing = 8
-			countrypanelmod_culture_piechart = {}
+			countrypanelmod_pop_type_piechart = {
+				visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+			}
+			countrypanelmod_culture_piechart = {
+				visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+			}
 			countrypanelmod_religion_piechart = {}
 		}
-	} 
+	}
+
+	type countrypanelmod_population_pop_type_section = flowcontainer {
+		#maximumsize = { @panel_width 1000}
+		minimumsize = { -1 378}
+
+		spacing = 5
+		widget = {
+			size = { 180 100% }
+			background = {
+				using = entry_bg
+			}
+
+			vbox = {
+				margin_top = 2
+				margin_bottom = 5
+				parentanchor = hcenter
+				#spacing = 15
+				countrypanelmod_pop_type_smallchart = {
+					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+				}
+				widget = {
+					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+					size = { 15 15}
+					#layoutpolicy_vertical = shrinking
+				}
+				countrypanelmod_pop_type_pol_str_smallchart = {}
+				widget = {
+					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+					size = { 15 15}
+					#layoutpolicy_vertical = shrinking
+				}
+				countrypanelmod_pop_type_smallchart = {
+					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+				}
+				expand = {}
+			}	
+		}
+		countrypanelmod_pop_type_table = {}
+	}
+
+	type countrypanelmod_population_culture_section = flowcontainer {
+		#maximumsize = { @panel_width 1000}
+		minimumsize = { -1 378}
+
+		spacing = 5
+		widget = {
+			size = { 180 100% }
+			background = {
+				using = entry_bg
+			}
+
+			vbox = {
+				margin_top = 2
+				margin_bottom = 5
+				parentanchor = hcenter
+				#spacing = 15
+				countrypanelmod_culture_smallchart = {
+					#visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+				}
+				widget = {
+					#visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
+					size = { 15 15}
+					#layoutpolicy_vertical = shrinking
+				}
+				countrypanelmod_religion_smallchart = {}
+				#widget = {
+				#	visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+				#	size = { 15 15}
+				#	layoutpolicy_vertical = shrinking
+				#}
+				#countrypanelmod_culture_smallchart = {
+				#	visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
+				#}
+				expand = {}
+			}	
+		}
+
+		countrypanelmod_culture_table = {}
+	}
+
 
 }

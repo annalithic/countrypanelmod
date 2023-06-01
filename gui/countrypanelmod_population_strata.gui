@@ -104,10 +104,11 @@ types countrypanelmod_population_strata_types {
 
 	type countrypanelmod_pop_strata_summary = container {
 		countrypanelmod_pop_strata_summary_large = {
-			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+			#visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
 		}
 		countrypanelmod_pop_strata_summary_small = {
-			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+			visible = no
+			#visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
 		}
 	}
 

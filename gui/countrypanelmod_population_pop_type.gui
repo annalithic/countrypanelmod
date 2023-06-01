@@ -147,7 +147,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "heading" {
-			text = "POPULATION_PIECHART_HEADER"
+			text = "[concept_profession]"
 		}
 
 		blockoverride "tooltip" {
