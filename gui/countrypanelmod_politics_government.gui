@@ -583,7 +583,7 @@ types countrypanelmod_politics_government_types  {
 				#visible = "[InterestGroup.IsPowerful]"
 				text = "[InterestGroup.GetClout|%1v]"
 				autoresize = yes
-				parentanchor = hcenter|nobaseline
+				parentanchor = hcenter
 			}
 			textbox = {
 				background = {

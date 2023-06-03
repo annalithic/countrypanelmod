@@ -41,3 +41,4 @@ white turmoil if zero?
 culture pol strength graph sucks, replace with religion?
 culture table tooltips
 resize culture table if lower
+primary culture icon

@@ -101,6 +101,7 @@ types countrypanelmod_population_types {
 		}
 
 
+		#widget = { size = { 5 27} }
 		widget = { size = { 5 5} }
 
 
@@ -112,7 +113,8 @@ types countrypanelmod_population_types {
 		#}	
 
 		widget = { size = { 5 5} }
-		
+		#widget = { size = { 5 5} }
+
 
 		countrypanelmod_population_pop_type_section = {
 			visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
@@ -139,7 +141,7 @@ types countrypanelmod_population_types {
 
 	type countrypanelmod_population_pop_type_section = flowcontainer {
 		#maximumsize = { @panel_width 1000}
-		minimumsize = { -1 378}
+		minimumsize = { -1 381}
 
 		spacing = 5
 		widget = {
@@ -178,7 +180,7 @@ types countrypanelmod_population_types {
 
 	type countrypanelmod_population_culture_section = flowcontainer {
 		#maximumsize = { @panel_width 1000}
-		minimumsize = { -1 378}
+		minimumsize = { -1 381}
 
 		spacing = 5
 		widget = {

@@ -10,7 +10,7 @@
  COUNTRYPANELMOD_TURMOIL_OF_CULTURE_IN_COUNTRY:0 "#variable [Country.CalcCulturalTurmoil( Culture.Self )|-0%]#! in [Country.GetName]"
 
  COUNTRYPANELMOD_POPULATION_TAB_SELECTED:0 "#bold $concept_population$#!"
- COUNTRYPANELMOD_RADICALISM_HEADER:0 "[Concept('concept_loyalist', '$concept_radicals$')]"
+ COUNTRYPANELMOD_RADICALISM_HEADER:0 "[Concept('concept_radical', '$concept_radicals$')]"
  COUNTRYPANELMOD_POP_HEADER:0 "#header [Concept('concept_pop','$concept_population$')]#!"
  COUNTRYPANELMOD_CULTURE_PIECHART:1 "#header [Culture.GetName]#!\n$concept_population$: #v [Culture.GetPopulationAsPercentage(Country.Self)|/%d] ([Culture.GetPopulation(Country.Self)|*])#!\n$TAB$$concept_workforce$: #variable [Culture.GetWorkforceAsPercentage(Country.Self)|/%d] ([Culture.GetWorkforce(Country.Self)|*v])#!\n$TAB$[concept_dependents]: #variable [Culture.GetDependentsAsPercentage(Country.Self)|/%d] ([Culture.GetDependents(Country.Self)|*v])#!\n$TOOLTIP_DELIMITER$\n[concept_political_strength]: #variable [Culture.GetPolStrAsPercentage(Country.Self)|/%d] ([Culture.GetPolStr(Country.Self)|*])#!"
  COUNTRYPANELMOD_RELIGION_PIECHART:1 "#header [Religion.GetName]#!\n$concept_population$: #v [Religion.GetPopulationAsPercentage(Country.Self)|/%d] ([Religion.GetPopulation(Country.Self)|*])#!\n$TAB$$concept_workforce$: #variable [Religion.GetWorkforceAsPercentage(Country.Self)|/%d] ([Religion.GetWorkforce(Country.Self)|*v])#!\n$TAB$[concept_dependents]: #variable [Religion.GetDependentsAsPercentage(Country.Self)|/%d] ([Religion.GetDependents(Country.Self)|*v])#!\n$TOOLTIP_DELIMITER$\n[concept_political_strength]: #variable [Religion.GetPolStrAsPercentage(Country.Self)|/%d] ([Religion.GetPolStr(Country.Self)|*])#!"
@@ -19,7 +19,7 @@
  COUNTRYPANELMOD_POP_TYPE_RADICALISM:0 "$COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_POP_TYPE_LOYALISTS$\n$TAB$$COUNTRYPANELMOD_POP_TYPE_RADICALS$"
  COUNTRYPANELMOD_POP_TYPE_LOYALISTS:0 "[Concept('concept_loyalist','$concept_loyalists$')]: #variable #p [CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%#!#! (#variable [PopType.GetLoyalists(Country.Self)|dp]#!)"
  COUNTRYPANELMOD_POP_TYPE_RADICALS:0 "[Concept('concept_radical','$concept_radicals$')]: #variable #n [CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%#!#! (#variable [PopType.GetRadicals(Country.Self)|dn]#!)"
-d
+
  COUNTRYPANELMOD_POP_TYPE_NAME_TOOLTIP:0 "[PopType.GetDesc]\n\n$POP_TYPE_STRATA$[SelectLocalization(PopType.IsSlave, 'POP_TYPE_TOOLTIP_SLAVES_AS_LABOR', '')]\n\n$COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY_TOOLTIP$[ConcatIfNeitherEmpty('\n$TOOLTIP_DELIMITER$\n', PopType.GetQualificationsGrowthDesc)]"
  COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY_TOOLTIP:1 "$COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY$:\n$concept_population$: [PopType.GetPopulation(Country.Self)|kv]\n[concept_political_strength]: [PopType.GetPolStr(Country.Self)|kv]\n\n[PopType.GetInterestGroupSupportDesc( Country.Self )]"
 
