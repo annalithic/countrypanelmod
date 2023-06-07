@@ -37,7 +37,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -93,7 +93,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -151,7 +151,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -186,7 +186,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -369,11 +369,25 @@ types countrypanelmod_population_pop_type_types {
 					alwaystransparent = yes
 				}
 			}
-			sort_button = {
-				enabled = no
+			widget = {
 				size = { 88 @pop_type_table_row_height}
-				text = "COUNTRYPANELMOD_RADICALISM_HEADER"
+				sort_button = {
+					size = { 100% 100% }
+					enabled = no
+					text = "COUNTRYPANELMOD_RADICALISM_HEADER"
+					#tooltip = "COUNTRYPANELMOD_LOYALISTS_AND_RADICALS"
+				}
+				icon = {
+					visible = no
+					position = { 0 1 }
+					size = { 26 26 }
+					parentanchor = center
+					alwaystransparent = yes	
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_radicalism.dds"
+				}
+
 			}
+
 
 		}
 
@@ -750,8 +764,6 @@ types countrypanelmod_population_pop_type_types {
 					countrypanelmod_FancyTooltip_PopType = {
 					}
 				}
-
-				#tooltip = "COUNTRYPANELMOD_POP_TYPE_NAME_TOOLTIP"
 			}
 
 		}
@@ -761,7 +773,7 @@ types countrypanelmod_population_pop_type_types {
 			background = {
 				using = entry_bg_simple
 			}
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
 
 			textbox = {
 				parentanchor = center
@@ -776,18 +788,30 @@ types countrypanelmod_population_pop_type_types {
 			background = {
 				using = entry_bg_simple
 			}
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_PIECHART_POL_STR"
+			widget = {
+				visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
+				size = { 100% 100% }
+				tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+				textbox = {
+					parentanchor = center
+					align = center|nobaseline
+					text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+					autoresize = yes
+				}	
+			}
 			textbox = {
+				visible = "[EqualTo_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
 				parentanchor = center
 				align = center|nobaseline
-				text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+				raw_text = "-"
 				autoresize = yes
 			}
+
 		}
 		
 		widget = {
 			size = { 88 @pop_type_table_row_height }
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM"
+			tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM_TOOLTIP"
 
 			background = {
 				using = entry_bg_simple

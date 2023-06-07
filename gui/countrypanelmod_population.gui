@@ -49,10 +49,10 @@ types countrypanelmod_population_types {
 						texture = "gfx/interface/buttons/button_icons/reset.dds"
 					}
 					blockoverride "tooltip_1" {
-						tooltip = "MINIMIZE_TOOLTIP"
+						tooltip = "[concept_culture]"
 					}
 					blockoverride "tooltip_2" {
-						tooltip = "EXPAND"
+						tooltip = "[concept_profession]"
 					}
 	
 					state = {
@@ -193,16 +193,28 @@ types countrypanelmod_population_types {
 				margin_top = 2
 				margin_bottom = 5
 				parentanchor = hcenter
-				#spacing = 15
+				spacing = 15
 				countrypanelmod_culture_smallchart = {
+					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r'), GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')))]"
 					#visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
 				}
-				widget = {
+				countrypanelmod_culture_pol_str_smallchart = {
+					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c'), GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
+				}
+				countrypanelmod_religion_smallchart = {
+					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c'), GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')))]"
+				}
+				countrypanelmod_religion_pol_str_smallchart = {
+					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r'), GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
+				}
+
+
+				#widget = {
 					#visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
-					size = { 15 15}
+				#	size = { 15 15}
 					#layoutpolicy_vertical = shrinking
-				}
-				countrypanelmod_religion_smallchart = {}
+				#}
+				
 				#widget = {
 				#	visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 				#	size = { 15 15}
