@@ -304,24 +304,12 @@ types countrypanelmod_population_pop_type_types {
 		direction = vertical
 
 		flowcontainer = {
-			#widget = {
-			#	size = { 120 @pop_type_table_row_height}
-			#}
 			sort_button = {
-				#enabled = no
-				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't'))]"
 				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
 				text = "[concept_profession]"
 			}
 			sort_button = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
-				size = { 145 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't-' )]"
-				text = "[concept_profession]"
-			}
-			sort_button = {
-				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'))]"
 				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
 				tooltip = "POLITICAL_STRENGTH_TITLE"
@@ -333,35 +321,9 @@ types countrypanelmod_population_pop_type_types {
 				}
 			}
 			sort_button = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's')]"
-				size = { 60 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's-' )]"
-				tooltip = "POLITICAL_STRENGTH_TITLE"
-				button = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
-			sort_button = {
-				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
 				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p' )]"
 				tooltip = "POPULATION_TOOLTIP"
-				button = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
-			sort_button = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
-				size = { 60 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p-' )]"
-				tooltip = "POPULATION_TOOLTIP"
-
 				button = {
 					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
 					size = { 25 25 }
@@ -421,37 +383,6 @@ types countrypanelmod_population_pop_type_types {
 			}
 		}
 
-		flowcontainer = {
-			direction = vertical
-			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't-')]"
-			dynamicgridbox = {
-				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
-				item = {
-					countrypanelmod_pop_type_row = {
-						visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
-					}
-				}
-			}
-			dynamicgridbox = {
-				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
-				item = {
-					countrypanelmod_pop_type_row = {
-						visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
-					}
-				}
-			}
-			dynamicgridbox = {
-				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
-				item = {
-					countrypanelmod_pop_type_row = {
-						visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
-					}
-				}
-			}
-		}
-
-
-
 		dynamicgridbox = {
 			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
 			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPopulation]"
@@ -468,232 +399,8 @@ types countrypanelmod_population_pop_type_types {
 			}
 		}
 
-		countrypanelmod_pop_type_table_reverse_pop = {
-			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-' )]"
-		}
-
-		countrypanelmod_pop_type_table_reverse_str = {
-			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's-' )]"
-		}
 	}
 
-	type countrypanelmod_pop_type_table_reverse_pop = flowcontainer {
-		direction = vertical
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)14')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 14
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)13')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 13
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)12')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 12
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)11')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 11
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)10')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 10
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)9')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 9
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)8')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 8
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)7')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 7
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)6')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 6
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)5')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 5
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)4')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 4
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)3')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 3
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)2')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 2
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)1')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 1
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)0')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
-				index = 0
-			}
-		}
-	}
-
-	type countrypanelmod_pop_type_table_reverse_str = flowcontainer {
-		direction = vertical
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)14')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 14
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)13')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 13
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)12')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 12
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)11')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 11
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)10')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 10
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)9')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 9
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)8')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 8
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)7')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 7
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)6')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 6
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)5')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 5
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)4')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 4
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)3')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 3
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)2')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 2
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)1')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 1
-			}
-		}
-		countrypanelmod_pop_type_row = {
-			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)0')]"
-			datacontext_from_model = {
-				datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
-				index = 0
-			}
-		}
-	}
 
 	type countrypanelmod_pop_type_row = widget {
 		size = { 355 @pop_type_table_row_height }
