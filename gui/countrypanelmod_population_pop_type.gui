@@ -9,7 +9,7 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-@pop_type_table_row_height = 27
+@pop_type_table_row_height = 28
 
 types countrypanelmod_population_pop_type_types {
 
@@ -311,17 +311,6 @@ types countrypanelmod_population_pop_type_types {
 			}
 			sort_button = {
 				size = { 60 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
-				tooltip = "POLITICAL_STRENGTH_TITLE"
-				button = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
-			sort_button = {
-				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p' )]"
 				tooltip = "POPULATION_TOOLTIP"
 				button = {
@@ -331,7 +320,17 @@ types countrypanelmod_population_pop_type_types {
 					alwaystransparent = yes
 				}
 			}
-
+			sort_button = {
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
+				tooltip = "POLITICAL_STRENGTH_TITLE"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
 			widget = {
 				size = { 90 @pop_type_table_row_height}
 				sort_button = {
@@ -501,23 +500,50 @@ types countrypanelmod_population_pop_type_types {
 				background = {
 					#using = entry_bg_simple
 				}
+				tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
+	
+				textbox = {
+					#visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+					margin_right = 8
+					parentanchor = left
+					align = right|nobaseline
+					text = "[PopType.GetPopulation(Country.Self)|d]"
+					size = { 100% 100% }
+				}
+				textbox = {
+					visible = no
+					#visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+					margin_right = 8
+					parentanchor = left
+					align = right|nobaseline
+					text = "[PopType.GetPopulation(Country.Self)|vd]"
+					size = { 100% 100% }
+				}
+
+			}
+
+
+			widget = {
+				size = { 60 @pop_type_table_row_height }
+				background = {
+					#using = entry_bg_simple
+				}
 				widget = {
 					visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
 					size = { 100% 100% }
 					tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
 					textbox = {
-						visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
-						margin_left = 8
+						#visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
 						parentanchor = left
-						align = nobaseline
+						align = center|nobaseline
 						text = "[PopType.GetPolStrAsPercentage(Country.Self)|v%d]"
 						size = { 100% 100% }
 					}
 					textbox = {
+						visible = no
 						visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
-						margin_left = 8
 						parentanchor = left
-						align = nobaseline
+						align = center|nobaseline
 						text = "[PopType.GetPolStrAsPercentage(Country.Self)|%d]"
 						size = { 100% 100% }
 					}	
@@ -533,31 +559,6 @@ types countrypanelmod_population_pop_type_types {
 	
 			}
 
-			widget = {
-				size = { 60 @pop_type_table_row_height }
-				background = {
-					#using = entry_bg_simple
-				}
-				tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
-	
-				textbox = {
-					visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
-					margin_right = 8
-					parentanchor = left
-					align = right|nobaseline
-					text = "[PopType.GetPopulation(Country.Self)|d]"
-					size = { 100% 100% }
-				}
-				textbox = {
-					visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
-					margin_right = 8
-					parentanchor = left
-					align = right|nobaseline
-					text = "[PopType.GetPopulation(Country.Self)|vd]"
-					size = { 100% 100% }
-				}
-
-			}
 				
 			widget = {
 				layoutpolicy_horizontal = expanding

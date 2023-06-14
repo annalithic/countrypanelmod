@@ -9,7 +9,7 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-@pop_type_table_row_height = 27
+@pop_type_table_row_height = 28
 
 types countrypanelmod_population_culture_types {
 
@@ -20,9 +20,11 @@ types countrypanelmod_population_culture_types {
 			#widget = {
 			#	size = { 120 @pop_type_table_row_height}
 			#}
+
+
 			sort_button = {
 				#enabled = no
-				size = { 161 @pop_type_table_row_height}
+				size = { 145 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_culture_table_sort', 'c' )]"
 				enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c'))]"
 				#onclick = "[Country.SortCultures('name')]"
@@ -30,26 +32,9 @@ types countrypanelmod_population_culture_types {
 			}
 
 			sort_button = {
-				size = { 28 @pop_type_table_row_height}
-				tooltip = "MAJORITY_RELIGION_TITLE"
-				onclick = "[GetVariableSystem.Set('countrypanelmod_culture_table_sort', 'r' )]"
-				enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r'))]"
-				#onclick = "[Country.SortCultures('religion')]"
-
-				icon = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_religion.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
-
-
-
-			sort_button = {
 				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_culture_table_sort', 'p' )]"
-				enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'))]"
+				#enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'))]"
 				#onclick = "[Country.SortCultures('population')]"
 				tooltip = "POPULATION_TOOLTIP"
 				icon = {
@@ -62,7 +47,7 @@ types countrypanelmod_population_culture_types {
 			sort_button = {
 				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_culture_table_sort', 's' )]"
-				enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
+				#enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
 				#onclick = "[Country.SortCultures('polstr')]"
 				tooltip = "POLITICAL_STRENGTH_TITLE"
 				icon = {
@@ -72,6 +57,23 @@ types countrypanelmod_population_culture_types {
 					alwaystransparent = yes
 				}
 			}
+
+			
+			sort_button = {
+				size = { 45 @pop_type_table_row_height}
+				tooltip = "MAJORITY_RELIGION_TITLE"
+				onclick = "[GetVariableSystem.Set('countrypanelmod_culture_table_sort', 'r' )]"
+				#enabled = "[Not(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r'))]"
+				#onclick = "[Country.SortCultures('religion')]"
+
+				icon = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_religion.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+
 			widget = {
 				size = { 45 @pop_type_table_row_height}
 				sort_button = {
@@ -88,6 +90,9 @@ types countrypanelmod_population_culture_types {
 				}
 			}
 
+			
+
+
 		}
 
 		widget = {
@@ -95,7 +100,7 @@ types countrypanelmod_population_culture_types {
 			size = { 50 50 }
 			textbox = {
 				size = { 100% 100% }
-				text = "[Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes)))]"
+				text = "[Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes)))]"
 			}
 		}
 
@@ -183,7 +188,7 @@ types countrypanelmod_population_culture_types {
 					}
 				}
 				button = {
-					visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+					visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 					size = { 100% @pop_type_table_row_height }
 					using = default_button
 					text = "SHOW_LESS"
@@ -198,7 +203,7 @@ types countrypanelmod_population_culture_types {
 				direction = vertical
 				dynamicgridbox = {
 					visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p')]"
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 					item = {
 						countrypanelmod_culture_row = {}
 					}
@@ -208,7 +213,7 @@ types countrypanelmod_population_culture_types {
 					direction = vertical
 					visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c')]"						
 					dynamicgridbox = {
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 						item = {
 							countrypanelmod_culture_row = {
 								visible = "[Culture.IsPrimaryCultureIn(Country.Self)]"
@@ -216,7 +221,7 @@ types countrypanelmod_population_culture_types {
 						}
 					}
 					dynamicgridbox = {
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 						item = {
 							countrypanelmod_culture_row = {
 								visible = "[Not(Or(Culture.IsPrimaryCultureIn(Country.Self),Culture.IsDiscriminatedIn(Country.Self)))]"
@@ -224,7 +229,7 @@ types countrypanelmod_population_culture_types {
 						}
 					}
 					dynamicgridbox = {
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 						item = {
 							countrypanelmod_culture_row = {
 								visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
@@ -240,7 +245,7 @@ types countrypanelmod_population_culture_types {
 					item = {
 						dynamicgridbox = {
 							#visible = "[Not(Religion.IsDiscriminatedIn(Country.Self))]"
-							datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+							datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 							item = {
 								countrypanelmod_culture_row = {
 									visible = "[EqualTo_string(Culture.GetReligion.GetNameNoFormatting, Religion.GetNameNoFormatting)]"
@@ -254,17 +259,17 @@ types countrypanelmod_population_culture_types {
 					direction = vertical
 					visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')]"
 					dynamicgridbox = {
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPolStr, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPolStr, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 						item = {
 							countrypanelmod_culture_row = {}
 						}
 					}
 						
 					dynamicgridbox = {
-						visible = "[And(LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes)))),LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),GetDataModelSize(Country.AccessPopCultures)))]"
+						visible = "[And(LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes)))),LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),GetDataModelSize(Country.AccessPopCultures)))]"
 
 						position = { 0 50 }
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 						item = {
 							countrypanelmod_culture_row = {
 								visible = "[EqualTo_int64(Culture.GetPolStr(Country.Self),'(int64)0')]"
@@ -274,7 +279,7 @@ types countrypanelmod_population_culture_types {
 				}
 
 				button = {
-					visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)27',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+					visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
 					size = { 100% @pop_type_table_row_height }
 					using = default_button
 					text = "SHOW_MORE"
@@ -376,7 +381,7 @@ types countrypanelmod_population_culture_types {
 		}
 	}
 
-	type countrypanelmod_culture_row = flowcontainer {
+	type countrypanelmod_culture_row_backup = flowcontainer {
 
 
 		parentanchor = top
@@ -436,6 +441,7 @@ types countrypanelmod_population_culture_types {
 						size = { 22 22 }
 						parentanchor = center
 					}
+
 
 
 				}
@@ -529,6 +535,200 @@ types countrypanelmod_population_culture_types {
 	}
 
 
+	type countrypanelmod_culture_row = widget {
+		size = { 355 @pop_type_table_row_height }
+
+		parentanchor = top
+
+		background = {
+			margin_top = -1
+			#margin_bottom = -1
+			margin_right = -100
+			visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = { .42 .31 .28 1 }
+			alpha = 0.4
+		}
+		background = {
+			margin_top = -1
+			#margin_bottom = -1
+			margin_right = -100
+			visible = "[Not(Culture.IsDiscriminatedIn(Country.Self)))]"
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = { .39 .46 .56 1 }
+			alpha = 0.4
+		}
+
+		divider_clean = {
+			#visible = no
+			position = { 0 1 }
+			size = { 98% 1 }
+			parentanchor = bottom|hcenter
+			alpha = 0.5
+		}
+
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			widget = {
+				size = { @pop_type_table_row_height @pop_type_table_row_height }
+	
+				background = {
+					using = simple_frame
+				}
+	
+				icon = {
+					parentanchor = center
+					texture = "/gfx/interface/piechart/piechart_legend.dds"
+					position = { -0.5 -0.5 }
+					size = { 24 24 }
+					color = "[Culture.GetColor]"
+				}
+			}
+	
+			
+	
+	
+			widget = {
+				size = { 120 @pop_type_table_row_height }
+	
+		
+	
+				hbox = {
+					#margin_left = 10
+					widget = {
+						#visible = no
+						size = { 24 24 }
+	
+						icon = {
+							visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
+							texture = "gfx/interface/icons/generic_icons/discriminated_icon.dds"
+							size = { 20 20 }
+							parentanchor = center
+						}
+	
+						icon = {
+							visible = "[Not(Culture.IsDiscriminatedIn(Country.Self))]"
+							texture = "gfx/interface/icons/generic_icons/accepted_icon.dds"
+							size = { 22 22 }
+							parentanchor = center
+						}
+	
+	
+	
+					}
+
+
+	
+					textbox = {
+						size = { -1 -1 }
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+						#parentanchor = left|vcenter
+						align = nobaseline
+						#margin_right = 10
+						fontsize_min = 14
+						default_format = "#tooltippable_name"
+						text = "[Culture.GetNameNoFormatting]"
+						
+						elide = right
+						tooltipwidget = {
+							countrypanelmod_FancyTooltip_Culture = {}
+						}
+					}
+		
+				}
+	
+	
+			}
+	
+	
+			textbox = {
+				size = { 60 @pop_type_table_row_height }
+				tooltip = "COUNTRYPANELMOD_CULTURE_POPULATION_TOOLTIP"
+				margin_right = 8
+				align = right|nobaseline
+				text = "[Culture.GetPopulation(Country.Self)|d]"
+			}
+	
+			widget = {
+				size = { 60 @pop_type_table_row_height }
+	
+				textbox = {
+					size = { 100% 100% }
+					tooltip = "COUNTRYPANELMOD_CULTURE_POL_STR_TOOLTIP"
+					visible = "[GreaterThanOrEqualTo_CFixedPoint(Culture.GetPolStrAsPercentage(Country.Self),'(CFixedPoint)0.01')]"
+					text = "[Culture.GetPolStrAsPercentage(Country.Self)|v/%d]"
+					align = center|nobaseline
+				}
+				textbox = {
+					visible = "[LessThan_CFixedPoint(Culture.GetPolStrAsPercentage(Country.Self),'(CFixedPoint)0.01')]"
+					parentanchor = center
+					align = center|nobaseline
+					raw_text = "-"
+					autoresize = yes
+				}
+	
+	
+			}
+
+			widget = {
+				size = { -1 @pop_type_table_row_height }
+				layoutpolicy_horizontal = expanding
+
+				background = {
+					visible = no
+					spriteType = Corneredstretched
+					#margin = { 2 2 }
+					spriteborder = { 0 0 }
+					texture = "gfx/interface/backgrounds/rounded_bg.dds"
+					#texture_density = 2
+					
+					
+					modify_texture = {
+						texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = multiply
+						alpha = 0.5
+					}
+
+				}
+
+				datacontext = "[Culture.GetReligion]"
+
+				tooltipwidget = {
+					countrypanelmod_FancyTooltip_Religion = {}
+				}
+
+
+				countrypanelmod_religion_icon = {
+					parentanchor = center
+					size = { 22 22 }
+				}
+			}
+
+	
+			textbox = {
+				size = { -1 @pop_type_table_row_height }
+				layoutpolicy_horizontal = expanding
+				margin_right = 8
+
+				align = right|nobaseline
+				text = "[Culture.CalcTurmoilInCountry(Country.Self)|%0n]"
+
+
+				tooltip = "COUNTRYPANELMOD_CULTURE_TURMOIL_TOOLTIP"
+			}
+	
+
+		}
+
+	}
+
+
 	type countrypanelmod_religion_button = 	button  {
 		parentanchor = center
 		size = { 30 28 }
@@ -540,10 +740,20 @@ types countrypanelmod_population_culture_types {
 			}
 		}
 
-		icon = {
-			#visible = no
+		countrypanelmod_religion_icon = {
 			parentanchor = center
-			size = { 22 22 }
+		}
+
+
+
+	}
+
+	type countrypanelmod_religion_icon = widget {
+		size = { 22 22 }
+
+		icon = {
+			parentanchor = center
+			size = { 100% 100% }
 			position = { 2 2 }
 			texture = "[Religion.GetTexture]"
 			alpha = 0.6
@@ -561,7 +771,7 @@ types countrypanelmod_population_culture_types {
 		icon = {
 			#visible = no
 			parentanchor = center
-			size = { 22 22 }
+			size = { 100% 100% }
 			texture = "[Religion.GetTexture]"
 
 			modify_texture = {
@@ -596,7 +806,7 @@ types countrypanelmod_population_culture_types {
 		icon = {
 			#visible = no
 			parentanchor = center
-			size = { 22 22 }
+			size = { 100% 100% }
 			texture = "[Religion.GetTexture]"
 			alpha = 0.1
 
@@ -628,12 +838,11 @@ types countrypanelmod_population_culture_types {
 		icon = {
 			#visible = no
 			parentanchor = center
-			size = { 22 22 }
+			size = { 100% 100% }
 			texture = "[Religion.GetTexture]"
 			alpha = 0.4
 		
 		}
-
 
 	}
 
