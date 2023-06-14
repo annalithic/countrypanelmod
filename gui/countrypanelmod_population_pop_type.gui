@@ -321,6 +321,30 @@ types countrypanelmod_population_pop_type_types {
 				text = "[concept_profession]"
 			}
 			sort_button = {
+				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'))]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
+				tooltip = "POLITICAL_STRENGTH_TITLE"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
+				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's')]"
+				size = { 60 @pop_type_table_row_height}
+				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's-' )]"
+				tooltip = "POLITICAL_STRENGTH_TITLE"
+				button = {
+					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
+					size = { 25 25 }
+					parentanchor = center
+					alwaystransparent = yes
+				}
+			}
+			sort_button = {
 				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
 				size = { 60 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p' )]"
@@ -345,32 +369,9 @@ types countrypanelmod_population_pop_type_types {
 					alwaystransparent = yes
 				}
 			}
-			sort_button = {
-				visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'))]"
-				size = { 60 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
-				tooltip = "POLITICAL_STRENGTH_TITLE"
-				button = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
-			sort_button = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's')]"
-				size = { 60 @pop_type_table_row_height}
-				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's-' )]"
-				tooltip = "POLITICAL_STRENGTH_TITLE"
-				button = {
-					texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
-					size = { 25 25 }
-					parentanchor = center
-					alwaystransparent = yes
-				}
-			}
+
 			widget = {
-				size = { 88 @pop_type_table_row_height}
+				size = { 90 @pop_type_table_row_height}
 				sort_button = {
 					size = { 100% 100% }
 					enabled = no
@@ -694,166 +695,213 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_pop_type_row = flowcontainer {
-
+	type countrypanelmod_pop_type_row = widget {
+		size = { 355 @pop_type_table_row_height }
 
 		parentanchor = top
 
-		widget = {
-			size = { @pop_type_table_row_height @pop_type_table_row_height }
-
-			background = {
-				using = simple_frame
-			}
-
-			icon = {
-				parentanchor = center
-				texture = "/gfx/interface/piechart/piechart_legend.dds"
-				position = { -0.5 -0.5 }
-				size = { 24 24 }
-				color = "[PopType.GetColor]"
-			}
+		divider_clean = {
+			#visible = no
+			position = { 0 1 }
+			size = { 98% 1 }
+			parentanchor = bottom|hcenter
+			alpha = 0.5
 		}
 
 		
 
+		background = {
+			margin_top = -1
+			#margin_bottom = -1
+			margin_right = -100
+			visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = { .42 .31 .28 1 }
+			alpha = 0.4
+		}
+		background = {
+			margin_top = -1
+			#margin_bottom = -1
+			margin_right = -100
+			visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = { .39 .46 .56 1 }
+			alpha = 0.4
+		}
+		background = {
+			margin_top = -1
+			#margin_bottom = -1
+			margin_right = -100
+			visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
+			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+			color = { .58 .52 .40 1 }
+			alpha = 0.4
+		}
 
-		widget = {
+		hbox = {
 
-			background = {
-				margin_top = -2
-				margin_bottom = -2
-				visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
-				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-				color = { .42 .31 .28 1 }
-				alpha = 0.5
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			widget = {
+				size = { @pop_type_table_row_height @pop_type_table_row_height }
+	
+				background = {
+					using = simple_frame
+				}
+	
+				icon = {
+					parentanchor = center
+					texture = "/gfx/interface/piechart/piechart_legend.dds"
+					position = { -0.5 -0.5 }
+					size = { 24 24 }
+					color = "[PopType.GetColor]"
+				}
 			}
-			background = {
-				margin_top = -2
-				margin_bottom = -2
-				visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
-				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-				color = { .39 .46 .56 1 }
-				alpha = 0.5
-			}
-			background = {
-				margin_top = -2
-				margin_bottom = -2
-				visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
-				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
-				color = { .58 .52 .40 1 }
-				alpha = 0.5
-			}
-
-
-			size = { 120 @pop_type_table_row_height }
-			background = {
-				using = entry_bg_simple
-			}
-
-			textbox = {
-				parentanchor = left|vcenter
-				align = nobaseline
-				position = { 6 0 }
-				default_format = "#tooltippable_name"
-				text = "[PopType.GetNameNoFormatting]"
+	
+			
+	
+	
+			widget = {
+	
 				
-				size = { 100% 100%}
-				elide = right
-				tooltipwidget = {
-					countrypanelmod_FancyTooltip_PopType = {
+	
+	
+				size = { 120 @pop_type_table_row_height }
+				background = {
+					#using = entry_bg_simple
+				}
+	
+				textbox = {
+					parentanchor = left|vcenter
+					align = nobaseline
+					position = { 6 0 }
+					default_format = "#tooltippable_name"
+					text = "[PopType.GetNameNoFormatting]"
+					
+					size = { 100% 100%}
+					elide = right
+					tooltipwidget = {
+						countrypanelmod_FancyTooltip_PopType = {
+						}
 					}
 				}
+	
 			}
-
-		}
-
-		widget = {
-			size = { 60 @pop_type_table_row_height }
-			background = {
-				using = entry_bg_simple
-			}
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
-
-			textbox = {
-				parentanchor = center
-				align = center|nobaseline
-				text = "[PopType.GetPopulation(Country.Self)|d]"
-				autoresize = yes
-			}
-		}
-
-		widget = {
-			size = { 60 @pop_type_table_row_height }
-			background = {
-				using = entry_bg_simple
-			}
+	
 			widget = {
-				visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
-				size = { 100% 100% }
-				tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+				size = { 60 @pop_type_table_row_height }
+				background = {
+					#using = entry_bg_simple
+				}
+				widget = {
+					visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
+					size = { 100% 100% }
+					tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+					textbox = {
+						visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+						margin_left = 8
+						parentanchor = left
+						align = nobaseline
+						text = "[PopType.GetPolStrAsPercentage(Country.Self)|v%d]"
+						size = { 100% 100% }
+					}
+					textbox = {
+						visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+						margin_left = 8
+						parentanchor = left
+						align = nobaseline
+						text = "[PopType.GetPolStrAsPercentage(Country.Self)|%d]"
+						size = { 100% 100% }
+					}	
+
+				}
 				textbox = {
+					visible = "[EqualTo_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
 					parentanchor = center
 					align = center|nobaseline
-					text = "[PopType.GetPolStrAsPercentage(Country.Self)|v/%d]"
+					raw_text = "-"
 					autoresize = yes
-				}	
-			}
-			textbox = {
-				visible = "[EqualTo_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
-				parentanchor = center
-				align = center|nobaseline
-				raw_text = "-"
-				autoresize = yes
-			}
-
-		}
-		
-		widget = {
-			size = { 88 @pop_type_table_row_height }
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM_TOOLTIP"
-
-			background = {
-				using = entry_bg_simple
-			}
-
-			countrypanelmod_radicalism_progressbar = {
-
-				size = { 80 19 }
-				position = { 4 4 }
-
-				blockoverride "value_left" {
-					min = 0
-					max = 100
-					value = "[CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self))))]"
 				}
-				blockoverride "value_right" {
-					min = 0
-					max = 100
-					value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
+	
+			}
+
+			widget = {
+				size = { 60 @pop_type_table_row_height }
+				background = {
+					#using = entry_bg_simple
+				}
+				tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
+	
+				textbox = {
+					visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+					margin_right = 8
+					parentanchor = left
+					align = right|nobaseline
+					text = "[PopType.GetPopulation(Country.Self)|d]"
+					size = { 100% 100% }
+				}
+				textbox = {
+					visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+					margin_right = 8
+					parentanchor = left
+					align = right|nobaseline
+					text = "[PopType.GetPopulation(Country.Self)|vd]"
+					size = { 100% 100% }
 				}
 
+			}
+				
+			widget = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
 
+				tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM_TOOLTIP"
+
+				countrypanelmod_radicalism_progressbar = {
+	
+					margin_left = 4
+					margin_right = 4
+					margin_top = 5
+					margin_bottom = 6
+					size = { 100% 100% }
+					#position = { 4 4 }
+	
+					blockoverride "value_left" {
+						min = 0
+						max = 100
+						value = "[CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self))))]"
+					}
+					blockoverride "value_right" {
+						min = 0
+						max = 100
+						value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
+					}
+				}
+				
 			}
 		}
 	}
 
-	type countrypanelmod_radicalism_progressbar = widget {
+	type countrypanelmod_radicalism_progressbar = margin_widget {
 		size = { 300 40 }
 		
-		background = {
-			texture = "gfx/interface/progressbar/progressbar_empty.dds"
-			spriteType = Corneredtiled
-			spriteborder = { 4 4 }
-			texture_density = 2
-			
-			using = progressbar_texture_properties
-		}
 		
 		### progressbar left
 		widget = {
 
 			size = { 100% 100% }
+
+			background = {
+				texture = "gfx/interface/progressbar/progressbar_empty.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 4 4 }
+				texture_density = 2
+				
+				using = progressbar_texture_properties
+			}
+	
+
 			scissor = yes
 			
 			progressbar = {
