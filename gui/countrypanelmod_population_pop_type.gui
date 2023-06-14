@@ -459,8 +459,8 @@ types countrypanelmod_population_pop_type_types {
 				icon = {
 					parentanchor = center
 					texture = "/gfx/interface/piechart/piechart_legend.dds"
-					position = { -0.5 -0.5 }
-					size = { 24 24 }
+					position = { 0.5 0.5 }
+					size = { 25 25 }
 					color = "[PopType.GetColor]"
 				}
 			}
