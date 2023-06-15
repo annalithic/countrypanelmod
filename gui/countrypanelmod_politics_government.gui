@@ -37,12 +37,15 @@ types countrypanelmod_politics_government_types  {
 		}
 
 		widget = {
-			size = { 100% 215 }
+			size = { 540 215 }
+
+
 
 			vbox = {
 				margin_top = 3
-				margin_left = 10
-				margin_right = 10
+
+				#margin_left = 10
+				#margin_right = 10
 	
 				layoutpolicy_horizontal = fixed
 				layoutpolicy_vertical = fixed
@@ -60,14 +63,19 @@ types countrypanelmod_politics_government_types  {
 				}
 				
 				hbox = {
-					spacing = 5
+					#spacing = 5
 					visible = yes
-					layoutpolicy_horizontal = expanding
+					layoutpolicy_horizontal = preferred
 					layoutpolicy_vertical = fixed
 					parentanchor = left
 
+					widget = {
+						layoutpolicy_horizontal = shrinking
+						size = { 10 10 }
+					}		
+
 					vbox = {
-						name = "opposition"
+						name = "government"
 						layoutpolicy_horizontal = expanding
 						layoutpolicy_vertical = expanding
 						spacing = 2
@@ -133,12 +141,16 @@ types countrypanelmod_politics_government_types  {
 						}
 					}
 
+	
+
 					widget = {
+						#visible = no
 						visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
-						block "size" {
-							size = { 0 100% }
-						}
-						
+						size = { 10 10 }
+
+						layoutpolicy_horizontal = shrinking
+						layoutpolicy_vertical = expanding
+
 						icon = {
 							parentanchor = center
 							size = { 2 100% }
@@ -155,6 +167,8 @@ types countrypanelmod_politics_government_types  {
 							}
 						}
 					}
+
+					
 					
 					vbox = {
 						visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
@@ -225,6 +239,10 @@ types countrypanelmod_politics_government_types  {
 
 					}
 
+					widget = {
+						layoutpolicy_horizontal = shrinking
+						size = { 10 10 }
+					}		
 		
 				}			
 
@@ -232,6 +250,8 @@ types countrypanelmod_politics_government_types  {
 				expand = {}
 	
 			}
+
+			
 
 	
 		}
