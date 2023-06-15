@@ -42,3 +42,8 @@ culture pol strength graph sucks, replace with religion?
 culture table tooltips
 resize culture table if lower
 primary culture icon
+
+
+TODO 4
+culture/religion sort by pol str?
+radio sort button

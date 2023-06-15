@@ -144,7 +144,7 @@ types countrypanelmod_population_types {
 
 	type countrypanelmod_population_pop_type_section = flowcontainer {
 		#maximumsize = { @panel_width 1000}
-		minimumsize = { -1 381}
+		minimumsize = { -1 366}
 
 		spacing = 5
 		widget = {
@@ -164,13 +164,13 @@ types countrypanelmod_population_types {
 				widget = {
 					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-'))]"
 					size = { 15 15}
-					#layoutpolicy_vertical = shrinking
+					layoutpolicy_vertical = shrinking
 				}
 				countrypanelmod_pop_type_pol_str_smallchart = {}
 				widget = {
 					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 					size = { 15 15}
-					#layoutpolicy_vertical = shrinking
+					layoutpolicy_vertical = shrinking
 				}
 				countrypanelmod_pop_type_smallchart = {
 					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
@@ -210,7 +210,7 @@ types countrypanelmod_population_types {
 					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c'), GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
 				}
 				widget = {
-					visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's'))]"
+					visible = "[Or(Not(GetVariableSystem.Exists('countrypanelmod_culture_table_sort')),Or(GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')))]"
 					size = { 15 15 }
 					layoutpolicy_vertical = shrinking
 				}

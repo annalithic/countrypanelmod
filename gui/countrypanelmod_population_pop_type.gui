@@ -23,15 +23,6 @@ types countrypanelmod_population_pop_type_types {
 			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPopulation), '(int32)3')]"
 		}
 
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
-			}
-			blockoverride "text" {
-				text = "NO_CULTURES"
-			}
-		}
-
 		blockoverride "heading" {
 			text = "[concept_profession]"
 		}
@@ -77,15 +68,6 @@ types countrypanelmod_population_pop_type_types {
 
 		blockoverride "show_more_button_visibility" {
 			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPolStr), '(int32)3')]"
-		}
-
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPolStr)]"
-			}
-			blockoverride "text" {
-				text = "NO_CULTURES"
-			}
 		}
 
 		blockoverride "heading" {
@@ -137,15 +119,6 @@ types countrypanelmod_population_pop_type_types {
 			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPopulation), '(int32)3')]"
 		}
 
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
-			}
-			blockoverride "text" {
-				text = "NO_POP_TYPES"
-			}
-		}
-
 		blockoverride "heading" {
 			text = "[concept_profession]"
 		}
@@ -170,15 +143,6 @@ types countrypanelmod_population_pop_type_types {
 
 		blockoverride "show_more_button_visibility" {
 			visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopTypesSortedOnPolStr), '(int32)3')]"
-		}
-
-		empty_state = {
-			blockoverride "visible" {
-				visible = "[IsDataModelEmpty(Country.AccessPopTypesSortedOnPopulation)]"
-			}
-			blockoverride "text" {
-				text = "NO_POP_TYPES_POL_STR"
-			}
 		}
 
 		blockoverride "heading" {
@@ -305,7 +269,7 @@ types countrypanelmod_population_pop_type_types {
 
 		flowcontainer = {
 			sort_button = {
-				size = { 145 @pop_type_table_row_height}
+				size = { 148 @pop_type_table_row_height}
 				onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
 				text = "[concept_profession]"
 			}
@@ -332,7 +296,7 @@ types countrypanelmod_population_pop_type_types {
 				}
 			}
 			widget = {
-				size = { 90 @pop_type_table_row_height}
+				size = { 87 @pop_type_table_row_height}
 				sort_button = {
 					size = { 100% 100% }
 					enabled = no
@@ -441,7 +405,7 @@ types countrypanelmod_population_pop_type_types {
 			visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
 			texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
 			color = { .58 .52 .40 1 }
-			alpha = 0.4
+			alpha = 0.5
 		}
 
 		hbox = {
@@ -541,7 +505,7 @@ types countrypanelmod_population_pop_type_types {
 					}
 					textbox = {
 						visible = no
-						visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+						#visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
 						parentanchor = left
 						align = center|nobaseline
 						text = "[PopType.GetPolStrAsPercentage(Country.Self)|%d]"
