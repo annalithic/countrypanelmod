@@ -245,10 +245,10 @@ types countrypanelmod_politics_government_types  {
 		layoutpolicy_horizontal = fixed
 		layoutpolicy_vertical = fixed
 		
+		datacontext = "[InterestGroup.GetParty]"
 
 
 		hbox = {
-			datacontext = "[InterestGroup.GetParty]"
 			#background = {
 			#	using = dark_area
 			#
@@ -293,7 +293,6 @@ types countrypanelmod_politics_government_types  {
 				align = left|nobaseline
 				elide = right
 				fontsize_min = 14
-				#default_format = "#title"
 			}
 			widget = {
 				layoutpolicy_horizontal = growing
@@ -302,15 +301,15 @@ types countrypanelmod_politics_government_types  {
 		}
 
 
-		fixedgridbox = {
+		dynamicgridbox = {
 			layoutpolicy_horizontal = fixed
 			layoutpolicy_vertical = fixed	
-			datamodel = "[InterestGroup.GetParty.GetMembers]"
-			addcolumn = 65
-			addrow = 125
+			datamodel = "[Country.AccessAllInterestGroups]"
 			flipdirection  = yes
 			item = {
-				countrypanelmod_ig_header_widget2 = {}
+				countrypanelmod_ig_header_widget2 = {
+					visible = "[And(StringIsEmpty(InterestGroup.GetWillJoinPartyDesc),EqualTo_string(InterestGroup.GetParty.GetNameNoFormatting, Party.GetNameNoFormatting))]"
+				}
 			}
 		}
 
