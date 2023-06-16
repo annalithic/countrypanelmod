@@ -121,10 +121,10 @@ types countrypanelmod_population_strata_types {
 		# portrait and summary
 		widget = {
 			parentanchor = hcenter
-			size = { 180 315 }
+			size = { 180 318 }
 
 			widget = {
-				size = { 170 315 }
+				size = { 170 318 }
 				scissor = yes
 				parentanchor = hcenter
 				position = { 0 18 }

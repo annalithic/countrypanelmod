@@ -10,6 +10,7 @@
 @panel_width_plus_70 = 610			# used to be 530
 
 @pop_type_table_row_height = 28
+@pop_table_width = 355
 
 types countrypanelmod_population_culture_types {
 
@@ -145,194 +146,182 @@ types countrypanelmod_population_culture_types {
 
 		}
 
-		#expanded
+		#small or expanded
+		countrypanelmod_culture_table_content = {
+			visible = "[Or(GetVariableSystem.Exists('countrypanelmod_culture_table_expand'),LessThan_int32(Add_int32(GetDataModelSize(Country.AccessPopCultures),Max_int32(Min_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)15'),'(int32)12')),'(int32)28'))]"
+		}
+
+		#not small
 		flowcontainer = {
-			visible = "[GetVariableSystem.Exists('countrypanelmod_culture_table_expand')]"
 			direction = vertical
+			visible = "[GreaterThanOrEqualTo_int32(Add_int32(GetDataModelSize(Country.AccessPopCultures),Max_int32(Min_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)15'),'(int32)12')),'(int32)28'))]"
 
-			#population (default)
-			dynamicgridbox = {
-				visible = "[Or(Not(GetVariableSystem.Exists('countrypanelmod_culture_table_sort')),GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'))]"
-				datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-				item = {
-					countrypanelmod_culture_row = {}
-				}
-			}
-
-			#pol str
+			#not expanded
 			flowcontainer = {
 				direction = vertical
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')]"
-				dynamicgridbox = {
-					datamodel = "[Country.AccessPopCulturesSortedByPolStr]"
-					item = {
-						countrypanelmod_culture_row = {}
-					}
+				visible = "[Not(GetVariableSystem.Exists('countrypanelmod_culture_table_expand'))]"
+				#professions >= 15 , cultures > 12 
+				widget = {
+					visible = "[And(GreaterThanOrEqualTo_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)15'),GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),'(int32)12'))]"
+					size = { @pop_table_width 308 }
+					scissor = yes
+					countrypanelmod_culture_table_content = {}
+					# background = {
+					# 	using = simple_frame
+					# }
+					#textbox = {
+					#	parentanchor = center
+					#	autoresize = yes
+					#	text = "over 12 cultures"
+					#}
 				}
-				dynamicgridbox = {
-					datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[EqualTo_int64(Culture.GetPolStr(Country.Self),'(int64)0')]"
-						}
-					}
+				#professions == 14 , cultures > 13 
+				widget = {
+					visible = "[And(EqualTo_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)14'),GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),'(int32)13'))]"
+					size = { @pop_table_width 336 }
+					scissor = yes
+					countrypanelmod_culture_table_content = {}
+					#background = {
+					#	using = simple_frame
+					#}
+					#textbox = {
+					#	parentanchor = center
+					#	autoresize = yes
+					#	text = "over 13 cultures"
+					#}
+				}
+				#professions == 13 , cultures > 14 
+				widget = {
+					visible = "[And(EqualTo_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)13'),GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),'(int32)14'))]"
+					size = { @pop_table_width 364 }
+					scissor = yes
+					countrypanelmod_culture_table_content = {}
+					# background = {
+					# 	using = simple_frame
+					# }
+					# textbox = {
+					# 	parentanchor = center
+					# 	autoresize = yes
+					# 	text = "over 14 cultures"
+					# }
+				}
+				#professions <= 12 , cultures > 15 
+				widget = {
+					visible = "[And(LessThanOrEqualTo_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)12'),GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),'(int32)15'))]"
+					size = { @pop_table_width 392 }
+					scissor = yes
+					countrypanelmod_culture_table_content = {}
+					# background = {
+					# 	using = simple_frame
+					# }
+					# textbox = {
+					# 	parentanchor = center
+					# 	autoresize = yes
+					# 	text = "over 15 cultures"
+					# }
+				}
+
+				button = {
+					size = { @pop_table_width @pop_type_table_row_height }
+					using = default_button
+					text = "SHOW_MORE"
+					onclick = "[GetVariableSystem.Toggle( 'countrypanelmod_culture_table_expand' )]"
 				}
 			}
 
-			#culture
-			flowcontainer = {
-				direction = vertical
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c')]"
-
-				dynamicgridbox = {
-					datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Culture.IsPrimaryCultureIn(Country.Self)]"
-						}
-					}
-				}
-				dynamicgridbox = {
-					datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Not(Or(Culture.IsPrimaryCultureIn(Country.Self),Culture.IsDiscriminatedIn(Country.Self)))]"
-						}
-					}
-				}
-				dynamicgridbox = {
-					datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
-						}
-					}
-				}
-			}
-
-			#religion
-			dynamicgridbox = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r')]"
-				datamodel = "[Country.AccessPopReligionsSortedByPopulation]"
-				item = {
-					dynamicgridbox = {
-						datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
-						item = {
-							countrypanelmod_culture_row = {
-								visible = "[EqualTo_string(Culture.GetReligion.GetNameNoFormatting, Religion.GetNameNoFormatting)]"
-							}
-						}
-					}
-				}
-			}
-
+			#expanded
 			button = {
-				visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-				size = { 100% @pop_type_table_row_height }
+				visible =  "[GetVariableSystem.Exists('countrypanelmod_culture_table_expand')]"
+				size = { @pop_table_width @pop_type_table_row_height }
 				using = default_button
 				text = "SHOW_LESS"
 				onclick = "[GetVariableSystem.Toggle( 'countrypanelmod_culture_table_expand' )]"
 			}
+
+
 		}
 
+	}
 
-		#non-expanded
+	type countrypanelmod_culture_table_content = flowcontainer {
+		direction = vertical
+
+		#population (default)
+		dynamicgridbox = {
+			visible = "[Or(Not(GetVariableSystem.Exists('countrypanelmod_culture_table_sort')),GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'))]"
+			datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+			item = {
+				countrypanelmod_culture_row = {}
+			}
+		}
+
+		#pol str
 		flowcontainer = {
-			visible = "[Not(GetVariableSystem.Exists('countrypanelmod_culture_table_expand'))]"
 			direction = vertical
-
-			#population (default)
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')]"
 			dynamicgridbox = {
-				visible = "[Or(Not(GetVariableSystem.Exists('countrypanelmod_culture_table_sort')),GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'p'))]"
-				datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
+				datamodel = "[Country.AccessPopCulturesSortedByPolStr]"
 				item = {
 					countrypanelmod_culture_row = {}
 				}
 			}
-
-			#pol str
-			flowcontainer = {
-				direction = vertical
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 's')]"
-
-				dynamicgridbox = {
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPolStr, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-					item = {
-						countrypanelmod_culture_row = {}
-					}
-				}
-
-				dynamicgridbox = {
-					visible = "[And(LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes)))),LessThan_int32(GetDataModelSize(Country.AccessPopCulturesSortedByPolStr),GetDataModelSize(Country.AccessPopCultures)))]"
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[EqualTo_int64(Culture.GetPolStr(Country.Self),'(int64)0')]"
-						}
-					}
-				}
-			}
-
-
-			#culture
-			flowcontainer = {
-				direction = vertical
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c')]"
-				dynamicgridbox = {
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Culture.IsPrimaryCultureIn(Country.Self)]"
-						}
-					}
-				}
-				dynamicgridbox = {
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Not(Or(Culture.IsPrimaryCultureIn(Country.Self),Culture.IsDiscriminatedIn(Country.Self)))]"
-						}
-					}
-				}
-				dynamicgridbox = {
-					datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-					item = {
-						countrypanelmod_culture_row = {
-							visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
-						}
-					}
-				}
-			}
-
-
-			#religion
 			dynamicgridbox = {
-				visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r')]"
-				datamodel = "[Country.AccessPopReligionsSortedByPopulation]"
+				datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
 				item = {
-					dynamicgridbox = {
-						#visible = "[Not(Religion.IsDiscriminatedIn(Country.Self))]"
-						datamodel = "[DataModelFirst(Country.AccessPopCulturesSortedByPopulation, Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-						item = {
-							countrypanelmod_culture_row = {
-								visible = "[EqualTo_string(Culture.GetReligion.GetNameNoFormatting, Religion.GetNameNoFormatting)]"
-							}
-						}
+					countrypanelmod_culture_row = {
+						visible = "[EqualTo_int64(Culture.GetPolStr(Country.Self),'(int64)0')]"
 					}
 				}
 			}
+		}
 
+		#culture
+		flowcontainer = {
+			direction = vertical
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'c')]"
 
-			button = {
-				visible = "[GreaterThan_int32(GetDataModelSize(Country.AccessPopCultures),Subtract_int32('(int32)26',Max_int32('(int32)13',GetDataModelSize(Country.AccessPopTypes))))]"
-				size = { 100% @pop_type_table_row_height }
-				using = default_button
-				text = "SHOW_MORE"
-				onclick = "[GetVariableSystem.Toggle( 'countrypanelmod_culture_table_expand' )]"
+			dynamicgridbox = {
+				datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+				item = {
+					countrypanelmod_culture_row = {
+						visible = "[Culture.IsPrimaryCultureIn(Country.Self)]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+				item = {
+					countrypanelmod_culture_row = {
+						visible = "[Not(Or(Culture.IsPrimaryCultureIn(Country.Self),Culture.IsDiscriminatedIn(Country.Self)))]"
+					}
+				}
+			}
+			dynamicgridbox = {
+				datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+				item = {
+					countrypanelmod_culture_row = {
+						visible = "[Culture.IsDiscriminatedIn(Country.Self)]"
+					}
+				}
+			}
+		}
+
+		#religion
+		dynamicgridbox = {
+			visible = "[GetVariableSystem.HasValue('countrypanelmod_culture_table_sort', 'r')]"
+			datamodel = "[Country.AccessPopReligionsSortedByPopulation]"
+			item = {
+				dynamicgridbox = {
+					datamodel = "[Country.AccessPopCulturesSortedByPopulation]"
+					item = {
+						countrypanelmod_culture_row = {
+							visible = "[EqualTo_string(Culture.GetReligion.GetNameNoFormatting, Religion.GetNameNoFormatting)]"
+						}
+					}
+				}
 			}
 		}
 	}
-
 
 	type countrypanelmod_culture_row = widget {
 		size = { 355 @pop_type_table_row_height }
