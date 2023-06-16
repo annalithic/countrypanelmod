@@ -1,11 +1,16 @@
 ﻿l_english:
  COUNTRYPANELMOD_POP_TYPE_IN_COUNTRY:0 "#header [PopType.GetName] in [Country.GetName]#!"
+
+
  COUNTRYPANELMOD_CULTURE_IN_COUNTRY:0 "#header [Culture.GetName] $concept_pops$ in [Country.GetName]#!:"
+ COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POPULATION:0 "[Culture.GetName] $concept_population$ in [Country.GetName]"
+ COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POL_STR:0 "[concept_political_strength] of [Culture.GetName] $concept_pops$ in [Country.GetName]"
+
  COUNTRYPANELMOD_RELIGION_IN_COUNTRY:0 "#header [Religion.GetName] $COUNTRYPANELMOD_POPULATION_IN_COUNTRY$#!"
 
  COUNTRYPANELMOD_LAW_CHANGE:0 "[Law.GetActiveGroupLaw.GetName] to [Law.GetName]"
 
- COUNTRYPANELMOD_POPULATION_IN_COUNTRY:0 "$concept_population$ in [Country.GetName]"
+ COUNTRYPANELMOD_POPULATION_IN_COUNTRY:0 "$concept_population$ in [Country.GetName]" #TODO REMOVE?
  COUNTRYPANELMOD_POL_STR_IN_COUNTRY:0 "$concept_political_strength$ in [Country.GetName]"
 
  COUNTRYPANELMOD_PRIMARY_CULTURE_IN_COUNTRY:0 "[Concept('concept_primary_cultures','$concept_primary_culture$')] in [Country.GetName]"
@@ -17,9 +22,9 @@
 
  COUNTRYPANELMOD_CULTURE_POPULATION_CHANGE_IN_COUNTRY:0 "(#v [Culture.GetPopulationChange(Country.Self)|=+K]#! / month)"
  COUNTRYPANELMOD_RELIGION_POPULATION_CHANGE_IN_COUNTRY:0 "(#v [Religion.GetPopulationChange(Country.Self)|=+K]#! / month)"
- 
+
  #no localization needed beyond this point
- 
+
  COUNTRYPANELMOD_POPULATION_TAB_SELECTED:0 "#bold $concept_population$#!"
  COUNTRYPANELMOD_RADICALISM_HEADER:0 "[Concept('concept_radical', '$concept_radicals$')]"
  COUNTRYPANELMOD_POP_HEADER:0 "#header [Concept('concept_pop','$concept_population$')]#!"
@@ -29,10 +34,15 @@
  COUNTRYPANELMOD_CULTURE_DEPENDENTS:0 "[concept_dependents]: #variable [Culture.GetDependentsAsPercentage(Country.Self)|/%d] ([Culture.GetDependents(Country.Self)|*v])#!"
  COUNTRYPANELMOD_CULTURE_POL_STR:0 "[concept_political_strength]: #variable [Culture.GetPolStrAsPercentage(Country.Self)|/%d] ([Culture.GetPolStr(Country.Self)|*])#!"
 
- COUNTRYPANELMOD_CULTURE_POPULATION_TOOLTIP:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_CULTURE_POPULATION$\n$TOOLTIP_DELIMITER$\n$TAB$$COUNTRYPANELMOD_CULTURE_POL_STR$"
- COUNTRYPANELMOD_CULTURE_POL_STR_TOOLTIP:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_CULTURE_POL_STR$\n$TAB$$COUNTRYPANELMOD_CULTURE_POPULATION$\n$TOOLTIP_DELIMITER$\n[Culture.GetCountryDiscriminationStatus(Country.Self)]"
+ COUNTRYPANELMOD_CULTURE_POPULATION_TOOLTIP:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POPULATION$: $COUNTRYPANELMOD_CULTURE_POPULATION_DATA$"
+ COUNTRYPANELMOD_CULTURE_POL_STR_TOOLTIP:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POL_STR$: $COUNTRYPANELMOD_CULTURE_POL_STR_DATA$"
+
+ COUNTRYPANELMOD_CULTURE_POPULATION_PIECHART:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_CULTURE_POPULATION$\n$TOOLTIP_DELIMITER$\n$TAB$$COUNTRYPANELMOD_CULTURE_POL_STR$"
+ COUNTRYPANELMOD_CULTURE_POL_STR_PIECHART:0 "$COUNTRYPANELMOD_CULTURE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_CULTURE_POL_STR$\n$TAB$$COUNTRYPANELMOD_CULTURE_POPULATION$\n$TOOLTIP_DELIMITER$\n[Culture.GetCountryDiscriminationStatus(Country.Self)]"
  COUNTRYPANELMOD_CULTURE_TURMOIL_TOOLTIP:0 "$COUNTRYPANELMOD_TURMOIL_OF_CULTURE$\n$TAB$$COUNTRYPANELMOD_TURMOIL_OF_CULTURE_IN_COUNTRY$\n$TAB$$COUNTRYPANELMOD_TURMOIL_OF_CULTURE_WORLDWIDE$"
 
+ COUNTRYPANELMOD_CULTURE_POPULATION_DATA:0 "[Culture.GetPopulation(Country.Self)|Kv] [SelectLocalization(NotEqualTo_int64(Culture.GetPopulationChange(Country.Self),'(int64)0'),'COUNTRYPANELMOD_CULTURE_POPULATION_CHANGE_IN_COUNTRY','')]"
+ COUNTRYPANELMOD_CULTURE_POL_STR_DATA:0 "#v [Culture.GetPolStrAsPercentage(Country.Self)|/%d]#! (#v [Culture.GetPolStr(Country.Self)|*]#!)"
 
  COUNTRYPANELMOD_RELIGION_POPULATION:0 "$concept_population$: #v [Religion.GetPopulationAsPercentage(Country.Self)|/%d] ([Religion.GetPopulation(Country.Self)|*])#!"
  COUNTRYPANELMOD_RELIGION_WORKFORCE:0 "$concept_workforce$: #variable [Religion.GetWorkforceAsPercentage(Country.Self)|/%d] ([Religion.GetWorkforce(Country.Self)|*v])#!"
@@ -57,7 +67,7 @@
 
  COUNTRYPANELMOD_DATA_CULTURE_NAME_TOOLTIP:0 "[Concept('concept_cultural_trait', '$concept_cultural_traits$')]: [Culture.GetCulturalTraitsDesc]\n[concept_religion]: [Culture.GetReligionsDesc]\n[concept_obsession]: [Culture.GetObsessionsDesc]\n[concept_taboo]: [Culture.GetTaboosDesc]\n[Culture.GetCountryDiscriminationStatus(Country.Self)]\n\n[AddLocalizationIf(NotEqualTo_int64(Culture.GetPopulation(Country.Self),'(int64)0'),'COUNTRYPANELMOD_CULTURE_IN_COUNTRY_DESC')]"
  COUNTRYPANELMOD_DATA_CULTURE_NAME_TOOLTIP_INGAME_ADDED:0 "[Culture.GetCountryDiscriminationStatus(Country.Self)]\n\n[AddLocalizationIf(NotEqualTo_int64(Culture.GetPopulation(Country.Self),'(int64)0'),'COUNTRYPANELMOD_CULTURE_IN_COUNTRY_DESC')]"
- COUNTRYPANELMOD_CULTURE_IN_COUNTRY_DESC:0 "$COUNTRYPANELMOD_POPULATION_IN_COUNTRY$: [Culture.GetPopulation(Country.Self)|Kv] [SelectLocalization(NotEqualTo_int64(Culture.GetPopulationChange(Country.Self),'(int64)0'),'COUNTRYPANELMOD_CULTURE_POPULATION_CHANGE_IN_COUNTRY','')]\n$COUNTRYPANELMOD_PRIMARY_CULTURE_IN_COUNTRY$: [Culture.IsPrimaryCultureInYesNo(Country.Self)|v]\n[concept_migration_target]: [Culture.GetMigrationTargetsDesc]\n$COUNTRYPANELMOD_CULTURE_TURMOIL_TOOLTIP$"
+ COUNTRYPANELMOD_CULTURE_IN_COUNTRY_DESC:0 "$COUNTRYPANELMOD_POPULATION_IN_COUNTRY$: $COUNTRYPANELMOD_CULTURE_POPULATION_DATA$\n$COUNTRYPANELMOD_PRIMARY_CULTURE_IN_COUNTRY$: [Culture.IsPrimaryCultureInYesNo(Country.Self)|v]\n[concept_migration_target]: [Culture.GetMigrationTargetsDesc]\n$COUNTRYPANELMOD_CULTURE_TURMOIL_TOOLTIP$"
 
 
  COUNTRYPANELMOD_DATA_RELIGION_NAME_TOOLTIP:0 "[Concept('concept_religious_trait', '$concept_religious_traits$')]: [Religion.GetReligiousTraitsDesc]\n[concept_taboo]: [Religion.GetTaboosDesc]\n\n[Religion.GetCountryDiscriminationStatus(Country.Self)]\n$COUNTRYPANELMOD_RELIGION_IN_COUNTRY_DESC$"

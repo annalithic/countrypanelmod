@@ -25,14 +25,14 @@ types countrypanelmod_population_types {
 		default_header = {
 				alwaystransparent = no
 				onmousehierarchyenter = "[PdxGuiWidget.FindChild('minimize_button').InterruptThenTriggerAnimation('hide_minimize_button','show_minimize_button')]"
-				onmousehierarchyleave = "[PdxGuiWidget.FindChild('minimize_button').InterruptThenTriggerAnimation('show_minimize_button','hide_minimize_button')]"	
+				onmousehierarchyleave = "[PdxGuiWidget.FindChild('minimize_button').InterruptThenTriggerAnimation('show_minimize_button','hide_minimize_button')]"
 				button_icon_round_toggle = {
 					name = "minimize_button"
-	
+
 					size = { 29 29 }
 					parentanchor = right|vcenter
 					position = { -10 0 }
-					
+
 					blockoverride "on_click" {
 						onclick = "[GetVariableSystem.Toggle('countrypanelmod_pop_type_minimize')]"
 					}
@@ -54,29 +54,29 @@ types countrypanelmod_population_types {
 					blockoverride "tooltip_2" {
 						tooltip = "[concept_profession]"
 					}
-	
+
 					state = {
 						name = hide_minimize_button
 						trigger_on_create = yes
 						alpha = 0
 						duration = 0.2
 					}
-		
+
 					state = {
 						name = show_minimize_button
 						alpha = 1
 						duration = 0.15
 					}
 				}
-	
-			
+
+
 
 			parentanchor = hcenter
 			blockoverride "text" {
 				text = "COUNTRYPANELMOD_POP_HEADER"
 			}
 
-		}	
+		}
 		widget = { size = { 5 5} }
 
 		flowcontainer = {
@@ -110,7 +110,7 @@ types countrypanelmod_population_types {
 		#	blockoverride "text" {
 		#		text = "POP_CULTURE_HEADER"
 		#	}
-		#}	
+		#}
 
 		widget = { size = { 5 5} }
 		#widget = { size = { 5 5} }
@@ -129,17 +129,6 @@ types countrypanelmod_population_types {
 			size = { 5 5 }
 		}
 
-		flowcontainer = {
-			visible = no
-			spacing = 8
-			countrypanelmod_pop_type_piechart = {
-				visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
-			}
-			countrypanelmod_culture_piechart = {
-				visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
-			}
-			countrypanelmod_religion_piechart = {}
-		}
 	}
 
 	type countrypanelmod_population_pop_type_section = flowcontainer {
@@ -176,7 +165,7 @@ types countrypanelmod_population_types {
 					visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 				}
 				expand = {}
-			}	
+			}
 		}
 		countrypanelmod_pop_type_table = {}
 	}
@@ -228,7 +217,7 @@ types countrypanelmod_population_types {
 
 
 
-				
+
 				#widget = {
 				#	visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 				#	size = { 15 15}
@@ -238,7 +227,7 @@ types countrypanelmod_population_types {
 				#	visible = "[Not(Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'),GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p-')))]"
 				#}
 				expand = {}
-			}	
+			}
 		}
 
 		countrypanelmod_culture_table = {}

@@ -10,7 +10,7 @@
 @panel_width_plus_70 = 610			# used to be 530
 
 types countrypanelmod_politics_movement_types {
-	
+
 	type countrypanelmod_political_movement_item = flowcontainer {
 		direction = vertical
 
@@ -34,10 +34,10 @@ types countrypanelmod_politics_movement_types {
 				#	size = { 1000 125 }
 				#	blockoverride "entity_instance" {
 				#		entity_instance = vfx_ui_plane_war_panel_fire_plane_entity
-				#	}	
+				#	}
 				#	alpha = 0.3
 				#}
-	
+
 
 
 				hbox = {
@@ -63,9 +63,9 @@ types countrypanelmod_politics_movement_types {
 
 						icon = {
 							size = { 100% 100% }
-							texture = "[PoliticalMovement.GetLaw.GetTexture]"			
+							texture = "[PoliticalMovement.GetLaw.GetTexture]"
 						}
-	
+
 
 					}
 
@@ -79,14 +79,14 @@ types countrypanelmod_politics_movement_types {
 						hbox = {
 							layoutpolicy_horizontal = expanding
 							layoutpolicy_vertical = fixed
-	
+
 							textbox = {
 								margin_left = 2
 								autoresize = yes
 								align = left|nobaseline
 								elide = right
 								fontsize_min = 12
-	
+
 								background = {
 									using = dark_area
 									alpha = 0.3
@@ -95,16 +95,16 @@ types countrypanelmod_politics_movement_types {
 
 									#margin_bottom = 6
 									#margin_top = 4
-									
+
 									modify_texture = {
 										texture = "gfx/interface/masks/fade_horizontal_center.dds"
 										blend_mode = alphamultiply
 									}
 								}
-								
-								text = "[PoliticalMovement.GetName]"	
+
+								text = "[PoliticalMovement.GetName]"
 							}
-	
+
 							textbox = {
 								layoutpolicy_horizontal = expanding
 								size = { 0 20 }
@@ -113,21 +113,21 @@ types countrypanelmod_politics_movement_types {
 								fontsize_min = 12
 								text = "POLITICAL_MOVEMENT_SUPPORT_WITH_LABEL"
 							}
-		
-	
+
+
 						}
-	
+
 						hbox = {
 							layoutpolicy_horizontal = expanding
 							layoutpolicy_vertical = expanding
 							margin_bottom = 2
-							#margin = { 10 0 }							
+							#margin = { 10 0 }
 
 							### REVOLUTION PROGRESSBAR ###
 							widget = {
 								visible = "[PoliticalMovement.IsRevolutionary]"
 								size = { 148 20 }
-								
+
 								bad_progressbar_horizontal = {
 									parentanchor = left
 									datacontext = "[PoliticalMovement.GetRevolution]"
@@ -163,7 +163,7 @@ types countrypanelmod_politics_movement_types {
 										parentanchor = right|vcenter
 										margin_right = 20
 									}
-									
+
 									blockoverride "in_government_icon" {}
 
 									icon = {
@@ -185,18 +185,18 @@ types countrypanelmod_politics_movement_types {
 								#margin_left = 5
 								margin_bottom = 2
 								spacing = 3
-	
+
 								dynamicgridbox = {
 									datamodel = "[PoliticalMovement.GetTopSupportingCharacters]"
 									flipdirection = yes
-	
+
 									item = {
 										character_portrait_mini = {
-	
+
 											blockoverride "portrait_button_onrightclick" {}
-	
+
 											#blockoverride "tooltip" {}
-						
+
 											#character_ig_icon = {
 											#	parentanchor = bottom|right
 											#	size = { 12 12 }
@@ -205,7 +205,7 @@ types countrypanelmod_politics_movement_types {
 										}
 									}
 								}
-	
+
 								textbox = {
 									autoresize = yes
 									visible = "[Not(IsDataModelEmpty(PoliticalMovement.GetBottomSupportingCharacters))]"
@@ -220,7 +220,7 @@ types countrypanelmod_politics_movement_types {
 							widget = {
 								size = { 2 2 }
 							}
-	
+
 							### Interest Groups
 							flowcontainer = {
 
@@ -232,7 +232,7 @@ types countrypanelmod_politics_movement_types {
 								item = {
 									ig_button = {
 										size = { 30 30 }
-										
+
 										tooltipwidget = {
 											FancyTooltip_IG = {}
 										}
@@ -249,15 +249,15 @@ types countrypanelmod_politics_movement_types {
 								fontsize_min = 12
 								text = "POLITICAL_MOVEMENT_RADICALISM_WITH_LABEL"
 							}
-		
+
 							textbox = {
 								layoutpolicy_horizontal = expanding
 								size = { 0 20 }
 								align = right|nobaseline
 								elide = right
 								fontsize_min = 12
-								
-								visible = "[And(PoliticalMovement.IsPlacated,Not(PoliticalMovement.IsRevolutionary))]"
+
+								visible = "[PoliticalMovement.IsPlacated]"
 								text = "[concept_political_movement_placated]"
 							}
 
@@ -265,14 +265,14 @@ types countrypanelmod_politics_movement_types {
 								visible = "[PoliticalMovement.IsRevolutionary]"
 							}
 
-					
+
 
 						}
 
 
 					}
 
-	
+
 				}
 
 				vbox = {
@@ -288,7 +288,7 @@ types countrypanelmod_politics_movement_types {
 
 
 			}
-			
+
 
 		}
 	}

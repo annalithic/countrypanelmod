@@ -11,7 +11,7 @@ If you're using a mod that adds more interest groups they might go offscreen, th
 Only has english localization, feel free to upload your own translation if you want
 
 Population panel:
-completely new, shows 
+completely new, shows
 
 
 
@@ -21,8 +21,6 @@ ig list - government/opposition/marginalised, pop, clout, radicalism - same as p
 
 
 
-sortable profession list?
-spacing profession list - include zeroes?
 small pop header? - 1080p check
 expandable culture/religion key
 
@@ -47,3 +45,4 @@ primary culture icon
 TODO 4
 culture/religion sort by pol str?
 radio sort button
+petitions?

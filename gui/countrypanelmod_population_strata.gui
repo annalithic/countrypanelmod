@@ -21,7 +21,7 @@ types countrypanelmod_population_strata_types {
 		}
 		countrypanelmod_pop_strata_summary = {
 			using = average_standard_of_living_lower_tooltip_with_graph
-			
+
 			blockoverride "strata_portrait_properties" {
 				datacontext = "[Country.GetSampleLowerStrataPop]"
 			}
@@ -48,7 +48,7 @@ types countrypanelmod_population_strata_types {
 		}
 		countrypanelmod_pop_strata_summary = {
 			using = average_standard_of_living_middle_tooltip_with_graph
-			
+
 			blockoverride "strata_portrait_properties" {
 				datacontext = "[Country.GetSampleMiddleStrataPop]"
 			}
@@ -75,7 +75,7 @@ types countrypanelmod_population_strata_types {
 		}
 		countrypanelmod_pop_strata_summary = {
 			using = average_standard_of_living_upper_tooltip_with_graph
-			
+
 			blockoverride "strata_portrait_properties" {
 				datacontext = "[Country.GetSampleUpperStrataPop]"
 			}
@@ -131,7 +131,7 @@ types countrypanelmod_population_strata_types {
 
 				culture_info_pop_portrait = {
 					parentanchor = center
-					
+
 					block "strata_portrait_properties" {}
 				}
 			}
@@ -201,7 +201,7 @@ types countrypanelmod_population_strata_types {
 
 				countrypanelmod_pop_strata_portrait = {
 					parentanchor = hcenter|top
-					
+
 					block "strata_portrait_properties" {}
 				}
 			}
@@ -266,5 +266,5 @@ types countrypanelmod_population_strata_types {
 		visible = "[Pop.IsValid]"
 		blockoverride "portrait_button" {}
 		tooltipwidget = { FancyTooltip_Pop = {} }
-	}	
+	}
 }
