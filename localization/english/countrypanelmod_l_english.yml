@@ -4,7 +4,7 @@
 
  COUNTRYPANELMOD_CULTURE_IN_COUNTRY:0 "#header [Culture.GetName] $concept_pops$ in [Country.GetName]#!:"
  COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POPULATION:0 "[Culture.GetName] $concept_population$ in [Country.GetName]"
- COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POL_STR:0 "[concept_political_strength] of [Culture.GetName] $concept_pops$ in [Country.GetName]"
+ COUNTRYPANELMOD_CULTURE_IN_COUNTRY_POL_STR:0 "[Culture.GetName] [concept_political_strength] in [Country.GetName]"
 
  COUNTRYPANELMOD_RELIGION_IN_COUNTRY:0 "#header [Religion.GetName] $COUNTRYPANELMOD_POPULATION_IN_COUNTRY$#!"
 
@@ -15,7 +15,7 @@
 
  COUNTRYPANELMOD_PRIMARY_CULTURE_IN_COUNTRY:0 "[Concept('concept_primary_cultures','$concept_primary_culture$')] in [Country.GetName]"
  COUNTRYPANELMOD_TURMOIL_OF_CULTURE:0 "[concept_turmoil] of [Culture.GetName] $concept_pops$:"
- COUNTRYPANELMOD_TURMOIL_OF_CULTURE_IN_COUNTRY:0 "#variable [Country.CalcCulturalTurmoil( Culture.Self )|-0%]#! in [Country.GetName]"
+ COUNTRYPANELMOD_TURMOIL_OF_CULTURE_IN_COUNTRY:0 "#variable [Culture.CalcTurmoilInCountry(Country.Self)|-0%]#! in [Country.GetName]"
  COUNTRYPANELMOD_TURMOIL_OF_CULTURE_WORLDWIDE:0 "#variable [Culture.GetTurmoil|-0%]#! worldwide"
 
  COUNTRYPANELMOD_LOYALISTS_AND_RADICALS:0 "[Concept('concept_radical','$concept_radicals$')] and [Concept('concept_loyalist','$concept_loyalists$')]"

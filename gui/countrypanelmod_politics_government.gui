@@ -27,7 +27,7 @@ types countrypanelmod_politics_government_types  {
 			alpha = 0.2
 			fittype = center
 			using = frame_small_mask
-			
+
 			modify_texture = {
 				texture = "gfx/interface/masks/fade_horizontal_center.dds"
 				spriteType = Corneredstretched
@@ -46,7 +46,7 @@ types countrypanelmod_politics_government_types  {
 
 				#margin_left = 10
 				#margin_right = 10
-	
+
 				layoutpolicy_horizontal = fixed
 				layoutpolicy_vertical = fixed
 
@@ -61,7 +61,7 @@ types countrypanelmod_politics_government_types  {
 					elide = right
 					using = fontsize_xl
 				}
-				
+
 				hbox = {
 					#spacing = 5
 					visible = yes
@@ -72,7 +72,7 @@ types countrypanelmod_politics_government_types  {
 					widget = {
 						layoutpolicy_horizontal = shrinking
 						size = { 10 10 }
-					}		
+					}
 
 					vbox = {
 						name = "government"
@@ -93,12 +93,12 @@ types countrypanelmod_politics_government_types  {
 								layoutpolicy_horizontal = expanding
 								spacing = 5
 								margin = { 5 0 }
-							
+
 								icon = {
 									texture = "gfx/interface/icons/generic_icons/in_government_icon.dds"
 									size = { 22 22 }
 									tooltip = "[concept_in_government]"
-								}	
+								}
 								textbox = {
 									layoutpolicy_horizontal = expanding
 									text = "GOVERNMENT"
@@ -141,7 +141,7 @@ types countrypanelmod_politics_government_types  {
 						}
 					}
 
-	
+
 
 					widget = {
 						#visible = no
@@ -157,7 +157,7 @@ types countrypanelmod_politics_government_types  {
 							texture = "gfx/interface/dividers/divider_clean_vertical.dds"
 							texture_density = 2
 							alpha = 0.7
-							
+
 							modify_texture = {
 								texture = "gfx/interface/masks/fade_vertical_center.dds"
 								spriteType = Corneredstretched
@@ -168,8 +168,8 @@ types countrypanelmod_politics_government_types  {
 						}
 					}
 
-					
-					
+
+
 					vbox = {
 						visible = "[Not(IsDataModelEmpty(Country.AccessInterestGroupsInOpposition))]"
 						layoutpolicy_horizontal = growing
@@ -193,7 +193,7 @@ types countrypanelmod_politics_government_types  {
 									texture = "gfx/interface/icons/generic_icons/in_opposition_icon.dds"
 									size = { 22 22 }
 									tooltip = "[concept_in_opposition]"
-								}	
+								}
 								textbox = {
 									layoutpolicy_horizontal = expanding
 									text = "OPPOSITION"
@@ -214,7 +214,7 @@ types countrypanelmod_politics_government_types  {
 								parentanchor = left
 								datamodel = "[Country.AccessInterestGroupsInOpposition]"
 								#flipdirection = yes
-							
+
 								item = {
 									testwidg = {}
 								}
@@ -226,7 +226,7 @@ types countrypanelmod_politics_government_types  {
 								layoutpolicy_vertical = expanding
 								parentanchor = left
 								datamodel = "[Country.GetIndependentInterestGroupsInOpposition]"
-								#flipdirection = yes	
+								#flipdirection = yes
 								item = {
 									countrypanelmod_ig_widget_independant = {}
 								}
@@ -242,18 +242,18 @@ types countrypanelmod_politics_government_types  {
 					widget = {
 						layoutpolicy_horizontal = shrinking
 						size = { 10 10 }
-					}		
-		
-				}			
+					}
+
+				}
 
 
 				expand = {}
-	
+
 			}
 
-			
 
-	
+
+
 		}
 	}
 
@@ -264,7 +264,7 @@ types countrypanelmod_politics_government_types  {
 
 		layoutpolicy_horizontal = fixed
 		layoutpolicy_vertical = fixed
-		
+
 		datacontext = "[InterestGroup.GetParty]"
 
 
@@ -323,7 +323,7 @@ types countrypanelmod_politics_government_types  {
 
 		dynamicgridbox = {
 			layoutpolicy_horizontal = fixed
-			layoutpolicy_vertical = fixed	
+			layoutpolicy_vertical = fixed
 			datamodel = "[Country.AccessAllInterestGroups]"
 			flipdirection  = yes
 			item = {
@@ -355,7 +355,7 @@ types countrypanelmod_politics_government_types  {
 			alpha = 0
 
 			modify_texture = {
-				texture = "gfx/interface/backgrounds/simple_frame_mask.dds"  
+				texture = "gfx/interface/backgrounds/simple_frame_mask.dds"
 				spriteType = Corneredstretched
 				spriteborder = { 20 20 }
 				texture_density = 2
@@ -378,13 +378,13 @@ types countrypanelmod_politics_government_types  {
 
 			using = countrypanelmod_ig_widget_button
 			texture = "gfx/interface/buttons/white_button_bg.dds"
-			
+
 			blockoverride "bevel_texture" {
 				texture = "gfx/interface/buttons/red_button_bevel.dds"
 			}
-		
+
 			block "frame_visible" {}
-	
+
 
 			alpha = 1
 
@@ -412,20 +412,20 @@ types countrypanelmod_politics_government_types  {
 				spriteborder = { 0 0 }
 				blend_mode = alphamultiply
 				alpha = 0.5
-			}		
+			}
 
 
-	
+
 			#background = {
 				#visible = "[InterestGroup.IsInGovernment]"
-				#texture = "gfx/interface/backgrounds/entry_bg_top_mask.dds"  
+				#texture = "gfx/interface/backgrounds/entry_bg_top_mask.dds"
 				#spriteType = Corneredtiled
 				#spriteborder = { 12 12 }
 				#texture_density = 2
 				#alpha = 0.7
-	
-	
-	
+
+
+
 				#texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
 				#alpha = "[Min_float(Multiply_float(FixedPointToFloat(InterestGroup.GetClout),'(float)2'),'(float)0.4')]"
 				#modify_texture = {
@@ -435,19 +435,19 @@ types countrypanelmod_politics_government_types  {
 				#	alpha = 0
 				#	blend_mode = multiply
 				#}
-	
-				
-	
+
+
+
 				#modify_texture = {
 				#	texture = "gfx/interface/textures/velvet_texture.dds"
 				#	spriteType = Corneredtiled
 				#	texture_density = 1
 				#	spriteborder = { 0 0 }
 				#	blend_mode = overlay
-				#	alpha = 1		
+				#	alpha = 1
 				#}
-	
-		
+
+
 				#modify_texture = {
 				#	texture = "gfx/interface/masks/fade_vertical_bottom.dds"
 				#	spriteType = Corneredstretched
@@ -456,24 +456,24 @@ types countrypanelmod_politics_government_types  {
 				#	alpha = 0.5
 				#}
 			#}
-	
-	
-	
-			
-	
-	
+
+
+
+
+
+
 			icon = {
 				size = { 65 65 }
 				texture = "[InterestGroup.GetTexture]"
 				parentanchor = bottom
 				alpha = 0.25
 			}
-	
+
 			widget = {
 				size = { 65 32 }
 				scissor = yes
 				visible = "[InterestGroup.IsPowerful]"
-	
+
 				parentanchor = bottom
 				icon = {
 					parentanchor = hcenter|bottom
@@ -481,26 +481,26 @@ types countrypanelmod_politics_government_types  {
 					size = { 61 61 }
 					texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
 					alwaystransparent = yes
-				}	
+				}
 			}
-	
+
 			widget = {
 				size = { 65 32 }
 				scissor = yes
 				visible = "[InterestGroup.IsPowerful]"
-	
+
 				icon = {
 					parentanchor = hcenter|top
 					position = { 0 2 }
 					size = { 61 61 }
 					texture = "gfx/interface/icons/ig_icons/influential_ig_frame.dds"
 					alwaystransparent = yes
-				}	
+				}
 			}
-	
-	
-	
-	
+
+
+
+
 		}
 
 		widget = {
@@ -515,35 +515,35 @@ types countrypanelmod_politics_government_types  {
 			parentanchor = center
 			direction = vertical
 			#tooltip = "CLOUT_PIECHART"
-			
+
 			widget = {
 				size = { 70 50 }
 				datacontext = "[InterestGroup.AccessLeader]"
 
 				character_portrait_base_head = {
 
-					
+
 					size = { 66 66 }
 					blockoverride "portrait_size" {
 						size = { 66 75 }
 					}
 					position = { 2 -14 }
-	
+
 					blockoverride "frame_texture_generated" {
 						texture = "gfx/interface/portraits/portrait_frame_head_small.dds"
 					}
 					blockoverride "frame_texture_historical" {
 						texture = "gfx/interface/portraits/portrait_frame_head_small_historical.dds"
 					}
-			
+
 
 					blockoverride "portrait_button_onrightclick" {}
 					#blockoverride "tooltip" {}
 					blockoverride "rank_icon" {}
 					blockoverride "portrait_icons" {}
 					blockoverride "show_hat" {}
-			
-			
+
+
 					#character_ig_icon = {
 					#	parentanchor = bottom|right
 					#	size = { 30 30 }
@@ -563,19 +563,21 @@ types countrypanelmod_politics_government_types  {
 
 			}
 
+			widget = {
+				size = { 5 5 }
+			}
 
-			#widget = {
-			#	size = { 36 36 }
-			#	parentanchor = hcenter
-			#	
-			#	ig_button = {
-			#		size = { 100% 100% }
-			#		blockoverride "in_government_icon"{}
-			#	}
-			#}
+			#clout
 			textbox = {
 
 				background = {
+					using = blurry_dark_background
+					margin = { 10 5 }
+					alpha = 0.4
+				}
+
+				background = {
+					visible = no
 					using = dark_area
 					margin_top = -3
 					margin_bottom = 3
@@ -601,68 +603,55 @@ types countrypanelmod_politics_government_types  {
 				margin_left = 5
 				#visible = "[InterestGroup.IsPowerful]"
 				text = "[InterestGroup.GetClout|%1v]"
+				align = nobaseline
 				autoresize = yes
 				parentanchor = hcenter
 			}
+
+			#approval
 			textbox = {
 				background = {
-					using = dark_area
-					margin_top = -3
-					margin_bottom = 3
+					using = blurry_dark_background
+					margin = { 10 5 }
 					alpha = 0.4
-
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_horizontal_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
-
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_vertical_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
 				}
 
 				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
 				visible = "[GreaterThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)5')]"
 				text = "[InterestGroup.GetApprovalValue|=p]"
+				align = nobaseline
 				autoresize = yes
 				parentanchor = hcenter
 			}
 
 			textbox = {
-
 				background = {
-					using = dark_area
-					margin_top = -3
-					margin_bottom = 3
+					using = blurry_dark_background
+					margin = { 10 5 }
 					alpha = 0.4
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_horizontal_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_vertical_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
 				}
 
 				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
-				visible = "[And(LessThan_int32(InterestGroup.GetApprovalValue,'(int32)5'),GreaterThan_int32(InterestGroup.GetApprovalValue,'(int32)-5'))]"
+				visible = "[And(Not(EqualTo_int32(InterestGroup.GetApprovalValue,'(int32)0')),And(LessThan_int32(InterestGroup.GetApprovalValue,'(int32)5'),GreaterThan_int32(InterestGroup.GetApprovalValue,'(int32)-5')))]"
 				text = "[InterestGroup.GetApprovalValue|=v]"
+				align = nobaseline
+				autoresize = yes
+				parentanchor = hcenter
+			}
+
+			textbox = {
+				background = {
+					using = blurry_dark_background
+					margin = { 10 5 }
+					alpha = 0.4
+				}
+
+				tooltip = "IG_APPROVAL_BREAKDOWN"
+				visible = "[EqualTo_int32(InterestGroup.GetApprovalValue,'(int32)0')]"
+				text = "[InterestGroup.GetApprovalValue|=v]"
+				align = nobaseline
 				autoresize = yes
 				parentanchor = hcenter
 			}
@@ -671,30 +660,16 @@ types countrypanelmod_politics_government_types  {
 			textbox = {
 
 				background = {
-					using = dark_area
-					margin_top = -3
-					margin_bottom = 3
+					using = blurry_dark_background
+					margin = { 10 5 }
 					alpha = 0.4
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_horizontal_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
-					modify_texture = {
-						texture = "gfx/interface/masks/fade_vertical_center.dds"
-						spriteType = Corneredstretched
-						spriteborder = { 0 0 }
-						blend_mode = alphamultiply
-						alpha = 1
-					}
 				}
 
 				tooltip = "IG_APPROVAL_BREAKDOWN"
 				margin_right = 5
 				visible = "[LessThanOrEqualTo_int32(InterestGroup.GetApprovalValue,'(int32)-5')]"
 				text = "[InterestGroup.GetApprovalValue|n]"
+				align = nobaseline
 				autoresize = yes
 				parentanchor = hcenter
 			}
@@ -718,10 +693,10 @@ template countrypanelmod_ig_widget_button {
 	downhoverframe = 2
 	downpressedframe = 2
 	disableframe = 3
-	
+
 	spriteborder = { 7 7 }
 	framesize = { 19 19 }
-	
+
 	### show
 	state = {
 		name = _show
@@ -745,13 +720,13 @@ template countrypanelmod_ig_widget_button {
 			translate_uv = { 0 0 }
 			using = default_button_texture_alpha
 		}
-		
+
 		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('show')]"
 		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('show')]"
 		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('show')]"
 		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('show')]"
 	}
-	
+
 	### mouse enter
 	state = {
 		name = _mouse_enter
@@ -775,13 +750,13 @@ template countrypanelmod_ig_widget_button {
 			translate_uv = { 0 0 }
 			using = default_button_texture_alpha
 		}
-		
+
 		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_enter')]"
 		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_enter')]"
 		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_enter')]"
 		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('enter')]"
 	}
-	
+
 	### mouse leave
 	state = {
 		name = _mouse_leave
@@ -805,13 +780,13 @@ template countrypanelmod_ig_widget_button {
 			translate_uv = { 0 0 }
 			using = default_button_texture_alpha
 		}
-		
+
 		on_start = "[PdxGuiWidget.AccessChild('frame').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
 		on_start = "[PdxGuiWidget.AccessChild('primary_dec').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
 		on_start = "[PdxGuiWidget.AccessChild('bevel').InterruptThenTriggerAnimation('mouse_enter','mouse_leave')]"
 		on_start = "[PdxGuiWidget.AccessChild('icon').InterruptThenTriggerAnimation('enter','leave')]"
 	}
-	
+
 	### mouse press
 	state = {
 		name = _mouse_press
@@ -835,13 +810,13 @@ template countrypanelmod_ig_widget_button {
 			translate_uv = { -0.005 -0.02 }
 			using = default_button_texture_alpha
 		}
-		
+
 		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_press')]"
 		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_press')]"
 		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_press')]"
 		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('press')]"
 	}
-	
+
 	### mouse release
 	state = {
 		name = _mouse_release
@@ -865,24 +840,24 @@ template countrypanelmod_ig_widget_button {
 			translate_uv = { 0 0 }
 			using = default_button_texture_alpha
 		}
-		
+
 		on_start = "[PdxGuiWidget.AccessChild('frame').TriggerAnimation('mouse_release')]"
 		on_start = "[PdxGuiWidget.AccessChild('primary_dec').TriggerAnimation('mouse_release')]"
 		on_start = "[PdxGuiWidget.AccessChild('bevel').TriggerAnimation('mouse_release')]"
 		on_start = "[PdxGuiWidget.AccessChild('icon').TriggerAnimation('release')]"
 	}
-	
+
 	### bevel
 	margin_widget = {
 		name = "bevel"
 		size = { 100% 100% }
 		alpha = 0.7
 		position = { 0 0 }
-		
+
 		block "bevel_margin" {
 			margin = { 2 2 }
 		}
-		
+
 		state = {
 			name = show
 			using = Animation_Curve_Default
@@ -918,7 +893,7 @@ template countrypanelmod_ig_widget_button {
 			alpha = 0.7
 			position = { 0 0 }
 		}
-		
+
 		icon = {
 			size = { 100% 100% }
 			block "bevel_texture" {
@@ -929,7 +904,7 @@ template countrypanelmod_ig_widget_button {
 			spriteborder = { 75 35 }
 		}
 	}
-	
+
 	### primary decoration
 	icon = {
 		name = "primary_dec"
@@ -944,7 +919,7 @@ template countrypanelmod_ig_widget_button {
 		size = { 100% 100% }
 		texture_density = 2
 		alwaystransparent = yes
-		
+
 		modify_texture = {
 			name = "mouse_enter"
 			texture = "gfx/interface/buttons/default_button_frame_mouse_enter.dds"
@@ -954,12 +929,12 @@ template countrypanelmod_ig_widget_button {
 			alpha = 0
 			translate_uv = { 0 1 }
 		}
-		
+
 		state = {
 			name = show
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -970,7 +945,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_enter
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 1
@@ -981,7 +956,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_leave
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -992,7 +967,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_press
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -1003,7 +978,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_release
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -1011,7 +986,7 @@ template countrypanelmod_ig_widget_button {
 			}
 		}
 	}
-	
+
 	### frame
 	icon = {
 		block "frame_visible" {
@@ -1026,7 +1001,7 @@ template countrypanelmod_ig_widget_button {
 		size = { 100% 100% }
 		texture_density = 2
 		alwaystransparent = yes
-		
+
 		modify_texture = {
 			name = "mouse_enter"
 			texture = "gfx/interface/buttons/default_button_frame_mouse_enter.dds"
@@ -1036,12 +1011,12 @@ template countrypanelmod_ig_widget_button {
 			alpha = 0
 			translate_uv = { 0 1 }
 		}
-		
+
 		state = {
 			name = show
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -1052,7 +1027,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_enter
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 1
@@ -1063,7 +1038,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_leave
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -1087,7 +1062,7 @@ template countrypanelmod_ig_widget_button {
 			name = mouse_release
 			using = Animation_Curve_Default
 			using = button_animation_duration
-			
+
 			modify_texture = {
 				name = "mouse_enter"
 				alpha = 0
@@ -1095,7 +1070,7 @@ template countrypanelmod_ig_widget_button {
 			}
 		}
 	}
-	
+
 	#Hack for the type "button_icon_square" which needs the animation triggers above
 	block "hack_icon" {
 		icon = {
@@ -1140,7 +1115,7 @@ template countrypanelmod_ig_button_properties {
 		translate_uv = { 0 0 }
 		using = default_button_texture_alpha
 	}
-	
+
 	### animation textures
 	modify_texture = {
 		name = "mouse_enter"
@@ -1158,7 +1133,7 @@ template countrypanelmod_ig_button_properties {
 		blend_mode = overlay
 		alpha = 0
 	}
-	
+
 	### disabled stripes
 	using = disabled_stripes
 }
