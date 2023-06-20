@@ -9,9 +9,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types countrypanelmod_politics_law_types {
+types cpm_politics_law_types {
 
-	type countrypanelmod_laws_block = flowcontainer {
+	type cpm_laws_block = flowcontainer {
 		minimumsize = { @panel_width -1 }
 		direction = vertical
 
@@ -61,7 +61,7 @@ types countrypanelmod_politics_law_types {
 				spacing = 3
 
 				item = {
-					countrypanelmod_law_item_container = {
+					cpm_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 					}
 				}
@@ -77,7 +77,7 @@ types countrypanelmod_politics_law_types {
 				spacing = 3
 
 				item = {
-					countrypanelmod_law_item_container = {
+					cpm_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 
 						#blockoverride "size" {
@@ -109,7 +109,7 @@ types countrypanelmod_politics_law_types {
 				spacing = 3
 
 				item = {
-					countrypanelmod_law_item_container = {
+					cpm_law_item_container = {
 						visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetActiveGroupLaw.GetName)))]"
 					}
 				}
@@ -118,20 +118,20 @@ types countrypanelmod_politics_law_types {
 
 	}
 
-	type countrypanelmod_law_item_container = widget {
+	type cpm_law_item_container = widget {
 		block "size" {
 			size = { 170 55 }
 		}
 
-		countrypanelmod_law_item = {
+		cpm_law_item = {
 			visible = "[Not(And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName)))]"
 		}
-		countrypanelmod_enacting_law_item = {
+		cpm_enacting_law_item = {
 			visible = "[And(Country.IsEnactingLaw,EqualTo_string(Law.GetName,Country.GetLawBeingEnacted.GetName))]"
 		}
 	}
 
-	type countrypanelmod_law_item = widget {
+	type cpm_law_item = widget {
 		size = { 100% 100% }
 		
 		background = {
@@ -150,7 +150,7 @@ types countrypanelmod_politics_law_types {
 					size = { 40 40 }
 					texture = "[Law.GetTexture]"			
 				}
-				countrypanelmod_institution_level_dots = {
+				cpm_institution_level_dots = {
 					visible = "[Law.HasInstitution]"
 				}
 			}
@@ -166,7 +166,7 @@ types countrypanelmod_politics_law_types {
 		}
 	}
 
-	type countrypanelmod_enacting_law_item = widget {
+	type cpm_enacting_law_item = widget {
 		size = { 100% 100% }
 		
 		background = {
@@ -181,8 +181,8 @@ types countrypanelmod_politics_law_types {
 			flowcontainer = {
 				direction = vertical
 				spacing = 2
-				countrypanelmod_law_change_icon = {}
-				countrypanelmod_institution_level_dots = {
+				cpm_law_change_icon = {}
+				cpm_institution_level_dots = {
 					visible = "[Law.HasInstitution]"
 				}
 			}
@@ -193,7 +193,7 @@ types countrypanelmod_politics_law_types {
 				fontsize_min = 10
 				multiline = yes
 				
-				text = "COUNTRYPANELMOD_LAW_CHANGE"
+				text = "CPM_LAW_CHANGE"
 			}
 
 		}
@@ -207,7 +207,7 @@ types countrypanelmod_politics_law_types {
 		}
 	}
 	
-	type countrypanelmod_law_change_icon = widget {
+	type cpm_law_change_icon = widget {
 		size = {40 40}
 		widget = {
 			size = {20 40}
@@ -245,33 +245,33 @@ types countrypanelmod_politics_law_types {
 
 	}
 
-	type countrypanelmod_institution_level_dots = widget {
+	type cpm_institution_level_dots = widget {
 		size = { 40 10 }
 		datamodel = "[CountryPanel.AccessCountry.AccessInstitutions]"
 		item = {
 			flowcontainer = {
 				parentanchor = center
 				visible = "[EqualTo_string(Law.GetInstitutionType.GetNameNoFormatting,Institution.GetNameNoFormatting)]"
-				countrypanelmod_institution_level_dot = {
+				cpm_institution_level_dot = {
 					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)1')]"
 				}
-				countrypanelmod_institution_level_dot = {
+				cpm_institution_level_dot = {
 					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)2')]"
 				}
-				countrypanelmod_institution_level_dot = {
+				cpm_institution_level_dot = {
 					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)3')]"
 				}
-				countrypanelmod_institution_level_dot = {
+				cpm_institution_level_dot = {
 					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)4')]"
 				}
-				countrypanelmod_institution_level_dot = {
+				cpm_institution_level_dot = {
 					visible = "[GreaterThanOrEqualTo_int32(Institution.GetInvestmentLevel,'(int32)5')]"
 				}	
 			}	
 		}
 	}
 
-	type countrypanelmod_institution_level_dot = widget {
+	type cpm_institution_level_dot = widget {
 		size = { 8 8 }
 		background = {
 			using = simple_frame

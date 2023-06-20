@@ -9,9 +9,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types countrypanelmod_politics_government_types  {
+types cpm_politics_government_types  {
 
-	type countrypanelmod_ig_header = flowcontainer {
+	type cpm_ig_header = flowcontainer {
 		direction = vertical
 
 		margin_top = 5
@@ -131,7 +131,7 @@ types countrypanelmod_politics_government_types  {
 								parentanchor = left
 								datamodel = "[Country.GetIndependentInterestGroupsInGovernment]"
 								item = {
-									countrypanelmod_ig_widget_independant = {}
+									cpm_ig_widget_independant = {}
 								}
 							}
 							widget = {
@@ -228,7 +228,7 @@ types countrypanelmod_politics_government_types  {
 								datamodel = "[Country.GetIndependentInterestGroupsInOpposition]"
 								#flipdirection = yes
 								item = {
-									countrypanelmod_ig_widget_independant = {}
+									cpm_ig_widget_independant = {}
 								}
 							}
 							widget = {
@@ -327,7 +327,7 @@ types countrypanelmod_politics_government_types  {
 			datamodel = "[Country.AccessAllInterestGroups]"
 			flipdirection  = yes
 			item = {
-				countrypanelmod_ig_header_widget2 = {
+				cpm_ig_header_widget2 = {
 					visible = "[And(StringIsEmpty(InterestGroup.GetWillJoinPartyDesc),EqualTo_string(InterestGroup.GetParty.GetNameNoFormatting, Party.GetNameNoFormatting))]"
 				}
 			}
@@ -336,16 +336,16 @@ types countrypanelmod_politics_government_types  {
 
 	}
 
-	type countrypanelmod_ig_widget_independant = vbox {
+	type cpm_ig_widget_independant = vbox {
 		layoutpolicy_vertical = expanding
 		widget = {
 			size = { 5 5 }
 			layoutpolicy_vertical = expanding
 		}
-		countrypanelmod_ig_header_widget2 = { }
+		cpm_ig_header_widget2 = { }
 	}
 
-	type countrypanelmod_ig_header_widget2 = widget {
+	type cpm_ig_header_widget2 = widget {
 		size = { 65 125 }
 
 		background = {
@@ -376,7 +376,7 @@ types countrypanelmod_politics_government_types  {
 			}
 
 
-			using = countrypanelmod_ig_widget_button
+			using = cpm_ig_widget_button
 			texture = "gfx/interface/buttons/white_button_bg.dds"
 
 			blockoverride "bevel_texture" {
@@ -678,11 +678,11 @@ types countrypanelmod_politics_government_types  {
 
 }
 
-template countrypanelmod_ig_widget_button {
+template cpm_ig_widget_button {
 	block "sound" {
 		using = select_button_sound
 	}
-	using = countrypanelmod_ig_button_properties
+	using = cpm_ig_button_properties
 	texture = "gfx/interface/buttons/default_button_bg.dds"
 
 	gfxtype = togglepushbuttongfx
@@ -1082,7 +1082,7 @@ template countrypanelmod_ig_widget_button {
 	}
 }
 
-template countrypanelmod_ig_button_properties {
+template cpm_ig_button_properties {
 	effectname = "NoHighlight"
 	spriteType = Corneredtiled
 	texture_density = 2

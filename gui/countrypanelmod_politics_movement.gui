@@ -9,9 +9,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types countrypanelmod_politics_movement_types {
+types cpm_politics_movement_types {
 
-	type countrypanelmod_political_movement_item = flowcontainer {
+	type cpm_political_movement_item = flowcontainer {
 		direction = vertical
 
 		onmousehierarchyenter = "[AccessHighlightManager.HighlightPoliticalMovement(PoliticalMovement.Self)]"

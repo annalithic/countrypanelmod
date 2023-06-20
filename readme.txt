@@ -46,3 +46,8 @@ TODO 4
 culture/religion sort by pol str?
 radio sort button
 petitions?
+
+TODO 5
+regular fancy tooltip cleanup
+state religion tooltip?
+"is discriminated in" concept

@@ -9,9 +9,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types countrypanelmod_population_strata_types {
+types cpm_population_strata_types {
 
-	type countrypanelmod_pop_strata_section = flowcontainer {
+	type cpm_pop_strata_section = flowcontainer {
 		parentanchor = hcenter
 		background = {
 			texture = "gfx/interface/illustrations/top_illus/top_illu_population.dds"
@@ -19,7 +19,7 @@ types countrypanelmod_population_strata_types {
 			margin = { -2 0 }
 			alpha = 0.8
 		}
-		countrypanelmod_pop_strata_summary = {
+		cpm_pop_strata_summary = {
 			using = average_standard_of_living_lower_tooltip_with_graph
 
 			blockoverride "strata_portrait_properties" {
@@ -46,7 +46,7 @@ types countrypanelmod_population_strata_types {
 				tooltip = "POPS_OVERVIEW_REMAINDER_POOR_TOOLTIP"
 			}
 		}
-		countrypanelmod_pop_strata_summary = {
+		cpm_pop_strata_summary = {
 			using = average_standard_of_living_middle_tooltip_with_graph
 
 			blockoverride "strata_portrait_properties" {
@@ -73,7 +73,7 @@ types countrypanelmod_population_strata_types {
 				tooltip = "POPS_OVERVIEW_REMAINDER_MIDDLE_TOOLTIP"
 			}
 		}
-		countrypanelmod_pop_strata_summary = {
+		cpm_pop_strata_summary = {
 			using = average_standard_of_living_upper_tooltip_with_graph
 
 			blockoverride "strata_portrait_properties" {
@@ -102,17 +102,17 @@ types countrypanelmod_population_strata_types {
 		}
 	}
 
-	type countrypanelmod_pop_strata_summary = container {
-		countrypanelmod_pop_strata_summary_large = {
-			#visible = "[Not(GetVariableSystem.Exists('countrypanelmod_pop_type_minimize'))]"
+	type cpm_pop_strata_summary = container {
+		cpm_pop_strata_summary_large = {
+			#visible = "[Not(GetVariableSystem.Exists('cpm_pop_type_minimize'))]"
 		}
-		countrypanelmod_pop_strata_summary_small = {
+		cpm_pop_strata_summary_small = {
 			visible = no
-			#visible = "[GetVariableSystem.Exists('countrypanelmod_pop_type_minimize')]"
+			#visible = "[GetVariableSystem.Exists('cpm_pop_type_minimize')]"
 		}
 	}
 
-	type countrypanelmod_pop_strata_summary_large = flowcontainer {
+	type cpm_pop_strata_summary_large = flowcontainer {
 		minimumsize = { 180 -1 }
 		maximumsize = { 180 -1 }
 		direction = vertical
@@ -181,7 +181,7 @@ types countrypanelmod_population_strata_types {
 		}
 	}
 
-	type countrypanelmod_pop_strata_summary_small = flowcontainer {
+	type cpm_pop_strata_summary_small = flowcontainer {
 		minimumsize = { 180 -1 }
 		maximumsize = { 180 -1 }
 		direction = vertical
@@ -199,7 +199,7 @@ types countrypanelmod_population_strata_types {
 				parentanchor = bottom|hcenter
 				position = { 0 -10 }
 
-				countrypanelmod_pop_strata_portrait = {
+				cpm_pop_strata_portrait = {
 					parentanchor = hcenter|top
 
 					block "strata_portrait_properties" {}
@@ -252,7 +252,7 @@ types countrypanelmod_population_strata_types {
 		}
 	}
 
-	type countrypanelmod_pop_strata_portrait = pop_portrait_base {
+	type cpm_pop_strata_portrait = pop_portrait_base {
 		layoutpolicy_horizontal = expanding
 		layoutpolicy_vertical = preferred
 		size = { -1 240 }

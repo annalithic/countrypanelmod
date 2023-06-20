@@ -11,10 +11,10 @@
 
 @pop_type_table_row_height = 28
 
-types countrypanelmod_population_pop_type_types {
+types cpm_population_pop_type_types {
 
 	#MINIMIZED CHART SECTION
-	type countrypanelmod_pop_type_piechart = chart {
+	type cpm_pop_type_piechart = chart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
 		}
@@ -28,7 +28,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
+			tooltip = "CPM_POP_TYPE_POPULATION_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -43,7 +43,7 @@ types countrypanelmod_population_pop_type_types {
 			default_format = "#tooltippable_name"
 			text = "[PopType.GetNameNoFormatting]"
 			tooltipwidget = {
-				countrypanelmod_FancyTooltip_PopType = {
+				cpm_FancyTooltip_PopType = {
 				}
 			}
 		}
@@ -61,7 +61,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_pop_type_pol_str_piechart = chart {
+	type cpm_pop_type_pol_str_piechart = chart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
 		}
@@ -75,7 +75,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+			tooltip = "CPM_POP_TYPE_POL_STR_TOOLTIP"
 		}
 
 		blockoverride "pieslice" {
@@ -90,7 +90,7 @@ types countrypanelmod_population_pop_type_types {
 			default_format = "#tooltippable_name"
 			text = "[PopType.GetNameNoFormatting]"
 			tooltipwidget = {
-				countrypanelmod_FancyTooltip_PopType = {
+				cpm_FancyTooltip_PopType = {
 				}
 			}
 		}
@@ -110,7 +110,7 @@ types countrypanelmod_population_pop_type_types {
 
 
 	#POP TYPE CHARTS
-	type countrypanelmod_pop_type_smallchart = countrypanelmod_smallchart {
+	type cpm_pop_type_smallchart = cpm_smallchart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
 		}
@@ -124,7 +124,9 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
+			tooltipwidget = {
+				cpm_FancyTooltip_PopType_Piechart = {}
+			}
 		}
 
 		blockoverride "pieslice" {
@@ -136,7 +138,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_pop_type_pol_str_smallchart = countrypanelmod_smallchart {
+	type cpm_pop_type_pol_str_smallchart = cpm_smallchart {
 		blockoverride "datamodel" {
 			datamodel = "[Country.AccessPopTypesSortedOnPolStr]"
 		}
@@ -150,7 +152,9 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		blockoverride "tooltip" {
-			tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+			tooltipwidget = {
+				cpm_FancyTooltip_PopType_Piechart = {}
+			}
 		}
 
 		blockoverride "pieslice" {
@@ -162,7 +166,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_smallchart = container {
+	type cpm_smallchart = container {
 		onmousehierarchyenter = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('hide_chart_button','show_chart_button')]"
 		onmousehierarchyleave = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('show_chart_button','hide_chart_button')]"
 		alwaystransparent = no
@@ -264,21 +268,21 @@ types countrypanelmod_population_pop_type_types {
 	}
 
 	#POP TYPE TABLE
-	type countrypanelmod_pop_type_table = flowcontainer {
+	type cpm_pop_type_table = flowcontainer {
 		direction = vertical
 
 		flowcontainer = {
 			widget = {
 				size = { 148 @pop_type_table_row_height}
 				sort_button = {
-					visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't' ))]"
+					visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 't' ))]"
 					size = { 100% 100% }
-					onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 't' )]"
+					onclick = "[GetVariableSystem.Set('cpm_pop_type_table_sort', 't' )]"
 					text = "[concept_profession]"
 				}
 
-				countrypanelmod_sort_button_pressed = {
-					visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't' )]"
+				cpm_sort_button_pressed = {
+					visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 't' )]"
 					size = { 100% 100% }
 					text = "[concept_profession]"
 				}
@@ -290,9 +294,9 @@ types countrypanelmod_population_pop_type_types {
 
 				sort_button = {
 					size = { 100% 100% }
-					visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p' ))]"
+					visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p' ))]"
 
-					onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 'p' )]"
+					onclick = "[GetVariableSystem.Set('cpm_pop_type_table_sort', 'p' )]"
 					tooltip = "POPULATION_TOOLTIP"
 					button = {
 						texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
@@ -302,9 +306,9 @@ types countrypanelmod_population_pop_type_types {
 					}
 				}
 
-				countrypanelmod_sort_button_pressed = {
+				cpm_sort_button_pressed = {
 					size = { 100% 100% }
-					visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p' )]"
+					visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p' )]"
 
 					tooltip = "POPULATION_TOOLTIP"
 					icon = {
@@ -321,8 +325,8 @@ types countrypanelmod_population_pop_type_types {
 
 				sort_button = {
 					size = { 100% 100% }
-					visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's' ))]"
-					onclick = "[GetVariableSystem.Set('countrypanelmod_pop_type_table_sort', 's' )]"
+					visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's' ))]"
+					onclick = "[GetVariableSystem.Set('cpm_pop_type_table_sort', 's' )]"
 					tooltip = "POLITICAL_STRENGTH_TITLE"
 					button = {
 						texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
@@ -332,9 +336,9 @@ types countrypanelmod_population_pop_type_types {
 					}
 				}
 
-				countrypanelmod_sort_button_pressed = {
+				cpm_sort_button_pressed = {
 					size = { 100% 100% }
-					visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's' )]"
+					visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's' )]"
 					tooltip = "POLITICAL_STRENGTH_TITLE"
 					icon = {
 						texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"
@@ -349,11 +353,11 @@ types countrypanelmod_population_pop_type_types {
 
 			widget = {
 				size = { 87 @pop_type_table_row_height}
-				countrypanelmod_sort_button = {
+				cpm_sort_button = {
 					size = { 100% 100% }
 					enabled = no
-					text = "COUNTRYPANELMOD_RADICALISM_HEADER"
-					#tooltip = "COUNTRYPANELMOD_LOYALISTS_AND_RADICALS"
+					text = "CPM_RADICALISM_HEADER"
+					#tooltip = "CPM_LOYALISTS_AND_RADICALS"
 				}
 				icon = {
 					visible = no
@@ -371,11 +375,11 @@ types countrypanelmod_population_pop_type_types {
 
 		flowcontainer = {
 			direction = vertical
-			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 't')]"
+			visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 't')]"
 			dynamicgridbox = {
 				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
 				item = {
-					countrypanelmod_pop_type_row = {
+					cpm_pop_type_row = {
 						visible = "[EqualTo_string(PopType.GetStrata,Localize('rich'))]"
 					}
 				}
@@ -383,7 +387,7 @@ types countrypanelmod_population_pop_type_types {
 			dynamicgridbox = {
 				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
 				item = {
-					countrypanelmod_pop_type_row = {
+					cpm_pop_type_row = {
 						visible = "[EqualTo_string(PopType.GetStrata,Localize('middle'))]"
 					}
 				}
@@ -391,7 +395,7 @@ types countrypanelmod_population_pop_type_types {
 			dynamicgridbox = {
 				datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
 				item = {
-					countrypanelmod_pop_type_row = {
+					cpm_pop_type_row = {
 						visible = "[EqualTo_string(PopType.GetStrata,Localize('poor'))]"
 					}
 				}
@@ -399,25 +403,25 @@ types countrypanelmod_population_pop_type_types {
 		}
 
 		dynamicgridbox = {
-			visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+			visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p')]"
 			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPopulation]"
 			item = {
-				countrypanelmod_pop_type_row = {}
+				cpm_pop_type_row = {}
 			}
 		}
 
 		dynamicgridbox = {
-			visible = "[Or(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 's'),Not(GetVariableSystem.Exists('countrypanelmod_pop_type_table_sort')))]"
+			visible = "[Or(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's'),Not(GetVariableSystem.Exists('cpm_pop_type_table_sort')))]"
 			datamodel = "[CountryPanel.AccessCountry.AccessPopTypesSortedOnPolStr]"
 			item = {
-				countrypanelmod_pop_type_row = {}
+				cpm_pop_type_row = {}
 			}
 		}
 
 	}
 
 
-	type countrypanelmod_pop_type_row = widget {
+	type cpm_pop_type_row = widget {
 		size = { 355 @pop_type_table_row_height }
 
 		parentanchor = top
@@ -468,6 +472,10 @@ types countrypanelmod_population_pop_type_types {
 			widget = {
 				size = { @pop_type_table_row_height @pop_type_table_row_height }
 
+				#tooltipwidget = {
+				#	cpm_FancyTooltip_PopType_Piechart = {}
+				#}
+
 				background = {
 					using = simple_frame
 				}
@@ -485,10 +493,6 @@ types countrypanelmod_population_pop_type_types {
 
 
 			widget = {
-
-
-
-
 				size = { 120 @pop_type_table_row_height }
 				background = {
 					#using = entry_bg_simple
@@ -504,7 +508,7 @@ types countrypanelmod_population_pop_type_types {
 					size = { 100% 100%}
 					elide = right
 					tooltipwidget = {
-						countrypanelmod_FancyTooltip_PopType = {
+						cpm_FancyTooltip_PopType = {
 						}
 					}
 				}
@@ -516,10 +520,10 @@ types countrypanelmod_population_pop_type_types {
 				background = {
 					#using = entry_bg_simple
 				}
-				tooltip = "COUNTRYPANELMOD_POP_TYPE_POPULATION_TOOLTIP"
+				tooltip = "CPM_POP_TYPE_POPULATION_TOOLTIP"
 
 				textbox = {
-					#visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+					#visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p'))]"
 					margin_right = 8
 					parentanchor = left
 					align = right|nobaseline
@@ -528,7 +532,7 @@ types countrypanelmod_population_pop_type_types {
 				}
 				textbox = {
 					visible = no
-					#visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+					#visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p')]"
 					margin_right = 8
 					parentanchor = left
 					align = right|nobaseline
@@ -547,9 +551,9 @@ types countrypanelmod_population_pop_type_types {
 				widget = {
 					visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
 					size = { 100% 100% }
-					tooltip = "COUNTRYPANELMOD_POP_TYPE_POL_STR_TOOLTIP"
+					tooltip = "CPM_POP_TYPE_POL_STR_TOOLTIP"
 					textbox = {
-						#visible = "[Not(GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p'))]"
+						#visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p'))]"
 						parentanchor = left
 						align = center|nobaseline
 						text = "[PopType.GetPolStrAsPercentage(Country.Self)|v%d]"
@@ -557,7 +561,7 @@ types countrypanelmod_population_pop_type_types {
 					}
 					textbox = {
 						visible = no
-						#visible = "[GetVariableSystem.HasValue('countrypanelmod_pop_type_table_sort', 'p')]"
+						#visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 'p')]"
 						parentanchor = left
 						align = center|nobaseline
 						text = "[PopType.GetPolStrAsPercentage(Country.Self)|%d]"
@@ -580,9 +584,9 @@ types countrypanelmod_population_pop_type_types {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = expanding
 
-				tooltip = "COUNTRYPANELMOD_POP_TYPE_RADICALISM_TOOLTIP"
+				tooltip = "CPM_POP_TYPE_RADICALISM_TOOLTIP"
 
-				countrypanelmod_radicalism_progressbar = {
+				cpm_radicalism_progressbar = {
 
 					margin_left = 4
 					margin_right = 4
@@ -607,7 +611,7 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_radicalism_progressbar = margin_widget {
+	type cpm_radicalism_progressbar = margin_widget {
 		size = { 300 40 }
 
 
@@ -720,9 +724,9 @@ types countrypanelmod_population_pop_type_types {
 		}
 	}
 
-	type countrypanelmod_FancyTooltip_PopType = FancyTooltipWidgetType {
+	type cpm_FancyTooltip_PopType = FancyTooltipWidgetType {
 		blockoverride "text" {
-			text = "COUNTRYPANELMOD_POP_TYPE_NAME_TOOLTIP"
+			text = "CPM_POP_TYPE_NAME_TOOLTIP"
 		}
 
 		blockoverride "icon_texture" {
@@ -741,6 +745,29 @@ types countrypanelmod_population_pop_type_types {
 			color = "[PopType.GetColor]"
 		}
 	}
+
+	type cpm_FancyTooltip_PopType_Piechart = cpm_FancyTooltipWidgetTypeNoType {
+		blockoverride "text" {
+			text = "CPM_POP_TYPE_POPULATION_PIECHART"
+		}
+
+		blockoverride "icon_texture" {
+			texture = "[PopType.GetTexture]"
+		}
+
+		blockoverride "name" {
+			text = "CPM_POP_TYPE_IN_COUNTRY_NO_ICON"
+		}
+
+		blockoverride "type" {
+			text = "TOOLTIP_TYPE_PROFESSION"
+		}
+
+		blockoverride "color" {
+			color = "[PopType.GetColor]"
+		}
+	}
+
 
 
 }

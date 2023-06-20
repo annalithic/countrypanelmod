@@ -102,7 +102,7 @@ types country_panel_types
 					visible = "[Not(InformationPanel.IsTabSelected('modifiers'))]"
 				}
 				blockoverride "third_button_selected" {
-					text = "COUNTRYPANELMOD_POPULATION_TAB_SELECTED"
+					text = "CPM_POPULATION_TAB_SELECTED"
 				}
 
 
@@ -162,7 +162,7 @@ types country_panel_types
 					using = default_content_fade
 				}
 
-				countrypanelmod_panel_population_content = {
+				cpm_panel_population_content = {
 					visible = "[InformationPanel.IsTabSelected('modifiers')]"
 					using = default_content_fade
 				}
@@ -172,7 +172,7 @@ types country_panel_types
 					using = default_content_fade
 				}
 
-				countrypanelmod_panel_politics_content = {
+				cpm_panel_politics_content = {
 					visible = "[And(Country.IsAIOrOtherPlayer,InformationPanel.IsTabSelected('politics'))]"
 					using = default_content_fade
 				}
