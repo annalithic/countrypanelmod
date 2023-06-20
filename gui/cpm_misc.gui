@@ -1,0 +1,525 @@
+types cpm_misc_types {
+
+	type cpm_sort_button = button {
+		block "tooltip_placement"{
+			using = tooltip_above
+		}
+
+		block "sound" {
+			using = sort_button_sound
+		}
+
+		block "background" {
+			texture = "gfx/interface/buttons/sort_button.dds"
+			size = { -1 30 }
+			spriteType = Corneredtiled
+			spriteborder = { 12 12 }
+			texture_density = 2
+			using = disabled_stripes
+			gfxtype = buttongfx
+			effectname = "NoHighlight"
+
+			modify_texture = {
+				name = "bg_gradient"
+				texture = "gfx/interface/buttons/default_button_bg_gradient.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+				alpha = 0.5
+			}
+			modify_texture = {
+				name = "texture"
+				texture = "gfx/interface/textures/default_noise_texture.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+			}
+
+			### mouse states
+			modify_texture = {
+				name = "mouse_enter"
+				texture = "gfx/interface/buttons/expand_button_bg_mouse_enter.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = colordodge
+				alpha = 0
+			}
+			modify_texture = {
+				name = "mouse_press"
+				texture = "gfx/interface/buttons/default_button_mousepress.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+				alpha = 0
+			}
+
+			### mouse enter
+			state = {
+				name = _mouse_enter
+				using = Animation_Curve_Default
+				using = button_animation_duration
+				modify_texture = {
+					name = mouse_press
+					alpha = 0
+				}
+				modify_texture = {
+					name = mouse_enter
+					alpha = 1
+				}
+			}
+
+			### mouse leave
+			state = {
+				name = _mouse_leave
+				using = button_animation_duration_slow
+				modify_texture = {
+					name = mouse_press
+					alpha = 0
+				}
+				modify_texture = {
+					name = mouse_enter
+					alpha = 0
+				}
+			}
+
+			### mouse press
+			state = {
+				name = _mouse_press
+				using = button_animation_duration
+				modify_texture = {
+					name = mouse_press
+					alpha = 1
+				}
+				modify_texture = {
+					name = mouse_enter
+					alpha = 0
+				}
+			}
+
+			### mouse release
+			state = {
+				name = _mouse_release
+				using = button_animation_duration
+				modify_texture = {
+					name = mouse_press
+					alpha = 0
+				}
+				modify_texture = {
+					name = mouse_enter
+					alpha = 1
+				}
+			}
+		}
+
+		### HIGHLIGHT
+		icon = {
+			block "selected_visibility" {
+				visible = no
+			}
+
+			using = highlighted_square_selection
+		}
+
+		minimumsize = { -1 30 }
+		maximumsize = { -1 30 }
+		align = center|nobaseline
+		margin_left = 10
+		margin_right = 10
+		elide = right
+	}
+
+	type cpm_sort_button_pressed = button {
+		minimumsize = { -1 30 }
+		maximumsize = { -1 30 }
+		align = center|nobaseline
+		margin_left = 10
+		margin_right = 10
+		elide = right
+
+		block "tooltip_placement"{
+			using = tooltip_above
+		}
+
+
+		block "background" {
+			texture = "gfx/interface/buttons/sort_button.dds"
+			size = { -1 30 }
+			spriteType = Corneredtiled
+			spriteborder = { 12 12 }
+			texture_density = 2
+			using = disabled_stripes
+			gfxtype = buttongfx
+			effectname = "NoHighlight"
+
+			modify_texture = {
+				name = "bg_gradient"
+				texture = "gfx/interface/buttons/default_button_bg_gradient.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+				alpha = 0.5
+			}
+			modify_texture = {
+				name = "texture"
+				texture = "gfx/interface/textures/default_noise_texture.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+			}
+
+			modify_texture = {
+				name = "mouse_press"
+				texture = "gfx/interface/buttons/default_button_mousepress.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = overlay
+				alpha = 0
+			}
+			modify_texture = {
+				name = "mouse_enter"
+				texture = "gfx/interface/buttons/expand_button_bg_mouse_enter.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 0 0 }
+				blend_mode = colordodge
+			}
+
+		}
+	}
+
+	type cpm_smallchart = container {
+		onmousehierarchyenter = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('hide_chart_button','show_chart_button')]"
+		onmousehierarchyleave = "[PdxGuiWidget.FindChild('chart_button').InterruptThenTriggerAnimation('show_chart_button','hide_chart_button')]"
+		alwaystransparent = no
+
+		flowcontainer = {
+			block = "chart_visible" {}
+			direction = vertical
+			spacing = 5
+			margin = { 8 5 }
+
+			block "minimumsize" {
+
+			}
+
+			block "background" {
+				background = {
+				}
+			}
+
+			block "title" {
+				textbox = {
+					using = default_list_position
+					size = { 120 20 }
+					align = hcenter|nobaseline
+					default_format = "#title"
+
+					block "heading" {
+						raw_text = "#todo heading#!"
+					}
+				}
+			}
+			v3_piechart = {
+				visible = "[GetVariableSystem.Exists('piecharts')]"
+
+				block "tree_chart_size" {}
+			}
+			v3_treemapchart  = {
+				visible = "[Not(GetVariableSystem.Exists('piecharts'))]"
+
+				block "tree_chart_size" {}
+			}
+
+		}
+
+		widget = {
+			name = "chart_button"
+			block = "chart_visible" {}
+			parentanchor = right|top
+			size = { 30 30 }
+
+			block "chart_button_position" {
+				position = { 15 20 }
+			}
+
+			state = {
+				name = hide_chart_button
+				trigger_on_create = yes
+				alpha = 0
+				duration = 0.2
+			}
+
+			state = {
+				name = show_chart_button
+				alpha = 1
+				duration = 0.15
+			}
+
+			# grid/list toggle
+			button_icon_round_toggle = {
+				size = { 29 29 }
+				parentanchor = right|vcenter
+				block "chart_button_button_position" {
+					position = { -10 0 }
+				}
+
+				blockoverride "on_click" {
+					onclick = "[GetVariableSystem.Toggle('piecharts')]"
+				}
+				blockoverride "view_1" {
+					visible = "[Not(GetVariableSystem.Exists('piecharts'))]"
+				}
+				blockoverride "view_2" {
+					visible = "[GetVariableSystem.Exists('piecharts')]"
+				}
+				blockoverride "icon_1" {
+					texture = "gfx/interface/buttons/button_icons/piecharts.dds"
+				}
+				blockoverride "icon_2" {
+					texture = "gfx/interface/buttons/button_icons/areacharts.dds"
+				}
+				blockoverride "tooltip_1" {
+					tooltip = "TOOLTIP_VIEW_LIST"
+				}
+				blockoverride "tooltip_2" {
+					tooltip = "TOOLTIP_VIEW_GRID"
+				}
+			}
+		}
+	}
+
+	type cpm_FancyTooltipWidgetTypeNoType = container {
+		using = tooltip_properties
+
+		container = {
+			flowcontainer = {
+				direction = vertical
+				margin = { 18 15 }
+				margin_top = 65
+				
+				block "tooltip_content" {
+					DefaultTooltipTextBox = {
+						name = "TooltipText"
+						block "text"
+						{
+						}
+						margin_bottom = 0
+						autoresize = yes
+						multiline = yes
+						maximumsize = { 550 -1 }
+						fonttintcolor = "[TooltipInfo.GetTintColor]"
+					}
+					
+					DefaultTooltipTextBox = {
+						name = "TooltipTextDelayed"
+						autoresize = yes
+						margin_top = 0
+						margin_bottom = 0
+						multiline = yes
+						maximumsize = { 550 -1 }
+						fonttintcolor = "[TooltipInfo.GetTintColor]"
+					}
+
+					DefaultTooltipTextBox = {
+						block "instruction_text"
+						{
+						}
+						autoresize = yes
+						margin_top = 0
+						margin_bottom = 0
+						multiline = yes
+						maximumsize = { 550 -1 }
+						fonttintcolor = "[TooltipInfo.GetTintColor]"
+					}
+
+					DefaultTooltipTextBox = {
+						name = "TooltipTextShortcut"
+						autoresize = yes
+						fonttintcolor = "[TooltipInfo.GetTintColor]"
+					}
+
+					DefaultTooltipTextBox = {
+						name = "TooltipTextInputAction"
+						autoresize = yes
+						fonttintcolor = "[TooltipInfo.GetTintColor]"
+					}
+
+					DefaultTooltipTextBox = {
+						margin_top = 10
+						text = "RIGHT_CLICK_TO_OPEN_CONTEXT_MENU"
+						visible = "[CanOpenRightClickContextMenu]"
+					}
+
+					block "tooltip_content_after" {}
+					
+					container = {
+						parentanchor = top|hcenter
+						widgetanchor = top|hcenter
+						visible = "[IsInGame]"
+						block "buttons" {}
+					}
+				}
+			}
+			
+			margin_widget = {
+				size = { 100% 100% }
+				margin = { 5 5 }
+
+				icon = {
+					name = "tooltip_frame_locked"
+					texture = "gfx/interface/tooltip/tooltip_locked.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 6 6 }
+					tintcolor = "[TooltipInfo.GetTintColor]"
+					size = { 100% 100% }
+					texture_density = 2
+
+					# Commented out due to looping sound effect (PRCAL-21403)
+					#state = {
+					#	name = _show
+					#	start_sound = {
+					# 		soundeffect = "event:/SFX/UI/Global/tooltip_lock"
+					#	}
+					#}
+				}
+			}
+			
+			### HEADER BG
+			icon = {
+				texture = "gfx/interface/tooltip/tooltip_title_bg.dds"
+				position = { 4 4 }
+				block "color" {
+					color = { 0.6 0.4 0.6 1 }
+				}
+				alpha = 0.5
+				size = { 325 55 }
+				
+				modify_texture = {
+					texture = "gfx/interface/textures/velvet_texture.dds"
+					spriteType = Corneredtiled
+					texture_density = 2
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+				}
+				modify_texture = {
+					texture = "gfx/interface/textures/cloth_texture.dds"
+					spriteType = Corneredtiled
+					texture_density = 2
+					spriteborder = { 0 0 }
+					blend_mode = overlay
+					alpha = 0.15
+				}
+			}
+				
+			### ICON	
+			icon = {
+				block "icon_background_texture" {
+					texture = "gfx/interface/tooltip/tooltip_icon_bg.dds"
+				}
+				position = { 3 3 }
+				size = { 57 57 }
+				block "color" {
+					color = { 0.5 0.5 0.5 1 }
+				}
+				
+				block "icon_frame" {
+					icon = {
+						texture = "gfx/interface/tooltip/tooltip_icon_frame.dds"
+						size = { 100% 100% }
+					}
+				}
+				
+				block "replace_icon" {
+					icon = {
+						block "icon_texture" {
+							texture = "gfx/interface/icons/generic_icons/generic_concept_icon.dds"
+						}
+						block "icon_size" {
+							size = { 45 45 }
+						}
+						parentanchor = center
+					}
+				}
+			}
+			
+			### HEADER TEXT
+			widget = {
+				
+				size = { 100% 60 }
+				position = { 0 0 }
+				
+				hbox = {
+					margin_left = 64
+					margin_right = 10
+					spacing = 5
+					
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+						#multiline = yes
+
+						block "name" {
+							raw_text = "Name"
+						}
+						align = left|nobaseline
+						elide = right
+						fontsize_min = 12
+						using = fontsize_large
+						default_format = "#tooltip_header"
+					}
+				}
+				icon = {
+					texture = "gfx/interface/dividers/divider_clean.dds"
+					texture_density = 2
+					spriteType = CorneredTiled
+					spriteborder = { 4 0 }
+					size =  { 100% 2 }
+					alpha = 0.3
+					parentanchor = hcenter|bottom
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = alphamultiply
+						alpha = 0.7
+					}
+				}
+			}
+		}
+		
+		### timer lock icon
+		block "progress"
+		{
+			progresspie = {
+				name = "tooltip_progress"
+				visible = "[And(UsesTimerLocking, Not(PdxGuiWidget.IsTooltipLocked))]"
+				parentanchor = top|right
+				position = { 8 -8 }
+				size = { 24 24 }
+				min = 0
+				max = 1
+				tintcolor = "[TooltipInfo.GetTintColor]"
+				value = "[PdxGuiWidget.GetTooltipLockProgress]"
+				texture = "gfx/interface/tooltip/tooltip_lock_timer.dds"
+				framesize = { 48 48 }
+				frame = 2
+
+				state = {
+					name = _show
+					alpha = 1
+				}
+	
+				state = {
+					name = _hide
+					bezier = { 0.25 0.1 0.25 1 }
+					duration = 0.05
+					alpha = 0
+				}
+			}
+		}
+	}
+
+}
