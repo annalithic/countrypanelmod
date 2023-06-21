@@ -393,12 +393,15 @@ types cpm_population_culture_types {
 
 
 
-			widget = {
+			button = {
 				size = { 120 @pop_type_table_row_height }
+				using = glow_button
+				onclick = "[InformationPanelBar.OpenCultureInfoPanel(Culture.AccessSelf)]"
 				
 				tooltipwidget = {
 					cpm_FancyTooltip_Culture = {}
 				}
+
 
 				hbox = {
 					#margin_left = 10
@@ -497,7 +500,7 @@ types cpm_population_culture_types {
 
 				}
 
-				datacontext = "[Culture.AccessReligion]"
+				datacontext = "[Culture.GetReligion]"
 
 				tooltipwidget = {
 					cpm_FancyTooltip_Religion = {}
