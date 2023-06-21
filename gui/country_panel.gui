@@ -156,7 +156,7 @@ types country_panel_types
 			container = {
 				parentanchor = hcenter
 
-				country_panel_information_content = {
+				cpm_panel_information_content = {
 					margin_top = 0
 					using = information_tab_visibility
 					using = default_content_fade

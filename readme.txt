@@ -18,12 +18,6 @@ completely new, shows
 TODO:
 head of state?
 ig list - government/opposition/marginalised, pop, clout, radicalism - same as profession, nice
-
-
-
-small pop header? - 1080p check
-expandable culture/religion key
-
 prettify laws?
 
 
@@ -33,17 +27,11 @@ pop type table row tooltips - done
 ASK FOR CurrentAndMaxToProgressbarValueInt64
 
 TODO 3
-culture table sorting weirdness, switch country - since we can't check history of selected country sort maybe have to use just the normal pop/str sort
-dash out pol str if zero?
 white turmoil if zero?
 culture pol strength graph sucks, replace with religion?
-culture table tooltips
-resize culture table if lower
-primary culture icon
 
 
 TODO 4
-culture/religion sort by pol str?
 radio sort button
 petitions?
 
@@ -51,3 +39,11 @@ TODO 5
 regular fancy tooltip cleanup
 state religion tooltip?
 "is discriminated in" concept
+move keys down 1px?
+sort button default highlight
+minimize movements?
+
+
+BUG REPORTS
+ig trend
+culture majority religion

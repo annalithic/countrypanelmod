@@ -497,7 +497,7 @@ types cpm_population_culture_types {
 
 				}
 
-				datacontext = "[Culture.GetReligion]"
+				datacontext = "[Culture.AccessReligion]"
 
 				tooltipwidget = {
 					cpm_FancyTooltip_Religion = {}

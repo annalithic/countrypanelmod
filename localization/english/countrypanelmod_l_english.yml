@@ -52,7 +52,7 @@
  CPM_CULTURE_POPULATION_DATA:0 "[Culture.GetPopulation(Country.Self)|Kv] [SelectLocalization(NotEqualTo_int64(Culture.GetPopulationChange(Country.Self),'(int64)0'),'CPM_CULTURE_POPULATION_CHANGE_IN_COUNTRY','')]"
  CPM_CULTURE_POL_STR_DATA:0 "#v [Culture.GetPolStrAsPercentage(Country.Self)|/%d]#! (#v [Culture.GetPolStr(Country.Self)|*]#!)"
 
- CPM_RELIGION_POPULATION:0 "$concept_population$: #v [Religion.GetPopulationAsPercentage(Country.Self)|/%d] ([Religion.GetPopulation(Country.Self)|*])#!"
+ CPM_RELIGION_POPULATION:0 "$concept_population$: [Religion.GetPopulationAsPercentage(Country.Self)|v%d] ([Religion.GetPopulation(Country.Self)|v*]) [SelectLocalization(NotEqualTo_int64(Religion.GetPopulationChange(Country.Self),'(int64)0'),'CPM_RELIGION_POPULATION_CHANGE_IN_COUNTRY','')]"
  CPM_RELIGION_WORKFORCE:0 "$concept_workforce$: #variable [Religion.GetWorkforceAsPercentage(Country.Self)|/%d] ([Religion.GetWorkforce(Country.Self)|*v])#!"
  CPM_RELIGION_DEPENDENTS:0 "[concept_dependents]: #variable [Religion.GetDependentsAsPercentage(Country.Self)|/%d] ([Religion.GetDependents(Country.Self)|*v])#!"
 
