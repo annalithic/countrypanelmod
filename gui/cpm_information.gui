@@ -442,7 +442,8 @@ types cpm_information_types {
 
 
 		widget = {
-			visible = "[Not(And(IsDataModelEmpty(Country.AccessActiveJournalEntries),IsDataModelEmpty(Country.GetTimedModifiers)))]"
+			visible = no
+			#visible = "[Not(And(IsDataModelEmpty(Country.AccessActiveJournalEntries),IsDataModelEmpty(Country.GetTimedModifiers)))]"
 			size = { @panel_width_minus_10 40 }
 			parentanchor = hcenter
 
@@ -495,7 +496,7 @@ types cpm_information_types {
 								parentanchor = center
 								size = { 32 32 }
 								onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
-								tooltip = "[JournalEntry.GetName]"
+								tooltip = "JOURNAL_ENTRY_TOOLTIP"
 			
 								blockoverride "icon" {
 									texture = "[JournalEntry.GetIcon]"
@@ -514,6 +515,150 @@ types cpm_information_types {
 
 
 		}
+
+		widget = { size = { 5 5 } }
+
+
+		#JOURNAL ENTRIES
+		flowcontainer = {
+
+			margin_left = 10
+			spacing = 10
+
+			flowcontainer = {
+				#visible = "[Not(IsDataModelEmpty(Country.AccessActiveJournalEntries))]"
+				#margin_top = 10
+				#margin_right = 7
+				#margin_left = 10
+				#margin_bottom = 5
+
+				margin = { 5 0 }
+
+
+				background = {
+					using = paper_bg
+					alpha = 0.5
+					margin = { 0 5 }
+				}
+
+				textbox = {
+					text = "ACTIVE_JOURNAL_ENTRIES"
+					autoresize = yes
+					multiline = yes
+					align = left|nobaseline
+					
+					minimumsize = { 260 -1 }
+					maximumsize = { 260 -1 }
+					margin = { 10 6 }
+					
+					background = {
+						using = default_header_bg
+						margin = { -2 0 }
+					}
+				}	
+
+
+				direction = vertical
+				datamodel = "[Country.AccessActiveJournalEntries]"
+				item = {
+					cpm_journal_entry = {
+
+						blockoverride "minimumsize" {
+							minimumsize = { 260 -1 }
+						}
+				
+
+						blockoverride "textsize" {
+							maximumsize = { 220 50 }
+							minimumsize = { 220 -1 }
+							fontsize_min = 14
+						}				
+					}
+				}
+			}
+
+
+			flowcontainer = {
+				#layoutpolicy_horizontal = fixed
+				#layoutpolicy_vertical = fixed	
+				#margin_top = 10
+				#margin_right = 2
+				#margin_left = 14
+				#margin_bottom = 5
+				datamodel = "[Country.GetTimedModifiers]"
+				#spacing = 5
+				visible = "[Not(IsDataModelEmpty(Country.GetTimedModifiers))]"
+				#maximumsize = { @panel_width_minus_10 45 }
+				#parentanchor = right
+				#datamodel_wrap = 2
+				direction = vertical
+
+				textbox = {
+					text = "concept_timed_modifiers"
+					autoresize = yes
+					multiline = yes
+					align = left|nobaseline
+					
+					minimumsize = { 250 -1 }
+					maximumsize = { 250 -1 }
+					margin = { 10 6 }
+					
+					background = {
+						using = default_header_bg
+						margin = { -2 0 }
+					}
+				}	
+
+
+				item = {
+					widget = {
+						size = { 250 35 }
+						tooltip = "[TimedModifier.GetTooltip]"
+
+						background = {
+							using = dark_area
+							alpha = 0.3
+							
+							modify_texture = {
+								texture = "gfx/interface/masks/fade_horizontal_center.dds"
+								blend_mode = alphamultiply
+								alpha = 1
+							}
+						}
+				
+
+						hbox = {
+							spacing = 4
+							icon = {
+								layoutpolicy_horizontal = fixed
+								layoutpolicy_vertical = fixed
+								texture = "[TimedModifier.GetIcon]"
+								size = { 25 25 }
+							}
+							
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								layoutpolicy_vertical = expanding
+								align = nobaseline
+								text = "[TimedModifier.GetName]"
+								elide = right
+							}
+	
+						}
+
+
+						divider_clean = {
+							size = { 95% 2 }
+							parentanchor = hcenter|bottom
+						}
+				
+					}
+				}
+			}
+
+		}
+
 
 
 		widget = {
@@ -580,6 +725,241 @@ types cpm_information_types {
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+
+		widget = { size = { 10 10 } }
+
+		### COMPANIES
+		default_header = {
+			parentanchor = hcenter
+			blockoverride "text" {
+				text = "COMPANIES"
+			}
+		}
+
+		widget = { size = { 10 10 } }
+
+		fixedgridbox = {
+			datamodel = "[Country.AccessCompanies]"
+			parentanchor = hcenter
+			addrow = 100
+			addcolumn = @panel_width_half
+			datamodel_wrap = 2
+
+			item = {
+				flowcontainer = {
+					spacing = 10
+					minimumsize = { 270 100 }
+					maximumsize = { 270 100 }
+					margin = { 10 10 }
+
+					tooltipwidget = {
+						FancyTooltip_Company = {}
+					}
+
+					background = {
+						using = entry_bg_simple
+					}
+
+					icon = {
+						size = { 80 80 }
+						texture = "[Company.GetCompanyType.GetTexture]"
+
+					}
+					textbox = {
+						text = "[Company.GetName]"
+						maximumsize = { 180 -1 }
+						multiline = yes
+						parentanchor = vcenter
+						align = nobaseline
+						autoresize = yes
+						using = fontsize_large
+					}
+				}
+			}
+		}
+
+		empty_state = {
+			blockoverride "visible" {
+				visible = "[IsDataModelEmpty(Country.AccessCompanies)]"
+			}
+			blockoverride "text" {
+				text = "NO_COMPANIES"
+			}
+		}			
+
+	}
+
+	type cpm_journal_entry_aaa = journal_entry {
+		using = default_list_position
+		blockoverride "button_style" {
+			using = glow_button
+		}
+		blockoverride "background" {
+			background = {
+				using = dark_area
+				alpha = 0.3
+				
+				modify_texture = {
+					texture = "gfx/interface/masks/fade_horizontal_center.dds"
+					blend_mode = alphamultiply
+					alpha = 1
+				}
+			}
+			
+			divider_clean = {
+				size = { 95% 2 }
+				parentanchor = hcenter|bottom
+			}
+		}
+
+		visible = "[And(JournalEntry.IsValid, JournalEntry.IsPinnedInOutliner)]"
+		
+		blockoverride "flowcontainer_properties" {
+			margin = { 4 4 }
+			spacing = 4
+		}
+		blockoverride "minimumsize" {
+			minimumsize = { 340 -1 }
+		}
+		blockoverride "textsize" {
+			maximumsize = { 275 50 }
+			minimumsize = { 275 -1 }
+			fontsize_min = 14
+		}
+		blockoverride "fontsize" {}
+		blockoverride "iconsize" {
+			size = { 27 27 }
+		}
+		blockoverride "completing_iconsize" {
+			size = { 18 18 }
+		}
+		blockoverride "progressbar_size" {
+			size = { 235 6 }
+		}
+	}
+
+	type cpm_journal_entry = widget {
+		
+		tooltip = "JOURNAL_ENTRY_TOOLTIP"
+	
+		background = {
+			using = dark_area
+			alpha = 0.3
+			
+			modify_texture = {
+				texture = "gfx/interface/masks/fade_horizontal_center.dds"
+				blend_mode = alphamultiply
+				alpha = 1
+			}
+		}
+		
+		divider_clean = {
+			size = { 95% 2 }
+			parentanchor = hcenter|bottom
+		}
+
+		flowcontainer = {
+			resizeparent = yes
+			block "minimumsize" {
+				minimumsize = { 300 -1 }
+			}
+			block "flowcontainer_properties" {
+				margin = { 4 4 }
+				spacing = 4
+			}
+
+			# journal entry icon
+			icon = {
+				texture = "[JournalEntry.GetIcon]"
+				block "iconsize" {
+					size = { 27 27 }
+				}
+			}
+
+			flowcontainer = {
+				direction = vertical
+				parentanchor = vcenter
+
+				# title
+				textbox = {
+					text = "[JournalEntry.GetName]"
+					autoresize = yes
+					align = left|nobaseline
+					multiline = yes
+					default_format = "#header"
+					
+					block "textsize" {
+						maximumsize = { 250 50 }
+						minimumsize = { 250 -1 }
+						fontsize_min = 14
+					}
+				}
+				
+				# status description
+				textbox = {
+					text = "[JournalEntry.GetStatusDesc]"
+					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+					
+					autoresize = yes					
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 200 50 }
+						minimumsize = { 200 -1 }
+						fontsize_min = 14
+					}
+				}
+				
+				# progress description
+				textbox = {
+					text = "[JournalEntry.GetProgressDesc]"
+					tooltip = "[JournalEntry.GetGoalDesc]"
+					autoresize = yes					
+					align = left|nobaseline
+					multiline = yes
+					block "textsize" {
+						maximumsize = { 200 50 }
+						minimumsize = { 200 -1 }
+						fontsize_min = 14
+					}
+				}
+
+				# progress bar
+				flowcontainer = {
+					visible = "[And(JournalEntry.HasProgressBar, JournalEntry.IsActive)]"
+					margin = { 0 5 }
+					
+					default_progressbar_horizontal = {
+						block "progressbar_size" {
+							size = { 210 6 }
+						}
+						blockoverride "values" {
+							value = "[FixedPointToFloat(JournalEntry.GetGoalProgressPercent)]"
+							min = 0
+							max = 1
+						}
+					}
+				}
+				
+				# time out info
+				flowcontainer = {
+					visible = "[And(JournalEntry.CanTimeOut, JournalEntry.IsActive)]"
+					spacing = 5
+					
+					icon = {
+						size = { 18 18 }
+						texture = "gfx/interface/icons/generic_icons/clock.dds"
+						parentanchor = vcenter
+					}
+					textbox = {
+						text = "[JournalEntry.GetTimeoutTooltip]"
+						autoresize = yes
+						align = left|nobaseline
+						parentanchor = vcenter
 					}
 				}
 			}

@@ -224,7 +224,7 @@ types cpm_population_pop_type_types {
 
 				sort_button = {
 					size = { 100% 100% }
-					visible = "[Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's' ))]"
+					visible = "[And(GetVariableSystem.Exists('cpm_pop_type_table_sort'),Not(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's' )))]"
 					onclick = "[GetVariableSystem.Set('cpm_pop_type_table_sort', 's' )]"
 					tooltip = "POLITICAL_STRENGTH_TITLE"
 					button = {
@@ -237,7 +237,7 @@ types cpm_population_pop_type_types {
 
 				cpm_sort_button_pressed = {
 					size = { 100% 100% }
-					visible = "[GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's' )]"
+					visible = "[Or(GetVariableSystem.HasValue('cpm_pop_type_table_sort', 's'),Not(GetVariableSystem.Exists('cpm_pop_type_table_sort')))]"
 					tooltip = "POLITICAL_STRENGTH_TITLE"
 					icon = {
 						texture = "gfx/interface/buttons/sort_button_icons/sort_icon_political_strength.dds"

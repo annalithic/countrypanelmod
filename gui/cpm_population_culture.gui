@@ -43,7 +43,7 @@ types cpm_population_culture_types {
 				size = { 60 @pop_type_table_row_height}
 				sort_button = {
 					size = { 100% 100% }
-					visible = "[Not(GetVariableSystem.HasValue('cpm_culture_table_sort', 'p'))]"
+					visible = "[And(GetVariableSystem.Exists('cpm_culture_table_sort'),Not(GetVariableSystem.HasValue('cpm_culture_table_sort', 'p')))]"
 					onclick = "[GetVariableSystem.Set('cpm_culture_table_sort', 'p')]"
 					tooltip = "POPULATION_TOOLTIP"
 					button = {
@@ -55,7 +55,7 @@ types cpm_population_culture_types {
 				}
 				cpm_sort_button_pressed = {
 					size = { 100% 100% }
-					visible = "[GetVariableSystem.HasValue('cpm_culture_table_sort', 'p')]"
+					visible = "[Or(Not(GetVariableSystem.Exists('cpm_culture_table_sort')),GetVariableSystem.HasValue('cpm_culture_table_sort', 'p'))]"
 					tooltip = "POPULATION_TOOLTIP"
 					icon = {
 						texture = "gfx/interface/buttons/sort_button_icons/sort_icon_population.dds"
@@ -397,7 +397,7 @@ types cpm_population_culture_types {
 				size = { 120 @pop_type_table_row_height }
 				using = glow_button
 				onclick = "[InformationPanelBar.OpenCultureInfoPanel(Culture.AccessSelf)]"
-				
+
 				tooltipwidget = {
 					cpm_FancyTooltip_Culture = {}
 				}
