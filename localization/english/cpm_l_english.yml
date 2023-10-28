@@ -96,3 +96,4 @@
  CPM_DATA_RELIGION_NAME_TOOLTIP:0 "[Concept('concept_religious_trait', '$concept_religious_traits$')]: [Religion.GetReligiousTraitsDesc]\n[concept_taboo]: [Religion.GetTaboosDesc]\n\n[Religion.GetCountryDiscriminationStatus(Country.Self)]\n$CPM_RELIGION_IN_COUNTRY_DESC$"
  CPM_RELIGION_IN_COUNTRY_DESC:0 "$CPM_POPULATION_IN_COUNTRY$: [Religion.GetPopulation(Country.Self)|kv] [SelectLocalization(NotEqualTo_int64(Religion.GetPopulationChange(Country.Self),'(int64)0'),'CPM_RELIGION_POPULATION_CHANGE_IN_COUNTRY','')]\n$CPM_POL_STR_IN_COUNTRY$: [Religion.GetPolStr( Country.Self )|kv]"
 
+ CPM_TOOLTIP_ENACTMENT:0 "[Law.GetActiveGroupLaw.GetTooltip]\n$TOOLTIP_DELIMITER$\n[Country.GetLawEnactmentProgressDesc]"
