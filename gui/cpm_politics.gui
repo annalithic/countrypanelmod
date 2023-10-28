@@ -76,9 +76,68 @@ types cpm_politics_types {
 
 		widget = { size = { 5 1 } }
 		
-		cpm_laws_block = {}
+		cpm_laws_block2 = {}
 		
+		cpm_laws_block = {}
 
+
+		flowcontainer = {
+			parentanchor = hcenter
+			direction = horizontal
+			spacing = 5
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActivePowerStructureLaws))]"
+				datamodel = "[Country.AccessActivePowerStructureLaws]"
+				parentanchor = hcenter
+				spacing = 5		
+
+				item = {
+					country_panel_law_item = {}
+				}
+			}
+
+			vertical_divider_full = {}
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActiveEconomyLaws))]"
+				datamodel = "[Country.AccessActiveEconomyLaws]"
+				parentanchor = hcenter
+				spacing = 5		
+
+				item = {
+					country_panel_law_item = {}
+				}
+				
+				background = {
+					using = light_bg
+					alpha = 0.5
+					margin = { 5 0 }
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_vertical_center.dds"
+						spriteType = Corneredstretched
+						blend_mode = alphamultiply
+					}
+				}
+			}
+
+			vertical_divider_full = {}			
+			
+			flowcontainer = {
+				direction = vertical
+				visible = "[Not(IsDataModelEmpty(Country.AccessActiveHumanRightsLaws))]"
+				datamodel = "[Country.AccessActiveHumanRightsLaws]"
+				parentanchor = hcenter
+				spacing = 5		
+
+				item = {
+					country_panel_law_item = {}
+				}
+			}			
+		}
 
 
 	}

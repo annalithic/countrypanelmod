@@ -519,6 +519,15 @@ types cpm_information_types {
 		widget = { size = { 5 5 } }
 
 
+
+		#ATTITUDE / INFAMY
+		attitude_info = {}
+
+		widget = {
+			size = { 10 10 }
+		}
+
+
 		#JOURNAL ENTRIES
 		flowcontainer = {
 
@@ -594,7 +603,8 @@ types cpm_information_types {
 				direction = vertical
 
 				textbox = {
-					text = "concept_timed_modifiers"
+					#visible = no
+					text = "concept_modifiers"
 					autoresize = yes
 					multiline = yes
 					align = left|nobaseline
@@ -658,15 +668,9 @@ types cpm_information_types {
 			}
 
 		}
-
-
-
-		widget = {
-			size = { 10 10 }
-		}
-
-		#ATTITUDE / INFAMY
-		attitude_info = {}
+		
+		
+		
 
 		#AI STRATEGIES
 		flowcontainer = {
@@ -731,6 +735,8 @@ types cpm_information_types {
 		}
 
 		widget = { size = { 10 10 } }
+
+		
 
 		### COMPANIES
 		default_header = {
@@ -890,7 +896,7 @@ types cpm_information_types {
 					autoresize = yes
 					align = left|nobaseline
 					multiline = yes
-					default_format = "#header"
+					#default_format = "#header"
 					
 					block "textsize" {
 						maximumsize = { 250 50 }
@@ -902,7 +908,9 @@ types cpm_information_types {
 				# status description
 				textbox = {
 					text = "[JournalEntry.GetStatusDesc]"
-					visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
+
+					visible = no
+					#visible = "[Not(StringIsEmpty(JournalEntry.GetStatusDesc))]"
 					
 					autoresize = yes					
 					align = left|nobaseline
