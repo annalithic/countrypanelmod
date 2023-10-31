@@ -5,7 +5,7 @@
 @panel_width_plus_10 = 550  		# used to be 470
 @panel_width_plus_14 = 554			# used to be 474
 @panel_width_plus_14_half = 277		# used to be 237
-@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_20 = 560			# used to be 480 
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
@@ -478,21 +478,16 @@ types cpm_population_pop_type_types {
 
 			}
 
-
 			widget = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = expanding
-
 				tooltip = "CPM_POP_TYPE_RADICALISM_TOOLTIP"
-
 				cpm_radicalism_progressbar = {
-
 					margin_left = 4
 					margin_right = 4
 					margin_top = 5
 					margin_bottom = 6
 					size = { 100% 100% }
-					#position = { 4 4 }
 
 					blockoverride "value_left" {
 						min = 0
@@ -501,8 +496,8 @@ types cpm_population_pop_type_types {
 					}
 					blockoverride "value_right" {
 						min = 0
-						max = 100
-						value = "[Subtract_float('(float)100', CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(CountryPanel.AccessCountry.Self))),FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(CountryPanel.AccessCountry.Self)))))]"
+						max = 1
+						value = "[Subtract_float('(float)1', FixedPointToFloat(Country.MakeScope.Var(Concatenate('cpm_',PopType.GetNameNoIconNoFormatting)).GetValue))]"
 					}
 				}
 

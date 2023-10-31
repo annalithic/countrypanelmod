@@ -1,0 +1,190 @@
+trigger_to_script_bitsum = {
+    value = scope:tmp_testbit
+    if = {
+        limit = {
+            exists = scope:tmp_numbit
+        }
+        add = scope:tmp_numbit
+    }
+}
+
+cpm_loyalist_academics = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = academics
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_aristocrats = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = aristocrats
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_bureaucrats = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = bureaucrats
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_capitalists = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = capitalists
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_clergymen = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = clergymen
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_clerks = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = clerks
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_engineers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = engineers
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_farmers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = farmers
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_laborers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = laborers
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_machinists = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = machinists
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_officers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = officers
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_peasants = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = peasants
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_shopkeepers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = shopkeepers
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_slaves = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = slaves
+            }
+        }
+        add = scope:tmp
+    }
+}
+cpm_loyalist_soldiers = {
+    if = {
+        limit = {
+            save_temporary_trigger_breakpoint_as = {
+                TRIGGER = cpm_strig_loyalists
+                NAME = tmp
+				POPTYPE = soldiers
+            }
+        }
+        add = scope:tmp
+    }
+}

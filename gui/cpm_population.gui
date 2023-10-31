@@ -22,6 +22,79 @@ types cpm_population_types {
 		cpm_pop_strata_section = {}
 		widget = { size = { 5 5} }
 
+
+		widget = {	
+			datacontext = "[GetScriptedGui('cpm_sgui_test')]"
+			visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+			state = {
+				name = _show
+				on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+			}
+		}
+
+
+		#button = {
+		#	using = default_button
+		#	size  = { 40 30 }
+		#	datacontext = "[GetScriptedGui('cpm_sgui_test')]"
+			#onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( C.MakeScope ).End)]"
+		#	onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+		#}
+
+		flowcontainer = {
+			visible = no
+			direction = vertical
+			datamodel = "[Country.AccessPopTypesSortedOnPopulation]"
+
+			item = {
+				flowcontainer = {
+					icon = {
+						size = { 30 30 }
+						texture = "[PopType.GetTexture]"
+					}
+
+					button = {
+						using = default_button
+						size  = { 40 30 }
+						datacontext = "[GetScriptedGui('cpm_sgui_test')]"
+						#onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( C.MakeScope ).End)]"
+						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+					}
+					textbox = {
+						size  = { 100 30 }
+						background = {
+							using = simple_frame
+						}
+						text = "[PopType.GetNameNoIconNoFormatting]"
+					}
+					textbox = {
+						size  = { 200 30 }
+						background = {
+							using = simple_frame
+						}
+						text = "[Country.MakeScope.Var(Concatenate('cpm_',PopType.GetNameNoIconNoFormatting)).GetValue|1%]"
+					}
+				}
+			}
+		}
+
+		#button = {
+		#	name = "cpm_sguitestbutton"
+		#	using = default_button
+		#	size  = { 40 40 }
+		#	datacontext = "[GetScriptedGui('cpm_sgui_test')]"
+		#	onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( Country.MakeScope ).End)]"
+		#}
+		
+		#textbox = {
+		#	name = "cpm_sguitesttextbox"
+		#	size  = { 200 40 }
+		#	background = {
+		#		using = simple_frame
+		#	}
+		#	text = "[Country.MakeScope.Var('cpm_testvar').GetValue|1]"
+		#}
+
 		default_header = {
 			#visible = no
 			alwaystransparent = no

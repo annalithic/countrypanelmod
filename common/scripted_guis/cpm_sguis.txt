@@ -1,0 +1,76 @@
+﻿cpm_sgui_test = {
+	scope = country
+
+	is_shown = {
+		NOT = {
+			has_variable = cpm_calculated_loyalists
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = cpm_Academics
+			value = cpm_loyalist_academics
+		}
+		set_variable = {
+			name = cpm_Aristocrats
+			value = cpm_loyalist_aristocrats
+		}
+		set_variable = {
+			name = cpm_Bureaucrats
+			value = cpm_loyalist_bureaucrats
+		}
+		set_variable = {
+			name = cpm_Capitalists
+			value = cpm_loyalist_capitalists
+		}
+		set_variable = {
+			name = cpm_Clergymen
+			value = cpm_loyalist_clergymen
+		}
+		set_variable = {
+			name = cpm_Clerks
+			value = cpm_loyalist_clerks
+		}
+		set_variable = {
+			name = cpm_Engineers
+			value = cpm_loyalist_engineers
+		}
+		set_variable = {
+			name = cpm_Farmers
+			value = cpm_loyalist_farmers
+		}
+		set_variable = {
+			name = cpm_Laborers
+			value = cpm_loyalist_laborers
+		}
+		set_variable = {
+			name = cpm_Machinists
+			value = cpm_loyalist_machinists
+		}
+		set_variable = {
+			name = cpm_Officers
+			value = cpm_loyalist_officers
+		}
+		set_variable = {
+			name = cpm_Peasants
+			value = cpm_loyalist_peasants
+		}
+		set_variable = {
+			name = cpm_Shopkeepers
+			value = cpm_loyalist_shopkeepers
+		}
+		set_variable = {
+			name = cpm_Slaves
+			value = cpm_loyalist_slaves
+		}
+		set_variable = {
+			name = cpm_Servicemen
+			value = cpm_loyalist_soldiers
+		}
+		set_variable = {
+			name = cpm_calculated_loyalists
+			days = 7
+		}
+	}
+}

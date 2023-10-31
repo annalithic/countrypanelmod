@@ -80,7 +80,7 @@
  CPM_POP_TYPE_WORKFORCE:0 "$concept_workforce$: #variable [PopType.GetWorkforceAsPercentage(Country.Self)|/%d] ([PopType.GetWorkforce(Country.Self)|*v])#!"
  CPM_POP_TYPE_DEPENDENTS:0 "[concept_dependents]: #variable [PopType.GetDependentsAsPercentage(Country.Self)|/%d] ([PopType.GetDependents(Country.Self)|*v])#!"
  CPM_POP_TYPE_POL_STR:0 "[concept_political_strength]: [PopType.GetPolStrAsPercentage(Country.Self)|v%d] ([PopType.GetPolStr(Country.Self)|v*])"
- CPM_POP_TYPE_LOYALISTS:0 "[Concept('concept_loyalist','$concept_loyalists$')]: #variable #p [CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetLoyalists(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%#!#! (#variable [PopType.GetLoyalists(Country.Self)|dp]#!)"
+ CPM_POP_TYPE_LOYALISTS:0 "[Concept('concept_loyalist','$concept_loyalists$')]: #variable #p [Country.MakeScope.Var(Concatenate('cpm_',PopType.GetNameNoIconNoFormatting)).GetValue)|1%]#!#! (#variable [Multiply_CFixedPoint(IntToFixedPoint(PopType.GetPopulation(Country.Self)),Country.MakeScope.Var(Concatenate('cpm_',PopType.GetNameNoIconNoFormatting)).GetValue))|dp]#!)"
  CPM_POP_TYPE_RADICALS:0 "[Concept('concept_radical','$concept_radicals$')]: #variable #n [CurrentAndMaxToProgressbarValueInt32(FixedPointToInt(IntToFixedPoint(PopType.GetRadicals(Country.Self))), FixedPointToInt(IntToFixedPoint(PopType.GetPopulation(Country.Self))))|1]%#!#! (#variable [PopType.GetRadicals(Country.Self)|dn]#!)"
 
  CPM_POP_TYPE_RADICALISM_TOOLTIP:0 "$CPM_POP_TYPE_IN_COUNTRY$:\n$TAB$$CPM_POP_TYPE_LOYALISTS$\n$TAB$$CPM_POP_TYPE_RADICALS$"

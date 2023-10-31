@@ -1,0 +1,47 @@
+cpm_strig_loyalists = {
+	loyalist_fraction = {
+		pop_type = $POPTYPE$
+		value >= trigger_to_script_bitsum
+	}
+}
+
+increment_if = {
+    save_temporary_scope_value_as = {
+        name = tmp_numbit 
+        value = {
+            value = $NUM$
+        }
+    }
+    trigger_if = {
+        limit = {
+            $TRIGGER$ = { POPTYPE = $POPTYPE$ }
+        }
+        save_temporary_scope_value_as = {
+            name = tmp_testbit 
+            value = {
+                value = scope:tmp_testbit
+                add = $NUM$
+            }
+        }
+    }
+}
+
+save_temporary_trigger_breakpoint_as = { # 10 bits
+    save_temporary_scope_value_as = {
+        name = tmp_testbit value = 0
+    }
+	increment_if = {TRIGGER = $TRIGGER$ NUM = 0.512 POPTYPE = $POPTYPE$}
+	increment_if = {TRIGGER = $TRIGGER$ NUM = 0.256 POPTYPE = $POPTYPE$}
+	increment_if = {TRIGGER = $TRIGGER$ NUM = 0.128 POPTYPE = $POPTYPE$}
+	increment_if = {TRIGGER = $TRIGGER$ NUM = 0.064 POPTYPE = $POPTYPE$}
+    increment_if = {TRIGGER = $TRIGGER$ NUM = 0.032 POPTYPE = $POPTYPE$}
+	increment_if = {TRIGGER = $TRIGGER$ NUM = 0.016 POPTYPE = $POPTYPE$}
+    increment_if = {TRIGGER = $TRIGGER$ NUM = 0.008 POPTYPE = $POPTYPE$}
+    increment_if = {TRIGGER = $TRIGGER$ NUM = 0.004 POPTYPE = $POPTYPE$}
+    increment_if = {TRIGGER = $TRIGGER$ NUM = 0.002 POPTYPE = $POPTYPE$}
+    increment_if = {TRIGGER = $TRIGGER$ NUM = 0.001 POPTYPE = $POPTYPE$}
+    save_temporary_scope_value_as = {
+        name = $NAME$
+        value = scope:tmp_testbit
+    }
+}
