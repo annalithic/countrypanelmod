@@ -44,6 +44,11 @@ sort button default highlight
 minimize movements?
 
 
+TODO 6
+gov legitimacy again?
+
 BUG REPORTS
 ig trend
 culture majority religion
+
+arigatou to tobbzn for the binary search trigger script

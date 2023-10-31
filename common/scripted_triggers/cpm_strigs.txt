@@ -1,4 +1,4 @@
-cpm_strig_loyalists = {
+﻿cpm_strig_loyalists = {
 	loyalist_fraction = {
 		pop_type = $POPTYPE$
 		value >= trigger_to_script_bitsum

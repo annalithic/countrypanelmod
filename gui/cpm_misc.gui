@@ -1,4 +1,4 @@
-types cpm_misc_types {
+﻿types cpm_misc_types {
 
 	type cpm_sort_button = button {
 		block "tooltip_placement"{
