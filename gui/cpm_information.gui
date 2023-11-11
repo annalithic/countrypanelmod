@@ -435,10 +435,10 @@ types cpm_information_types {
 
 
 
-		widget = {
-			visible = "[And(IsDataModelEmpty(Country.AccessActiveJournalEntries),IsDataModelEmpty(Country.GetTimedModifiers))]"
-			size = { 10 10 }
-		}
+		#widget = {
+		#	visible = "[And(IsDataModelEmpty(Country.AccessActiveJournalEntries),IsDataModelEmpty(Country.GetTimedModifiers))]"
+		#	size = { 10 10 }
+		#}
 
 
 		widget = {
@@ -489,29 +489,146 @@ types cpm_information_types {
 					spacing = 10
 					datamodel = "[Country.AccessActiveJournalEntries]"
 					item = {
-						widget = {
+						icon = {
 							size = { 25 25 }
-
-							cpm_button_icon_round = {
-								parentanchor = center
-								size = { 32 32 }
-								onclick = "[InformationPanelBar.OpenJournalEntryPanel(JournalEntry.AccessSelf)]"
-								tooltip = "JOURNAL_ENTRY_TOOLTIP"
-			
-								blockoverride "icon" {
-									texture = "[JournalEntry.GetIcon]"
-								}
-								blockoverride "icon_size" {
-									size = { 25 25 }
-								}				
-							}
+							texture = "[JournalEntry.GetIcon]"
+							tooltip = "JOURNAL_ENTRY_TOOLTIP"
 						}
-
 					}
 				}
 
+
 	
 			}
+
+
+		}
+
+
+		widget = {
+			size = { @panel_width_minus_10 40 }
+			section_header_button = {
+
+				blockoverride "layout" {
+					size = { 100% 38 }
+					position = { 10 0 }
+				}
+		
+
+				visible = "[Not(IsDataModelEmpty(Country.GetNonPotentialDiploPlays))]"
+	
+				blockoverride "background" {
+					using = expand_button_bg_right_fade
+				}
+		
+				modify_texture = {
+					#texture = "gfx/interface/masks/fade_horizontal_center.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 0 0 }
+					blend_mode = alphamultiply
+					alpha = 0.5
+				}
+	
+	
+	
+				blockoverride "left_textbox" {
+					textbox = {
+						margin_left = 38
+						size = { 310 100% }
+						visible = "[GetVariableSystem.Exists('cpm_modifiers_expand')]"
+						align = nobaseline
+						text = "ACTIVE_JOURNAL_ENTRIES"
+						#text = "concept_timed_modifiers"
+					}
+	
+					widget = {
+						visible = "[Not(GetVariableSystem.Exists('cpm_modifiers_expand'))]"
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+					}
+				}
+	
+	
+				blockoverride "right_text" {
+					textbox = {
+						size = { -1 100% }
+						visible = "[GetVariableSystem.Exists('cpm_modifiers_expand')]"
+						text = "TIMED_MODIFIERS"
+						#text = "ACTIVE_JOURNAL_ENTRIES"
+						align = nobaseline
+						layoutpolicy_horizontal = expanding
+					}
+	
+					flowcontainer = {
+						margin_right = 20
+						visible = "[Not(GetVariableSystem.Exists('cpm_modifiers_expand'))]"
+	
+						
+						flowcontainer = {
+							visible = "[Not(IsDataModelEmpty(Country.AccessActiveJournalEntries))]"
+							layoutpolicy_horizontal = fixed
+							layoutpolicy_vertical = fixed	
+							#margin_top = 10
+							#margin_right = 7
+							#margin_bottom = 5
+							spacing = 5
+							datamodel = "[Country.AccessActiveJournalEntries]"
+							item = {
+								icon = {
+									size = { 25 25 }
+									texture = "[JournalEntry.GetIcon]"
+									tooltip = "JOURNAL_ENTRY_TOOLTIP"
+								}
+							}
+						}
+						flowcontainer = {
+							margin_left = 5
+								datamodel = "[Country.GetTimedModifiers]"
+							spacing = 5
+							visible = "[Not(IsDataModelEmpty(Country.GetTimedModifiers))]"
+							maximumsize = { @panel_width_minus_10 45 }
+							#parentanchor = right
+							datamodel_wrap = 2
+							#margin_right = 5
+			
+							item = {
+								icon = {
+									tooltip = "[TimedModifier.GetTooltip]"
+									texture = "[TimedModifier.GetIcon]"
+									size = { 25 25 }
+								}
+							}
+						}
+	
+					}
+				}
+	
+				blockoverride "onclick" {
+					onclick = "[GetVariableSystem.Toggle('cpm_modifiers_expand')]"
+				}
+				
+				blockoverride "onclick_showmore" {
+					visible = "[Not(GetVariableSystem.Exists('cpm_modifiers_expand'))]"
+				}
+	
+				blockoverride "onclick_showless" {
+					visible = "[GetVariableSystem.Exists('cpm_modifiers_expand')]"
+				}
+			}
+	
+		}
+
+
+		#JOURNAL ENTRIES
+		flowcontainer = {
+			visible = "[GetVariableSystem.Exists('cpm_modifiers_expand')]"
+
+			margin_left = 10
+			spacing = 10
+			margin_bottom = 5
+			cpm_info_journal_entries = {}
+
+			cpm_info_timed_modifiers = {}
 
 
 		}
@@ -519,155 +636,14 @@ types cpm_information_types {
 		widget = { size = { 5 5 } }
 
 
-
 		#ATTITUDE / INFAMY
 		attitude_info = {}
 
-		widget = {
-			size = { 10 10 }
-		}
+		#widget = {
+		#	size = { 5 5 }
+		#}
 
 
-		#JOURNAL ENTRIES
-		flowcontainer = {
-
-			margin_left = 10
-			spacing = 10
-
-			flowcontainer = {
-				#visible = "[Not(IsDataModelEmpty(Country.AccessActiveJournalEntries))]"
-				#margin_top = 10
-				#margin_right = 7
-				#margin_left = 10
-				#margin_bottom = 5
-
-				margin = { 5 0 }
-
-
-				background = {
-					using = paper_bg
-					alpha = 0.5
-					margin = { 0 5 }
-				}
-
-				textbox = {
-					text = "ACTIVE_JOURNAL_ENTRIES"
-					autoresize = yes
-					multiline = yes
-					align = left|nobaseline
-					
-					minimumsize = { 260 -1 }
-					maximumsize = { 260 -1 }
-					margin = { 10 6 }
-					
-					background = {
-						using = default_header_bg
-						margin = { -2 0 }
-					}
-				}	
-
-
-				direction = vertical
-				datamodel = "[Country.AccessActiveJournalEntries]"
-				item = {
-					cpm_journal_entry = {
-
-						blockoverride "minimumsize" {
-							minimumsize = { 260 -1 }
-						}
-				
-
-						blockoverride "textsize" {
-							maximumsize = { 220 50 }
-							minimumsize = { 220 -1 }
-							fontsize_min = 14
-						}				
-					}
-				}
-			}
-
-
-			flowcontainer = {
-				#layoutpolicy_horizontal = fixed
-				#layoutpolicy_vertical = fixed	
-				#margin_top = 10
-				#margin_right = 2
-				#margin_left = 14
-				#margin_bottom = 5
-				datamodel = "[Country.GetTimedModifiers]"
-				#spacing = 5
-				visible = "[Not(IsDataModelEmpty(Country.GetTimedModifiers))]"
-				#maximumsize = { @panel_width_minus_10 45 }
-				#parentanchor = right
-				#datamodel_wrap = 2
-				direction = vertical
-
-				textbox = {
-					#visible = no
-					text = "concept_modifiers"
-					autoresize = yes
-					multiline = yes
-					align = left|nobaseline
-					
-					minimumsize = { 250 -1 }
-					maximumsize = { 250 -1 }
-					margin = { 10 6 }
-					
-					background = {
-						using = default_header_bg
-						margin = { -2 0 }
-					}
-				}	
-
-
-				item = {
-					widget = {
-						size = { 250 35 }
-						tooltip = "[TimedModifier.GetTooltip]"
-
-						background = {
-							using = dark_area
-							alpha = 0.3
-							
-							modify_texture = {
-								texture = "gfx/interface/masks/fade_horizontal_center.dds"
-								blend_mode = alphamultiply
-								alpha = 1
-							}
-						}
-				
-
-						hbox = {
-							spacing = 4
-							icon = {
-								layoutpolicy_horizontal = fixed
-								layoutpolicy_vertical = fixed
-								texture = "[TimedModifier.GetIcon]"
-								size = { 25 25 }
-							}
-							
-
-							textbox = {
-								layoutpolicy_horizontal = expanding
-								layoutpolicy_vertical = expanding
-								align = nobaseline
-								text = "[TimedModifier.GetName]"
-								elide = right
-							}
-	
-						}
-
-
-						divider_clean = {
-							size = { 95% 2 }
-							parentanchor = hcenter|bottom
-						}
-				
-					}
-				}
-			}
-
-		}
 		
 		
 		
@@ -797,6 +773,141 @@ types cpm_information_types {
 			}
 		}			
 
+	}
+
+	type cpm_info_timed_modifiers = flowcontainer {
+		#layoutpolicy_horizontal = fixed
+		#layoutpolicy_vertical = fixed	
+		#margin_top = 10
+		#margin_right = 2
+		#margin_left = 14
+		#margin_bottom = 5
+		datamodel = "[Country.GetTimedModifiers]"
+		#spacing = 5
+		visible = "[Not(IsDataModelEmpty(Country.GetTimedModifiers))]"
+		#maximumsize = { @panel_width_minus_10 45 }
+		#parentanchor = right
+		#datamodel_wrap = 2
+		direction = vertical
+
+		textbox = {
+			visible = no
+			#text = "MODIFIERS_PANEL_TIMED_MODIFIERS"
+
+			text = "concept_timed_modifiers"
+			autoresize = yes
+			multiline = yes
+			align = left|nobaseline
+			
+			minimumsize = { 250 -1 }
+			maximumsize = { 250 -1 }
+			margin = { 10 6 }
+			
+			background = {
+				using = default_header_bg
+				margin = { -2 0 }
+			}
+		}	
+
+
+		item = {
+			widget = {
+				size = { 250 35 }
+				tooltip = "[TimedModifier.GetTooltip]"
+
+				background = {
+					using = dark_area
+					alpha = 0.3
+					
+					modify_texture = {
+						texture = "gfx/interface/masks/fade_horizontal_center.dds"
+						blend_mode = alphamultiply
+						alpha = 1
+					}
+				}
+		
+
+				hbox = {
+					spacing = 4
+					icon = {
+						layoutpolicy_horizontal = fixed
+						layoutpolicy_vertical = fixed
+						texture = "[TimedModifier.GetIcon]"
+						size = { 25 25 }
+					}
+					
+
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+						align = nobaseline
+						text = "[TimedModifier.GetName]"
+						elide = right
+					}
+
+				}
+
+
+				divider_clean = {
+					size = { 95% 2 }
+					parentanchor = hcenter|bottom
+				}
+		
+			}
+		}
+	}
+
+	type cpm_info_journal_entries = flowcontainer {
+		#visible = "[Not(IsDataModelEmpty(Country.AccessActiveJournalEntries))]"
+		#margin_top = 10
+		#margin_right = 7
+		#margin_left = 10
+		#margin_bottom = 5
+
+		margin = { 5 0 }
+
+
+		background = {
+			using = paper_bg
+			alpha = 0.5
+			margin = { 0 5 }
+		}
+
+		textbox = {
+			visible = no
+			text = "ACTIVE_JOURNAL_ENTRIES"
+			autoresize = yes
+			multiline = yes
+			align = left|nobaseline
+			
+			minimumsize = { 260 -1 }
+			maximumsize = { 260 -1 }
+			margin = { 10 6 }
+			
+			background = {
+				using = default_header_bg
+				margin = { -2 0 }
+			}
+		}	
+
+
+		direction = vertical
+		datamodel = "[Country.AccessActiveJournalEntries]"
+		item = {
+			cpm_journal_entry = {
+
+				blockoverride "minimumsize" {
+					minimumsize = { 260 -1 }
+				}
+		
+
+				blockoverride "textsize" {
+					maximumsize = { 220 50 }
+					minimumsize = { 220 -1 }
+					fontsize_min = 14
+				}				
+			}
+		}
 	}
 
 	type cpm_journal_entry_aaa = journal_entry {
@@ -973,5 +1084,7 @@ types cpm_information_types {
 			}
 		}
 	}
+
+	
 
 }

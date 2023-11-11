@@ -26,7 +26,7 @@ types cpm_population_types {
 		widget = {	
 			datacontext = "[GetScriptedGui('cpm_sgui_test')]"
 			size = { 100 100 }
-			visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+			visible = "[And(Country.IsValid,ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).End))]"
 			state = {
 				name = _show
 				on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"

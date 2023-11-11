@@ -17,35 +17,30 @@ completely new, shows
 
 TODO:
 head of state?
-ig list - government/opposition/marginalised, pop, clout, radicalism - same as profession, nice
-prettify laws?
-
-
-TODO 2
-law icon tooltip?
-pop type table row tooltips - done
-ASK FOR CurrentAndMaxToProgressbarValueInt64
-
-TODO 3
-white turmoil if zero?
-culture pol strength graph sucks, replace with religion?
-
-
-TODO 4
-radio sort button
-petitions?
+culture pol strength graph sucks, replace with religion? i dunno pie charts setup in culture section feel kinda weird
+radio sort button/sort button default highlight - make look better?
+petitions? - probably adding jpurnal entries in info tab anyway so not needed
 
 TODO 5
-regular fancy tooltip cleanup
-state religion tooltip?
-"is discriminated in" concept
-move keys down 1px?
-sort button default highlight
-minimize movements?
+regular fancy tooltip cleanup - i dont know what this is referring to
+state religion tooltip? i think i did something?
+"is discriminated in" concept - huh?
 
 
 TODO 6
+get sgui to start working lol
 gov legitimacy again?
+figure out what to do with information tab
+i think there was another bug but i dont remember what it was
+look at other skins
+documentation - nexus, workshop, paradoxmods. install instructions
+get testers?
+figure out if there's a way to use non-localized sgui so translations can work
+clean up loc, check unneded types
+companies
+other econ?
+
+CULUTRE SUCCESSION ICON!!!!
 
 BUG REPORTS
 ig trend
