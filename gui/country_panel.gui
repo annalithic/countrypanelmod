@@ -162,7 +162,7 @@ types country_panel_types
 					using = default_content_fade
 				}
 
-				modifier_list = {
+				cpm_panel_population_content = {
 					visible = "[InformationPanel.IsTabSelected('modifiers')]"
 					using = default_content_fade
 				}

@@ -22,25 +22,19 @@ types cpm_population_types {
 		cpm_pop_strata_section = {}
 		widget = { size = { 5 5} }
 
-
 		widget = {	
 			datacontext = "[GetScriptedGui('cpm_sgui_test')]"
-			size = { 100 100 }
-			visible = "[And(Country.IsValid,ScriptedGui.IsShown(GuiScope.SetRoot(Country.MakeScope).End))]"
 			state = {
-				name = _show
+				name = a
+				trigger_when = "[Not(Country.MakeScope.Var('cpm_calculated_loyalists').IsSet))]"
 				on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
+				duration = 0.0001
+				next = b
+			}
+			state = {
+				name = b
 			}
 		}
-
-
-		#button = {
-		#	using = default_button
-		#	size  = { 40 30 }
-		#	datacontext = "[GetScriptedGui('cpm_sgui_test')]"
-			#onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( C.MakeScope ).End)]"
-		#	onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Country.MakeScope).End)]"
-		#}
 
 		flowcontainer = {
 			visible = no

@@ -154,7 +154,7 @@ types cpm_population_culture_types {
 		#not small
 		flowcontainer = {
 			direction = vertical
-			visible = "[GreaterThanOrEqualTo_int32(Add_int32(GetDataModelSize(Country.AccessPopCultures),Max_int32(Min_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)15'),'(int32)12')),'(int32)28'))]"
+			visible = "[GreaterThanOrEqualTo_int32(Add_int32(GetDataModelSize(Country.AccessPopCultures),Max_int32(Min_int32(GetDataModelSize(Country.AccessPopTypes),'(int32)15'),'(int32)12')),'(int32)28')]"
 
 			#not expanded
 			flowcontainer = {

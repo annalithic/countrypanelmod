@@ -448,7 +448,7 @@ types cpm_population_pop_type_types {
 					#using = entry_bg_simple
 				}
 				widget = {
-					visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
+					visible = "[GreaterThan_int64(PopType.GetPolStr(Country.Self),'(int64)0')]"
 					size = { 100% 100% }
 					tooltip = "CPM_POP_TYPE_POL_STR_TOOLTIP"
 					textbox = {
@@ -469,7 +469,7 @@ types cpm_population_pop_type_types {
 
 				}
 				textbox = {
-					visible = "[EqualTo_int64(PopType.GetPolStr(Country.Self),'(int64)0')))]"
+					visible = "[EqualTo_int64(PopType.GetPolStr(Country.Self),'(int64)0')]"
 					parentanchor = center
 					align = center|nobaseline
 					raw_text = "-"

@@ -1,13 +1,11 @@
 ﻿cpm_sgui_test = {
 	scope = country
 
-	is_shown = {
-		NOT = {
-			has_variable = cpm_calculated_loyalists
-		}
-	}
-
 	effect = {
+		set_variable = {
+			name = cpm_calculated_loyalists
+			days = 7
+		}
 		set_variable = {
 			name = cpm_Academics
 			value = cpm_loyalist_academics
@@ -67,10 +65,6 @@
 		set_variable = {
 			name = cpm_Servicemen
 			value = cpm_loyalist_soldiers
-		}
-		set_variable = {
-			name = cpm_calculated_loyalists
-			days = 7
 		}
 	}
 }
